@@ -4,6 +4,7 @@ use think\Controller;
 use think\Session;
 use app\model\AreaModel;
 use app\model\PriceModel;
+use app\model\Price2Model;
 use app\model\LayoutModel;
 use app\model\ThemeModel;
 use app\model\BuildingModel;
@@ -11,6 +12,7 @@ use app\model\StateModel;
 use app\model\BuildLayoutModel;
 use app\model\BuildThemeModel;
 use app\model\BuildPriceModel;
+use app\model\BuildPrice2Model;
 use app\model\BuildStateModel;
 use app\model\BuildingDynamicModel;
 use app\model\AdModel;
@@ -36,6 +38,7 @@ class Advancesale extends Controller
         $data['layout']=isset($data['layout']) ? $data['layout'] : '0';
         $data['theme']=isset($data['theme']) ? $data['theme'] : '0';
         $data['state']=isset($data['state']) ? $data['state'] : '0';
+        $data['price_type']=isset($data['price_type']) ? $data['price_type'] : '1';
 
 
         // if(!Session::has('layouts')){
@@ -65,9 +68,16 @@ class Advancesale extends Controller
                     $query->where('area_id',$data['area']);
                 }
                 if(isset($data['price']) && $data['price']!='0'){
-                    $build_ids=BuildPriceModel::wherein('price_id',$data['price'])->column('build_id');
-                    $build_ids=array_unique($build_ids);
-                    $query->wherein('id',$build_ids);
+                    if($data['price_type']==1){
+                      $build_ids=BuildPriceModel::wherein('price_id',$data['price'])->column('build_id');
+                      $build_ids=array_unique($build_ids);
+                      $query->wherein('id',$build_ids);
+                    }else{
+                      $build_ids=BuildPrice2Model::wherein('price_id',$data['price'])->column('build_id');
+                      $build_ids=array_unique($build_ids);
+                      $query->wherein('id',$build_ids);
+                    }
+
                 }
                 if(isset($data['layout']) && $data['layout']!='0'){
                     $build_ids=BuildLayoutModel::wherein('layout_id',$data['layout'])->column('build_id');
@@ -103,6 +113,7 @@ class Advancesale extends Controller
         $hotbuild=BuildingModel::where('is_delete',BuildingModel::$isDelete['no']['val'])->where('state',BuildingModel::$state['yushou']['val'])->order('is_hot','desc')->order('read_count','desc')->limit(0,8)->select();
         $area=AreaModel::where('is_delete',AreaModel::$isDelete['no']['val'])->order('sort','desc')->select();
         $price=PriceModel::where('is_delete',PriceModel::$isDelete['no']['val'])->order('sort','desc')->select();
+        $price2=Price2Model::where('is_delete',Price2Model::$isDelete['no']['val'])->order('sort','desc')->select();
         $layout=LayoutModel::where('is_delete',LayoutModel::$isDelete['no']['val'])->order('sort','desc')->select();
         $theme=ThemeModel::where('is_delete',ThemeModel::$isDelete['no']['val'])->order('sort','desc')->select();
         $state=StateModel::where('is_delete',StateModel::$isDelete['no']['val'])->order('sort','desc')->select();
@@ -114,6 +125,7 @@ class Advancesale extends Controller
         $this->assign('yushou_down',$yushou_down);
         $this->assign('area',$area);
         $this->assign('price',$price);
+        $this->assign('price2',$price2);
         $this->assign('layout',$layout);
         $this->assign('theme',$theme);
         $this->assign('data',$data);
@@ -121,6 +133,7 @@ class Advancesale extends Controller
         $this->assign('state',$state);
         $this->assign('hotbuild',$hotbuild);
         $this->assign('imgs',$imgs);
+        $this->assign('price_type',$data['price_type']);
         return $this->fetch();
     }
     public function louhuayushou_detaile()

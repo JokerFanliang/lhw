@@ -41,6 +41,7 @@
 			<input type="hidden" class="layout_form" name="layout" value="{$data['layout']}">
 			<input type="hidden" class="theme_form" name="theme" value="{$data['theme']}">
 			<input type="hidden" class="state_form" name="state" value="{$data['state']}">
+			<input type="hidden" class="price_type" name="price_type" value="{$data['price_type']}">
 		</form>
 		<div id="main" class="clear">
 			<div id="leftMain" class="left">
@@ -119,43 +120,51 @@
 						<div class="fenlei left">价格区间：</div>
 						<div class="fenleiDetailes ">
 							<div class="priceNavBox clear">
-								<div class="left priceNav active">单价/套</div>
-								<div class="priceNav left">单价/平尺</div>
+								{if condition="$price_type==1"}
+								<div class="left priceNav active">单价(加元)/平尺</div>
+								<div class="priceNav left">单价(万加元)/套</div>
+								{else}
+								<div class="left priceNav">单价(加元)/平尺</div>
+								<div class="priceNav left active">单价(万加元)/套</div>
+								{/if}
 							</div>
+
 							<div class="over priceBox priceTao priceTaoBox">
 								<label  <?php if($data['price']=='0') {echo "class='active'";}?>>
-                  <input type="radio" name="price_form" value="0"/>
+                  <input type="radio" name="price_form" value="0" price_type="1"/>
                   不限
               	</label>
               	{volist name='price' id='price'}
 								<label <?php if($data['price']==$price->id) {echo "class='active'";}?>>
-                  	<input type="radio" name="price_form" value="{$price.id}"/>
+                  	<input type="radio" name="price_form" value="{$price.id}" price_type="1"/>
                   	{$price.min}--{$price.max}
               	</label>
               	{/volist}
 								<div class="sureBox">
 									<input type="number" name="" value="" class="min-price" placeholder="最低"> --
-									<input type="number" name="" value="" class="max-price" placeholder="最高">
+									<input type="number" name="" value="" class="max-price" placeholder="最高">(加元/平尺)
 									<span class="sureBtn">确定</span>
 								</div>
 							</div>
+
 							<div class="over priceBox priceChi priceTaoBox">
 								<label  <?php if($data['price']=='0') {echo "class='active'";}?>>
-                  <input type="radio" name="price_form" value="0"/>
+                  <input type="radio" name="price_form" value="0" price_type="2"/>
                   不限
               	</label>
-              	{volist name='price' id='price'}
-								<label <?php if($data['price']==$price->id) {echo "class='active'";}?>>
-                  	<input type="radio" name="price_form" value="{$price.id}"/>
-                  	{$price.min}--{$price.max}
+              	{volist name='price2' id='price2'}
+								<label <?php if($data['price']==$price2->id) {echo "class='active'";}?>>
+                  	<input type="radio" name="price_form" value="{$price2.id}" price_type="2"/>
+                  	{$price2.min}--{$price2.max}
               	</label>
               	{/volist}
 								<div class="sureBox">
 									<input type="number" name="" value="" class="min-price" placeholder="最低"> --
-									<input type="number" name="" value="" class="max-price" placeholder="最高">
+									<input type="number" name="" value="" class="max-price" placeholder="最高">万(加元)
 									<span class="sureBtn">确定</span>
 								</div>
 							</div>
+
 						</div>
 
 						</div>
@@ -246,10 +255,23 @@
 		</script>
 		<script>
 			$(function() {
+				var types="{$price_type}";
+				if(types==1){
+					$('.priceTao').show();
+					$('.priceChi').hide();
+				}else{
+					$('.priceTao').hide();
+					$('.priceChi').show();
+				}
 				$('#radioBox').on('click', 'input', function() {
 					var cla=$(this).attr('name');
 					var val=$(this).val();
 					$("."+cla).val(val);
+					var price_type=1;
+					if(cla=="price_form"){
+						price_type=$(this).attr('price_type');
+					}
+					$(".price_type").val(price_type);
 					$("#form").submit();
 				});
 
