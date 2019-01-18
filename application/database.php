@@ -16,11 +16,11 @@ return [
     // 服务器地址
     'hostname'        => '127.0.0.1',
     // 数据库名
-    'database'        => Env::get('database.database','louhuawang'),
+    'database'        => Env::get('database.database','lhw'),
     // 用户名
     'username'        => Env::get('database.username','root'),
     // 密码
-    'password'        => Env::get('database.password','root'),
+    'password'        => Env::get('database.password','ycfl906280213.'),
     // 端口
     'hostport'        => '',
     // 连接dsn
