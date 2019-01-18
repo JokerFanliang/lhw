@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+{include file="public/head"}
+<body>
+{include file="public/header"}
+{include file="public/left"}
+<style>
+    .tit{
+        font-size:20px;
+        background: green;
+        color:white;
+
+    }
+</style>
+<div id="dcMain">
+    <!-- 当前位置 -->
+    <div id="urHere">管理中心<b>></b><strong>楼盘管理</strong><b>></b><strong>基本信息</strong> </div>   <div id="manager" class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+    <h3>
+        <a href="{:url('Building/index')}" class="actionBtn">返回列表</a>
+        <a href="{:url('Building/edit')}?id={$list['id']}" class="tit">基本信息</a>
+        <a href="{:url('Building/edit_detail')}?id={$list['id']}" class="tit">参数详情</a>
+        <a href="{:url('Building/dynamic')}?id={$list['id']}" class="tit">楼盘简介/动态</a>
+        <a href="{:url('Building/house_type')}?id={$list['id']}" class="tit">户型图</a>
+		{if condition="$list['state']==2"}
+        <a href="{:url('Building/video')}?id={$list['id']}" class="tit">视频</a>
+		{else}
+		<a href="{:url('Building/house_show')}?id={$list['id']}" class="tit">楼盘展示图</a>
+		{/if}
+    </h3>
+    <form action="{:url('Building/edit')}"  method="post" id="form">
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <td width="100" align="right">楼盘*</td>
+                <td>
+                    <input type="text" name="name" size="40" class="inpMain name" value="{$list->name}" />
+                </td>
+                <?php $areas=explode(",",$list->area);?>
+                <td width="100" align="right">城市/地区</td>
+                <td>
+                    <input type="text" name="city" size="15" class="inpMain city" placeholder="请填写城市" value="{$areas[0]}" />
+                    <input type="text" name="period" size="15" class="inpMain period" placeholder="请填写地区" value="{$areas[1]}" />
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">热门区域</td>
+                <td>
+                    <select name="area_id">
+                    <option>请选择</option>
+                    {volist name='area' id='area'}
+                      <option value ="{$area.id}" <?php if($area->id==$list->area_id) echo "selected"?>>{$area.name}</option>
+                    {/volist}
+                    </select>
+                </td>
+
+                <td width="100" align="right">价格区间/平尺</td>
+                <td>
+                    {volist name='price' id='price'}
+                        <input type="checkbox" class="cheacks" value="{$price->id}" name="price_id[]" <?php if(in_array($price->id,$price_ids))echo 'checked';?>/><label for="">{$price.min}--{$price.max}</label>
+                    {/volist}
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">户型划分</td>
+                <td>
+                    {volist name='layout' id='layout'}
+                        <input type="checkbox" class="cheacks" value="{$layout->id}" name="layout_id[]" <?php if(in_array($layout->id,$layout_ids))echo 'checked';?>/><label for="">{$layout->name}</label>
+                    {/volist}
+
+                </td>
+                <td width="100" align="right">价格区间/套</td>
+                <td>
+                    {volist name='price2' id='price2'}
+                        <input type="checkbox" class="cheacks" value="{$price2->id}" name="price2_id[]" <?php if(in_array($price2->id,$price2_ids))echo 'checked';?>/><label for="">{$price2.min}--{$price2.max}</label>
+                    {/volist}
+                </td>
+
+            </tr>
+
+            <tr>
+                <td width="100" align="right">建筑类型</td>
+                <td>
+                    <input type="text" name="type" size="40" class="inpMain type" value="{$list->type}" />
+                </td>
+
+                <td width="100" align="right">项目地址</td>
+                <td>
+                    <input type="text" name="address" size="40" class="inpMain address" value="{$list->address}" />
+                </td>
+            </tr>
+
+            <tr>
+                <td width="100" align="right">交工时间</td>
+                <td>
+                    <input type="text" id="youxiao" size="40" class="inpMain finish_at" name="finish_at" value="{$list->finish_at}"/>
+                </td>
+
+                <td width="100" align="right">销售状态</td>
+                <td>
+                    {volist name='state' id='state'}
+                        <input type="checkbox" class="cheacks" value="{$state->id}" name="state_id[]" <?php if(in_array($state->id,$state_ids))echo 'checked';?>/><label for="">{$state->name}</label>
+                    {/volist}
+                </td>
+            </tr>
+
+            <tr>
+                <td width="100" align="right">咨询电话</td>
+                <td>
+                    <input type="text" name="telephone" size="40" class="inpMain telephone" value="{$list->telephone}" />
+                </td>
+                 <td width="100" align="right">销售价格</td>
+                <td>
+                    <input type="text" name="price" size="40" class="inpMain price" value="{$list->price}" />
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">分类</td>
+                <td>
+                    <select name="state">
+                        <option value="0" <?php if($list->state==0) echo "selected"?>>楼花预售</option>
+                        <option value="1" <?php if($list->state==1) echo "selected"?>>热盘现房</option>
+						<option value="2" <?php if($list->state==2) echo "selected"?>>视频看房</option>
+                    </select>
+                </td>
+				<td width="100" align="right">热点新盘</td>
+                <td>
+                    <select name="is_hot">
+                        <option value="0" <?php if($list->is_hot==0) echo "selected"?>>否</option>
+                        <option value="1" <?php if($list->is_hot==1) echo "selected"?>>是</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="hidden" name="id" value="{$list->id}">
+                    <div class="btn sub">修改</div>
+                </td>
+                <td width="100" align="right">特色主题</td>
+                <td>
+                    {volist name='theme' id='theme'}
+                        <input type="checkbox" class="cheacks" value="{$theme->id}" name="theme_id[]" <?php if(in_array($theme->id,$theme_ids))echo 'checked';?>/><label for="">{$theme->name}</label>
+                    {/volist}
+
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</div>
+<div class="clear"></div>
+{include file="public/foot"}
+<script>
+    $(".sub").click(function(){
+        var name=$.trim($(".name").val());
+        if(name==""){
+            alert("区域不能为空");
+            return false;
+        }
+        $("#form").submit();
+    })
+</script>
+</body>
+</html>

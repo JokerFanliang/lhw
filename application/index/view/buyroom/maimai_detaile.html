@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="zh-cn">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="__STATIC__/index/css/rescss.css" />
+		<link rel="stylesheet" href="__STATIC__/index/css/maimai-detaile.css" />
+	</head>
+
+	<body>
+		<div id="header">
+			<!-- 头部公用 -->
+			{include file="public/head"}
+		</div>
+		<div id="main" class="clear">
+			<div class="mianbaoxie">
+				<a href="index.html">楼花王</a>
+				<span>></span>
+				<a href="dichanmaimai.html">地产买卖</a>
+				<span>></span>
+				<span class="navName">{$house->building}</span>
+			</div>
+			<div class="mains clear">
+				<h2 class="xiangxidizhi">{$house->building}</h2>
+				<div class="mainsLeft left">
+					<div class="mainImgBox">
+						<img class="mainImg" width="545px" height="363px" src="__STATIC__/{$show.path}" alt="" />
+					</div>
+					<div id="smallImgBox" class="clear">
+						<button id="prevBtn"><</button>
+						<button id="nextBtn">></button>
+						<div id="mysloder" class="clear">
+							{volist name="imgs" id="img"}
+							<div class="smallBigBox left">
+								<div class="smallBox">
+									<a href="{:url('Buyroom/maimai_detaile')}?id={$house.id}&img_id={$img.id}">
+									<img src="__STATIC__/{$img.path}" alt="" />
+									</a>
+								</div>
+								<!-- <div class="imgBgText">交通图</div> -->
+							</div>
+							{/volist}
+
+						</div>
+
+					</div>
+				</div>
+				<div class="mainsRight">
+					<div class="topBox">
+						<div class="priceBox">
+							<span id="price">{$house->price}</span>
+						</div>
+					</div>
+					<div class="jieshaoBox clear">
+						<div class="msgBox left">
+							<div class="xiangqingBox">
+								<span class="shi">{$house->layout}</span>
+							</div>
+							<p class="biaozhu">户型</p>
+						</div>
+						<div class="msgBox left">
+							<div class="xiangqingBox">
+								<span class="mianji">{$house->acreage}</span>
+							</div>
+							<p class="biaozhu">建筑面积</p>
+						</div>
+						<div class="msgBox left">
+							<div class="xiangqingBox">
+								<span class="chaoxiang">{$house->orientation}</span>
+							</div>
+							<p class="biaozhu">朝向</p>
+						</div>
+						<div class="msgBox left">
+							<div class="xiangqingBox">
+								<span class="zhuangxiu">{$house->decorate}</span>
+							</div>
+							<p class="biaozhu">装修</p>
+						</div>
+					</div>
+
+					<div class="dizhiBox">
+						<span class="biaozhu">小区</span>
+						<span class="xiaoqu">{$house->village}</span>
+					</div>
+					<div class="dizhiBox">
+						<span class="biaozhu">地址</span>
+						<span class="dizhi">{$house->address}</span>
+					</div>
+					<div class="telBox">
+						<span>咨询电话：</span>
+						<span class="hong">{$house->phone}</span>
+					</div>
+					<div class="goGoogleBox">
+						<a href="https://www.google.com/maps" class="goA">地图找房</a>
+						<b class="goGoogleIcon"></b>
+					</div>
+				</div>
+			</div>
+			<div class="downMain clear">
+				<div class="downLeft left">
+					<h3 class="mbm">房源描述</h3>
+					<div class="fangyuanmiaoshu">
+						{$house->info}
+					</div>
+					<h3 class="mbm">配套设施</h3>
+					<?php $assort=explode(",",$house->assort) ?>
+					<div class="peitao clear">
+
+						{volist name='assort' id='assort'}
+						<div class="peitaoBox chuang left">
+							<div class="peitaoIcon chuangIcon"></div>
+							<p>{$assort}</p>
+						</div>
+						{/volist}
+
+					</div>
+					<h3 class="mbm">房源图片</h3>
+					<div class="imgBoxs">
+						{volist name="imgs" id="img"}
+						<div class="imgBox left">
+							<img src="__STATIC__{$img.path}" alt="" />
+						</div>
+						{/volist}
+					</div>
+				</div>
+				<!-- 右侧广告位 -->
+				<div class="downRight right">
+					<div class="guanggaoImgBox" style="width:267px">
+						<a href="{$sale_up.url}" target="_block">
+							<img src="__STATIC__/{$sale_up.path}" height="355px" alt="" />
+						</a>
+					</div>
+					<div class="guanggaoImgBox" style="width:267px">
+						<a href="{$sale_down.url}" target="_block">
+							<img src="__STATIC__/{$sale_down.path}"  height="141px" alt="" />
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="foot">
+			{include file="public/foot"}
+		</div>
+		<script src="__STATIC__/index/js/jquery-1.11.3.js"></script>
+		<script>
+			$(function() {
+				//var smallBoxWidth = parseInt($('.smallBigBox').width()) + parseInt($('.smallBigBox').css("margin-left")) + parseInt($('.smallBigBox').css("margin-right"));
+				
+				//var mySloderWidth = parseInt($('.smallBigBox').length) * (parseInt($('.smallBigBox').width()) + parseInt($('.smallBigBox').css("margin-left")) + parseInt($('.smallBigBox').css("margin-right")));
+				
+				var smallBoxWidth = 110;
+				var mySloderWidth = parseInt($('.smallBigBox').length) *smallBoxWidth;
+				var num = parseInt($('.smallBigBox').length) - 5;
+				var sloder = 0;
+				$('#mysloder').width(mySloderWidth);
+				$('#nextBtn').click(function() {
+					if(sloder < num) {
+						sloder++;
+						$('#mysloder').css('margin-left', "-" + parseInt(smallBoxWidth * sloder) + "px");
+						console.log("sloder=" + sloder + "~num=" + num);
+					}
+				});
+				$('#prevBtn').click(function() {
+					if(sloder > 0) {
+						sloder--;
+						$('#mysloder').css('margin-left', "-" + parseInt(smallBoxWidth * sloder) + "px");
+						console.log("sloder=" + sloder + "~num=" + num);
+					}
+				});
+
+				$('#dongtai').click(function() {
+					$('#dongtaiBox').show().siblings().hide();
+					$(this).addClass('active').siblings('.active').removeClass('active');
+				});
+
+				$('#canshu').click(function() {
+					$('#canshuBox').show().siblings().hide();
+					$(this).addClass('active').siblings('.active').removeClass('active');
+				});
+
+				$('#huxing').click(function() {
+					$('#huxingBox').show().siblings().hide();
+					$(this).addClass('active').siblings('.active').removeClass('active');
+				});
+
+			});
+		</script>
+	</body>
+
+</html>

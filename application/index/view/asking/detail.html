@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="zh-cn">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="__STATIC__/index/css/rescss.css" />
+		<link rel="stylesheet" href="__STATIC__/index/css/kanfanggonglue-msg.css" />
+	</head>
+
+	<body>
+		<div id="header">
+			<!-- 头部公用 -->
+			{include file="public/head"}
+		</div>
+		<div id="main" class="clear">
+			<div id="leftMain" class="left">
+				<div id="dateils" class="clear">
+					<div class="titelBox">
+						<h1 class="titles">{$list->question}</h1>
+						<h4 class="subTitle">{$list->title}</h4>
+					</div>
+					<div class="msgbox">
+						<span class="zy"></span>
+						<span class="texts">
+                         {$list->answer}
+                </span>
+					</div>
+					<div class="fanye clear">
+						<div class="left">
+							<span>上一篇：</span>
+							<a class="prevMsg" href="{:url('Asking/detail')}?id={$prev['id']}">{$prev.question}</a>
+							{if condition="$prev"}
+							{else /} 暂无数据
+							{/if}
+						</div>
+						<div class="right">
+							<span>下一篇：</span>
+							<a class="nextMsg" href="{:url('Asking/detail')}?id={$next['id']}">{$next.question}</a>
+							{if condition="$next"}
+							{else /} 暂无数据
+							{/if}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="foot">
+			{include file="public/foot"}
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ {include file="public/head"}
+<body>
+{include file="public/header"}
+{include file="public/left"}
+<script type="text/javascript">
+
+    function del() {
+        var msg = "确定要删除么！";
+        if (confirm(msg)==true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+</script>
+<div id="dcMain"><!-- 当前位置 -->
+    <div id="urHere">管理中心<b>></b><strong>房源审核</strong> </div>   <div id="manager" class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+    <h3>房源审核</h3>
+    <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+     <tr>
+         <th width="30" align="center">编号</th>
+         <th align="center">标题</th>
+         <th align="center">状态</th>
+         <th align="center">类型</th>
+         <th align="center">添加时间</th>
+         <th align="center">操作</th>
+     </tr>
+     <?php $id=1;?>
+     {volist name='lists' id='list'}
+     <tr>
+      <td align="center">{$id}</td>
+      <td align="center">{$list.title}</td>
+      <td align="center">{$list.checkout==0 ? "待审核" : ($list.checkout==1 ? "审核通过": "审核未通过")}</td>
+      <td align="center">{$list.type==0 ? "出租求租" : "地产买卖"}</td>
+      <td align="center">{$list.create_time}</td>
+      <td align="center"><a href="{:url('SecondHouse/edit')}?id={$list['id']}">审核</a> </td>
+     </tr>
+     <?php $id++;?>
+     {/volist}
+    </table>
+    {$lists->render()}
+    </div>
+              
+ </div>
+{include file="public/foot"}
+</body>
+</html>

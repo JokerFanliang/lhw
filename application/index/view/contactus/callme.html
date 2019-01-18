@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="__STATIC__/index/css/rescss.css"/>
+    <link rel="stylesheet" href="__STATIC__/index/css/callme.css"/>
+</head>
+<body>
+<div id="header" class="left">
+    <!-- 头部公用 -->
+    {include file="public/head"}
+</div>
+<div id="main" class="clear">
+    <div class="mianbaoxie">
+        <a href="index.html">楼花王</a>
+        <span>></span>
+        <span>联系我们</span>
+    </div>
+    <div id="msgBox">
+        {include file="public/common"}
+        <div class="msgDetaile">
+            <div class="msgMain">
+                <div id="msgTitle">
+                    联系我们
+                </div>
+                <div class="msgText">
+                    {$list.content}
+<!--                     <p class="hangju">楼花网前台接待：400-996-6608</p>
+                    <p class="hangju">楼花网市场部：0898-36824134</p>
+                    <p class="hangju">楼花网人事部：0898-36822287</p>
+                    <p class="hangju">地址：海南省琼海市嘉积镇春晖商住区（博海·假日风情）C栋16号商铺</p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="foot">
+    {include file="public/foot"}
+</div>
+<script src="__STATIC__/index/js/jquery-1.11.3.js"></script>
+<script>
+    $(function () {
+        $('#radioBox').on('click', 'label', function () {
+            $(this).css('background', '#CC0000').css('color', '#fff');
+            $(this).siblings().css('background', '#F7F7F7').css('color', '#000');
+        });
+
+        /**
+         *
+         *      选择框 获取 value 功能  临时用的BUTTON
+         *
+         */
+        $('button').click(function () {
+            $.each($('#radioBox').find('input[type="radio"]'), function (i, e) {
+                if ($(e).is(':checked')) {
+                    alert($(e).val());
+                }
+
+            });
+        });
+    });
+
+</script>
+</body>
+</html>

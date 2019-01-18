@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+{include file="public/head"}
+<body>
+{include file="public/header"}
+{include file="public/left"}
+<div id="dcMain">
+    <!-- 当前位置 -->
+    <div id="urHere">管理中心<b>></b><strong>楼盘管理</strong> </div>   <div id="manager" class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+    <h3><a href="{:url('Building/index')}" class="actionBtn">返回列表</a>添加楼盘</h3>
+    <form action="{:url('Building/add')}"  method="post" id="form">
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <td width="100" align="right">楼盘*</td>
+                <td>
+                    <input type="text" name="name" size="40" class="inpMain name" value="" />
+                </td>
+
+                <td width="100" align="right">城市/地区</td>
+                <td>
+                    <input type="text" name="city" size="15" class="inpMain city" placeholder="请填写城市" value="" />
+                    <input type="text" name="period" size="15" class="inpMain period" placeholder="请填写地区" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">热门区域</td>
+                <td>
+                    <select name="area_id">
+                    <option>请选择</option>
+                    {volist name='area' id='area'}
+                      <option value ="{$area.id}">{$area.name}</option>
+                    {/volist}
+                    </select>
+                </td>
+
+                <td width="100" align="right">价格区间/平尺</td>
+                <td>
+                    {volist name='price' id='price'}
+                        <input type="checkbox" class="cheacks" value="{$price->id}" name="price_id[]"/><label for="">{$price.min}--{$price.max}</label>
+                    {/volist}
+
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">户型划分</td>
+                <td>
+                    {volist name='layout' id='layout'}
+                        <input type="checkbox" class="cheacks" value="{$layout->id}" name="layout_id[]"/><label for="">{$layout->name}</label>
+                    {/volist}
+
+                </td>
+                <td width="100" align="right">价格区间/套</td>
+                <td>
+                    {volist name='price2' id='price2'}
+                        <input type="checkbox" class="cheacks" value="{$price2->id}" name="price2_id[]"/><label for="">{$price2.min}--{$price2.max}</label>
+                    {/volist}
+
+                </td>
+
+            </tr>
+
+            <tr>
+                <td width="100" align="right">建筑类型</td>
+                <td>
+                    <input type="text" name="type" size="40" class="inpMain type" value="" />
+                </td>
+
+                <td width="100" align="right">项目地址</td>
+                <td>
+                    <input type="text" name="address" size="40" class="inpMain address" value="" />
+                </td>
+            </tr>
+
+            <tr>
+                <td width="100" align="right">交工时间</td>
+                <td>
+					<input type="text" id="youxiao" size="40" class="inpMain finish_at" name="finish_at" value="待定"/>
+                </td>
+
+                <td width="100" align="right">销售状态</td>
+                <td>
+                    {volist name='state' id='state'}
+                        <input type="checkbox" class="cheacks" value="{$state->id}" name="state_id[]"/><label for="">{$state->name}</label>
+                    {/volist}
+                </td>
+            </tr>
+
+            <tr>
+                <td width="100" align="right">咨询电话</td>
+                <td>
+                    <input type="text" name="telephone" size="40" class="inpMain telephone" value="" />
+                </td>
+                <td width="100" align="right">销售价格</td>
+                <td>
+                    <input type="text" name="price" size="40" class="inpMain price" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">分类</td>
+                <td>
+                    <select name="state">
+                        <option value="0">楼花预售</option>
+                        <option value="1">热盘现房</option>
+						<option value="2">视频看房</option>
+                    </select>
+                </td>
+				<td width="100" align="right">热点新盘</td>
+                <td>
+                    <select name="is_hot">
+                        <option value="0">否</option>
+                        <option value="1">是</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>
+                    <div class="btn sub">添加</div>
+                </td>
+                <td width="100" align="right">特色主题</td>
+                <td>
+                    {volist name='theme' id='theme'}
+                        <input type="checkbox" class="cheacks" value="{$theme->id}" name="theme_id[]"/><label for="">{$theme->name}</label>
+                    {/volist}
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</div>
+<div class="clear"></div>
+{include file="public/foot"}
+<script>
+
+    $(".sub").click(function(){
+        var name=$.trim($(".name").val());
+        if(name==""){
+            alert("楼盘不能为空");
+            return false;
+        }
+        $("#form").submit();
+    })
+</script>
+</body>
+</html>

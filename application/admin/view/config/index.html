@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+{include file="public/head"}
+<body>
+{include file="public/header"}
+{include file="public/left"}
+<div id="dcMain">
+    <!-- 当前位置 -->
+    <div id="urHere">管理中心<b>></b><strong>底部配置</strong> </div>   <div id="manager" class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+    <h3>修改配置</h3>
+    <form action=""  method="post" id="form"  enctype="multipart/form-data">
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <td width="100" align="right">地址</td>
+                <td>
+                    <input type="text" name="address" size="40" class="inpMain address" value="{$list->address}" />
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">服务电话</td>
+                <td>
+                    <input type="text" name="phone" size="40" class="inpMain phone" value="{$list->phone}" />
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">简介</td>
+                <td>
+                    <input type="text" name="info" size="40" class="inpMain info" value="{$list->info}" />
+                </td>
+            </tr>
+
+            <tr>
+                <td width="100" align="right">版权</td>
+                <td>
+                    <input type="text" name="copy" size="40" class="inpMain copy" value="{$list->copy}" />
+                </td>
+            </tr>
+            <tr>
+                <td align="right">底部图</td>
+                <td>
+                    <input type="file" name="img">
+                    <span>（尺寸：200*100）</span>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">当前底部图</td>
+                <td>
+                    <div style="width:200px;"><img  width="100%" src="{$list.img}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="btn sub">添加</div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</div>
+<div class="clear"></div>
+{include file="public/foot"}
+<script>
+    $(".sub").click(function(){
+        $("#form").submit();
+    })
+</script>
+</body>
+</html>

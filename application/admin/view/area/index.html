@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ {include file="public/head"}
+<body>
+{include file="public/header"}
+{include file="public/left"}
+<script type="text/javascript">
+
+    function del() {
+        var msg = "确定要删除么！";
+        if (confirm(msg)==true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+</script>
+<div id="dcMain"><!-- 当前位置 -->
+    <div id="urHere">管理中心<b>></b><strong>热门区域</strong> </div>   <div id="manager" class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+    <h3><a href="{:url('Area/add')}" class="actionBtn">添加热门区域</a>热门区域</h3>
+    <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+     <tr>
+         <th width="30" align="center">编号</th>
+         <th align="center">区域</th>
+         <th align="center">排序</th>
+         <th align="center">添加时间</th>
+         <th align="center">操作</th>
+     </tr>
+     <?php $id=1;?>
+     {volist name='lists' id='list'}
+     <tr>
+      <td align="center">{$id}</td>
+      <td align="center">{$list.name}</td>
+      <td align="center">{$list.sort}</td>
+      <td align="center">{$list.create_time}</td>
+      <td align="center"><a href="{:url('Area/edit')}?id={$list['id']}">编辑</a> | <a href="{:url('Area/delete')}?id={$list['id']}" onclick="javascript:return del()">删除</a></td>
+     </tr>
+     <?php $id++;?>
+     {/volist}
+    </table>
+    {$lists->render()}
+    </div>
+              
+ </div>
+{include file="public/foot"}
+</body>
+</html>

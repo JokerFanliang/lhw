@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ {include file="public/head"}
+<body>
+{include file="public/header"}
+{include file="public/left"}
+<style>
+    .tit{
+        font-size:20px;
+        background: green;
+        color:white;
+
+    }
+</style>
+<script type="text/javascript">
+
+    function del() {
+        var msg = "确定要删除么！";
+        if (confirm(msg)==true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+</script>
+<div id="dcMain"><!-- 当前位置 -->
+    <div id="urHere">管理中心<b>></b><strong>楼盘管理</strong><b>></b><strong>楼盘简介/动态</strong> </div>   <div id="manager" class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+    <h3>
+        <a href="{:url('Building/dynamic_add')}?id={$building_id}" class="actionBtn">添加动态</a>
+        <a href="{:url('Building/edit')}?id={$building_id}" class="tit">基本信息</a>
+        <a href="{:url('Building/edit_detail')}?id={$building_id}" class="tit">参数详情</a>
+        <a href="{:url('Building/dynamic')}?id={$building_id}" class="tit">楼盘简介/动态</a>
+        <a href="{:url('Building/house_type')}?id={$building_id}" class="tit">户型图</a>
+		{if condition="$build['state']==2"}
+        <a href="{:url('Building/video')}?id={$building_id}" class="tit">视频</a>
+		{else}
+		<a href="{:url('Building/house_show')}?id={$building_id}" class="tit">楼盘展示图</a>
+		{/if}
+    </h3>
+    <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+     <tr>
+         <th width="30" align="center">编号</th>
+         <th align="center">标题</th>
+         <th align="center">添加时间</th>
+         <th align="center">操作</th>
+     </tr>
+     <?php $id=1;?>
+     {volist name='lists' id='list'}
+     <tr>
+      <td align="center">{$id}</td>
+      <td align="center">{$list.title}</td>
+      <td align="center">{$list.create_time}</td>
+      <td align="center"><a href="{:url('Building/dynamic_edit')}?id={$list['id']}">编辑</a> | <a href="{:url('Building/dynamic_delete')}?id={$list['id']}&building_id={$building_id}" onclick="javascript:return del()">删除</a></td>
+     </tr>
+     <?php $id++;?>
+     {/volist}
+    </table>
+    {$lists->render()}
+    </div>
+              
+ </div>
+{include file="public/foot"}
+</body>
+</html>

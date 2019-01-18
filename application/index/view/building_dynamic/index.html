@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="__STATIC__/index/css/rescss.css"/>
+    <link rel="stylesheet" href="__STATIC__/index/css/kanfanggonglue.css"/>
+</head>
+
+<body>
+<div id="header">
+    <!-- 头部公用 -->
+    {include file="public/head"}
+</div>
+<div id="main" class="clear">
+    <div id="leftMain" class="left">
+        <div id="dateils" class="clear">
+            <div class="deteilsBox left">
+                <h2 class="hongxian">楼盘动态</h2>
+                <!--攻略信息 循环区域-->
+
+
+                <div class="deteilsMegBox">
+                    {volist name="lists" id="list"}
+                    <div class="megBox clear">
+                        <div class="msgImg left">
+                            <img src="__STATIC__/index/image/gonglue-1.jpg" alt=""/>
+                        </div>
+                        <div class="msgTextBox">
+                            <h3>{$list.title}</h3>
+                            <span class="msgZhaiyao">
+                                      [简介]
+                                    </span>
+                            <span class="msgText">
+                                <?php echo mb_substr($list['summary'],0,40,'UTF-8')."...";?>
+                            </span>
+                            <a href="{:url('BuildingDynamic/detail')}?id={$list['id']}&building_id={$list['building_id']}" target="_blank" class="xiangqing">[详情]</a>
+                        </div>
+                    </div>
+                    {/volist}
+
+                    <div id="fenye" class="clear">
+                          {$lists->render()}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div id="foot">
+    {include file="public/foot"}
+</div>
+</body>
+
+</html>

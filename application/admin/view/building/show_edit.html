@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+{include file="public/head"}
+<body>
+{include file="public/header"}
+{include file="public/left"}
+<div id="dcMain">
+    <!-- 当前位置 -->
+    <div id="urHere">管理中心<b>></b><strong>修改楼盘图</strong> </div>   <div id="manager" class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+    <h3><a href="{:url('Building/house_show')}?id={$house->building_id}" class="actionBtn">返回列表</a>修改楼盘图</h3>
+    <form action="{:url('Building/show_edit')}"  method="post" id="form" enctype="multipart/form-data">
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <td align="right">修改图片</td>
+                <td>
+                    <input type="file" name="image" id="image" size="40" class="inpMain" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td align="right">原图片</td>
+                <td>
+                    <img src="{$house->photo}" width="100px;">
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">排序</td>
+                <td>
+                    <input type="number" name="sort" size="40" class="inpMain" value="{$house->sort}" placeholder="数字越大越靠前" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="hidden" name="building_id" value="{$house->building_id}">
+                    <input type="hidden" name="id" value="{$house->id}">
+                    <div class="btn sub">修改</div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</div>
+<div class="clear"></div>
+{include file="public/foot"}
+<script>
+    $(".sub").click(function(){
+        // var img=$("#image").val();
+        // if(img==""){
+        //     alert("请先上传图片");
+        //     return false;
+        // }
+        $("#form").submit();
+    })
+</script>
+</body>
+</html>

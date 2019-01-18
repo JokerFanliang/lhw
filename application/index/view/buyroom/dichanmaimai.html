@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="zh-cn">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="__STATIC__/index/css/rescss.css" />
+		<link rel="stylesheet" href="__STATIC__/index/css/dichanmaimai.css" />
+		<style>
+			.newsBox:first-child a span {
+				color: #F7743C;
+			}
+			
+			.newsBox:first-child {
+				border-bottom: 1px dotted #ddd;
+				padding-bottom: 5px;
+			}
+			#radioBox label{
+				background:#F7F7F7;
+				color:#000;
+			}
+			#radioBox label.active{
+				background:#CC0000;
+				color:#fff;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<!-- 头部公用 -->
+			{include file="public/head"}
+		</div>
+		<form action="{:url('Buyroom/dichanmaimai')}" method="get" id="form">
+			<input type="hidden" class="area_form" name="area" value="{$data['area']}">
+			<input type="hidden" class="price_form" name="price" value="{$data['price']}">
+			<input type="hidden" class="layout_form" name="layout" value="{$data['layout']}">
+			<input type="hidden" class="theme_form" name="theme" value="{$data['theme']}">
+		</form>
+		<div id="main" class="clear">
+			<div id="leftMain" class="left">
+				<!-- 选择框 -->
+				<div id="radioBox">
+					<!--热门区域-->
+					<div class="radioSunBox clear">
+						<div class="fenlei left">热门区域：</div>
+						<div class="fenleiDetailes">
+						<label <?php if($data['area']=='0') {echo "class='active'";}?>>
+	                        <input type="radio" name="area_form" value="0"/>
+	                        不限
+	                    </label>
+	                    {volist name='area' id='area'}
+						<label <?php if($data['area']==$area->name) {echo "class='active'";}?>>
+	                        <input type="radio" name="area_form" value="{$area.name}"/>
+	                        {$area.name}
+	                    </label>
+	                    {/volist}
+						</div>
+					</div>
+					<!--价格区间-->
+					<div class="radioSunBox clear">
+						<div class="fenlei left">价格区间：</div>
+						<div class="fenleiDetailes ">
+						<label  <?php if($data['price']=='0') {echo "class='active'";}?>>
+                        <input type="radio" name="price_form" value="0"/>
+                        不限
+                    	</label>
+                    	{volist name='price' id='price'}
+						<label <?php $pri=$price->min."--".$price->max; if($data['price']==$pri) {echo "class='active'";}?>>
+                        	<input type="radio" name="price_form" value="{$price.min}--{$price.max}"/>
+                        	{$price.min}--{$price.max}
+                    	</label>
+                    	{/volist}
+						</div>
+					</div>
+					<!--户型划分-->
+					<div class="radioSunBox clear">
+						<div class="fenlei left">户型划分：</div>
+						<div class="fenleiDetailes">						
+						<label  <?php if($data['layout']=='0') {echo "class='active'";}?>>
+                        	<input type="radio" name="layout_form" value="0"/>
+                        不限
+                    	</label>                  	
+                    	{volist name='layout' id='layout'}
+                    	<label <?php if(in_array($layout->name,$layouts)) {echo "class='active'";}?>>
+                        	<input type="radio" name="layout_form" value="{$layout.name}"/>
+                        	{$layout.name}
+                    	</label>
+						{/volist}
+						</div>
+					</div>
+					<!--特色主题-->
+					<div class="radioSunBox clear">
+						<div class="fenlei left">特色主题：</div>
+						<div class="fenleiDetailes">
+
+						<label  <?php if($data['theme']=='0') {echo "class='active'";}?>>
+                        	<input type="radio" name="theme_form" value="0"/>
+                        不限
+                    	</label>
+						{volist name='theme' id='theme'}
+						<label <?php if($data['theme']==$theme->name) {echo "class='active'";}?>>
+                        	<input type="radio" name="theme_form" value="{$theme.name}"/>
+                        	{$theme.name}
+                    	</label>
+                    	{/volist}
+						</div>
+					</div>
+				</div>
+				<form action="{:url('Buyroom/dichanmaimai')}" method="get" id="search">
+					<div id="serchBox" class="clear">
+						<input type="text" id="serchText" name="searchname" class="left searchname" />
+
+						<div id="serchBtn" class="left">
+							<b id="serchIcon"></b> 搜索
+						</div>
+						<div id="goGoogleBox" class="right">
+							<b id="goGoogleIcon"></b>
+							<a href="https://www.google.com/maps" target="_block" id="goGoogle">地图找房</a>
+						</div>
+					</div>
+				</form>
+				<div id="dateils" class="clear">
+					<!--图片展示 循环区域-->
+					{volist name='house' id='hou'}
+					<div class="deteilsBox clear">
+						<div class="deteilsImgBox left">
+							<a href="{:url('Buyroom/maimai_detaile')}?id={$hou.id}">
+								<img src="/static/{$imgs[$hou.id]}" alt="" />
+							</a>
+						</div>
+						<div class="msgBox left">
+							<h2 class="jieshao">
+								<a href="{:url('Buyroom/maimai_detaile')}?id={$hou.id}">{$hou.title}
+								</a>
+							</h2>
+							<div class="jianjieBox clear">
+								<div class="priceBox">
+									<span class="maimaiprice">{$hou.price}</span>
+								</div>
+								<div class="jianjie">
+									<span class="tingshi">{$hou.layout}</span>
+									<span class="shu">|</span>
+									<span class="mianji">{$hou.acreage}</span>
+									<span class="shu">|</span>
+									<span class="chaoxiang">{$hou.orientation}</span>
+								</div>
+								
+							</div>
+							<?php $area=explode(",",$hou->area)?>
+							<div class="diqu">
+								<span class="shi">{$area[0]}</span>
+								<span class="xiaoshu">|</span>
+								<span class="dizhi">{$area[1]}</span>
+							</div>
+						</div>
+					</div>
+					{/volist}
+					<div id="fenye" class="clear">
+						{$house->render()}
+					</div>
+				</div>
+				
+			</div>
+			<div id="rightMain" class="left">
+				<a href="{:url('Buyroom/maimaifabu')}">
+					<div id="fabuBox">
+						<b class="fbIcon"></b> 发布楼花房源
+					</div>
+				</a>
+				<div id="rightUp">
+					<div class="newHot">
+						<b id="hotIcon"></b> 热点新盘
+					</div>
+					<div id="newDetaile">
+						{volist name='hothouse' id='hothouse'}						
+						<div class="newsBox clear">
+							<a href="{:url('Buyroom/maimai_detaile')}?id={$hothouse.id}" class="clear">
+							<div class="clear">
+								<span class="newTle shenglue left">{$hothouse.building}</span>
+								<?php $area=explode(",",$hothouse->area)?>
+								<span class="newDizhi right">{$area[0]}</span>
+							</div>
+							<p class="price">{$hothouse.price}</p>
+							</a>
+						</div>
+						{/volist}
+
+					</div>
+				</div>
+				<div id="rightMidImg">
+					<img src="img/guanggao-1.jpg" alt="" />
+				</div>
+				<div id="rightDown">
+					<img src="img/guanggaoTel-1.jpg" alt="" />
+				</div>
+			</div>
+		</div>
+		<div id="foot">
+			{include file="public/foot"}
+		</div>
+		<script src="__STATIC__/index/js/jquery-1.11.3.js"></script>
+		<script>
+			$("#serchBtn").click(function(){
+				var name=$.trim($(".searchname").val());
+				if(name==""){
+					alert("请输入查询条件");
+					return false;
+				}
+				$("#search").submit();
+			})
+		</script>
+		<script>
+			$(function() {
+				$('#radioBox').on('click', 'input', function() {
+					$(this).addClass('active').siblings('.active').removeClass('active');
+					var cla=$(this).attr('name');
+					var val=$(this).val();
+					$("."+cla).val(val);
+					$("#form").submit();
+				});
+
+				/**
+				 *
+				 *      选择框 获取 value 功能  临时用的BUTTON
+				 *
+				 */
+				$('button').click(function() {
+					$.each($('#radioBox').find('input[type="radio"]'), function(i, e) {
+						if($(e).is(':checked')) {
+							alert($(e).val());
+						}
+
+					});
+				});
+			});
+		</script>
+	</body>
+
+</html>

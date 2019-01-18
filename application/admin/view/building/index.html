@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ {include file="public/head"}
+<body>
+{include file="public/header"}
+{include file="public/left"}
+<script type="text/javascript">
+
+    function del() {
+        var msg = "确定要删除么！";
+        if (confirm(msg)==true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+</script>
+<div id="dcMain"><!-- 当前位置 -->
+    <div id="urHere">管理中心<b>></b><strong>楼盘管理</strong> </div>   <div id="manager" class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+    <h3><a href="{:url('Building/add')}" class="actionBtn">添加楼盘</a>楼盘管理</h3>
+    <div class="filter">
+        <form action="" method="get">
+            <input name="name" class="input" type="text" value="" placeholder="按楼盘关键字检索" />
+            <input name="submit" class="btnGray" type="submit" value="筛选" />
+        </form>
+    </div>
+    <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+     <tr>
+         <th width="30" align="center">编号</th>
+         <th align="center">楼盘</th>
+         <th align="center">分类</th>
+         <th align="center">添加时间</th>
+         <th align="center">操作</th>
+     </tr>
+     <?php $id=1;?>
+     {volist name='lists' id='list'}
+     <tr>
+      <td align="center">{$list.id}</td>
+      <td align="center">{$list.name}</td>
+      <td align="center">{$list.state==0 ? "楼花预售" : ($list.state==1 ? "热盘现房" : "视频看房")}</td>
+      <td align="center">{$list.create_time}</td>
+      <td align="center"><a href="{:url('Building/edit')}?id={$list['id']}">编辑</a> | <a href="{:url('Building/delete')}?id={$list['id']}" onclick="javascript:return del()">删除</a></td>
+     </tr>
+     <?php $id++;?>
+     {/volist}
+    </table>
+    {$lists->render()}
+    </div>
+              
+ </div>
+{include file="public/foot"}
+</body>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="__STATIC__/index/css/rescss.css"/>
+    <link rel="stylesheet" href="__STATIC__/index/css/maimaifabu.css"/>
+    <!-- 文本编辑器 范围 -->
+    <!--<link rel="stylesheet" href="kindeditor/themes/default/default.css" />-->
+    
+    <style>
+      .ke-statusbar {
+        display: none;
+      }
+      /* 测试范围 */
+      
+      #imgPreview {
+        float: left;
+        border: none;
+      }
+      
+      #imgPreview img {
+        margin-right: 10px;
+        width: 50px;
+        height: 50px;
+      }
+      
+      .upload-img {
+        background: #008800;
+        color: #fff;
+        padding: 10px 20px;
+        margin: 5px 0;
+        display: inline-block;
+        border-radius: 5px;
+      }
+      /*//这儿是为了改变上传按钮样式把input设为了透明色*/
+      
+      #fileUpload {
+        visibility: hidden;
+        height: 0;
+      }
+      
+      .imgBox {
+        display: table-cell;
+        width: 100px;
+        height: 100px;
+        vertical-align: middle;
+        text-align: center;
+      }
+      
+      .borderBox {
+        border: 2px solid #ddd;
+        margin-right: 20px;
+        height: 100%;
+      }
+      /* 测试范围 */
+    </style>
+    <!-- 文本编辑器 范围 -->
+</head>
+<body>
+<div id="header">
+    <!-- 头部公用 -->
+    {include file="public/head"}
+</div>
+<!-- <form action="{:url('Buyroom/maimaifabu')}" enctype="multipart/form-data"  method="post" id="form"> -->
+<div id="main" class="clear">
+    <div id="leftMain" class="left">
+        <div id="dateils" class="clear">
+            <div class="deteilsBox left">
+                <h2 class="hongxian">发布二手房源</h2>
+                <!--攻略信息 循环区域-->
+                <div class="deteilsMegBox">
+                    <div class="inputBox">
+                        <span class="leftTitle">标题：</span>
+                        <input type="text" id="biaoti" class="inputBig title" name="title"/>
+                    </div>
+                    <div class="inputBox">
+                        <span class="leftTitle">所属区域：</span>
+                        <input type="text" id="chengshi" class="inputBig city" placeholder="请输入城市" name="city"/>
+                        <input type="text" id="quyu" class="inputBig" placeholder="请输入区域" name="region"/>
+                    </div>
+                    <div class="inputBox">
+                        <span class="leftTitle">热门区域：</span>
+                        <select name="hot_area">
+                        <option>请选择</option>
+                        {volist name='area' id='area'}
+                          <option value ="{$area.name}">{$area.name}</option>
+                        {/volist}
+                        </select>
+                    </div>
+
+                    <div class="inputBox">
+                        <span class="leftTitle">楼盘：</span>
+                        <input type="text" id="loupan" class="inputBig building" name="building"/>
+                    </div>
+                    <div class="inputBox">
+                        <span class="leftTitle">小区名称：</span>
+                        <input type="text" id="xiaoqu" class="inputBig village" name="village"/>
+                    </div>
+                    <div class="inputBox">
+                        <span class="leftTitle">详细地址：</span>
+                        <input type="text" id="dizhi" class="inputBig address" name="address"/>
+                        <span>PS：可用地图查询地址</span>
+                    </div>
+                    <div id="googleMapsBox">
+                        <iframe width="898" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://ditu.google.cn/maps?f=q&amp;source=s_q&amp;hl=zh-CN&amp;geocode=&amp;output=embed"></iframe>
+                        <!--<iframe width="898" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://ditu.google.cn/maps?f=q&amp;source=s_q&amp;hl=zh-CN&amp;geocode=&amp;q=%E5%90%89%E6%9E%97%E7%9C%81%E9%95%BF%E6%98%A5%E4%BA%8C%E9%81%93%E5%8C%BA%E4%BB%99%E5%8F%B0%E5%A4%A7%E8%A1%971468%E5%8F%B7&amp;aq=0&amp;oq=%E5%90%89%E6%9E%97%E7%9C%81%E9%95%BF%E6%98%A5%E4%BA%8C%E9%81%93%E5%8C%BA%E4%BB%99%E5%8F%B0%E5%A4%A7%E8%A1%97146&amp;sll=43.849159,125.376878&amp;sspn=0.005115,0.00929&amp;brcurrent=3,0x5e384eb3f72ee7eb:0x2ba447d3bd324cc2,0,0x5e385df36dbd9a6f:0x9fc7d4f42756b198%3B5,0,0&amp;ie=UTF8&amp;hq=&amp;hnear=%E5%90%89%E6%9E%97%E7%9C%81%E9%95%BF%E6%98%A5%E4%BA%8C%E9%81%93%E5%8C%BA%E4%BB%99%E5%8F%B0%E5%A4%A7%E8%A1%971468%E5%8F%B7&amp;t=m&amp;z=14&amp;ll=43.856258,125.379522&amp;output=embed"></iframe>-->
+                    </div>
+<!--                     <div class="inputBox">
+                        <span class="leftTitle">房屋面积：</span>
+                        <input type="number" id="mianji" class="inputMid" name="acreage"/>尺
+                        <span>PS：请输入数字</span>
+                    </div>
+                    <div class="inputBox">
+                        <span class="leftTitle">出售总价：</span>
+                        <input type="number" id="chushou" class="inputMid" name="price"/>万
+                        <span>PS：请输入数字</span>
+                    </div> -->
+                    <div class="inputBox">
+                        <span class="leftTitle">房屋面积：</span>
+                        <input type="text" id="mianji" class="inputBig" name="acreage"/>
+                    </div>
+                    <div class="inputBox">
+                        <span class="leftTitle">出售总价：</span>
+                        <input type="text" id="chushou" class="inputBig" name="price"/>
+                    </div>
+                    <div class="inputBox">
+                        <span class="leftTitle">价格区间：</span>
+                        <select name="price_period">
+                        <option>请选择</option>
+                        {volist name='price' id='price'}
+                          <option value ="{$price.id}">{$price.price}</option>
+                        {/volist}
+                        </select>
+                    </div>
+                    <div class="inputBox">
+                        <span class="leftTitle">户型：</span>
+                        <input type="number" id="fang" class="inputSmall" name="count1"/><span class="leftMargin">房</span>
+                        <input type="number" id="ting" class="inputSmall" name="count2"/><span class="leftMargin">厅</span>
+                        <input type="number" id="chu" class="inputSmall" name="count3"/><span class="leftMargin">厨</span>
+                        <input type="number" id="wei" class="inputSmall" name="count4"/><span class="leftMargin">卫</span>
+                    </div>
+                    <div class="inputBox">
+                        <span class="leftTitle">户型划分：</span>
+                        <select name="layout_diff">
+                        <option>请选择</option>
+                        {volist name='layout' id='layout'}
+                            <option value ="{$layout.name}">{$layout.name}</option>
+                        {/volist}
+                        </select>
+                    </div>
+                    <div class="inputBox">
+                        <span class="leftTitle">特色主题：</span>
+                        <select name="theme">
+                        <option>请选择</option>
+                        {volist name='theme' id='theme'}
+                          <option value ="{$theme.name}">{$theme.name}</option>
+                        {/volist}
+                        </select>
+                    </div>
+                    <div class="inputBox">
+                        <span class="leftTitle">楼层：</span>
+                        第<input type="number" id="fang" maxlength="2" size="2"  name="num"/><span class="leftMargin">层</span>
+
+                        共<input type="number" id="chu" maxlength="2" size="2" name="all"/><span class="leftMargin">层</span>
+ 
+                    </div>
+
+                    <div class="inputBox">
+                        <span class="leftTitle">朝向：</span>
+                        <input type="text" id="chaoxiang" class="inputBig" name="orientation"/>
+                    </div>
+                    <div class="inputBox">
+                        <span class="leftTitle">装修：</span>
+                        <input type="text" id="zhuangxiu" class="inputBig" name="decorate"/>
+                    </div>
+                    <div class="cheackBox">
+                        <span class="leftTitle">配套：</span>
+                        <input type="checkbox" id="dianshi" class="cheacks" value="电视" name="assort[]"/><label for="dianshi">电视</label>
+                        <input type="checkbox" id="reshuiqi" class="cheacks" value="热水器" name="assort[]"/><label for="reshuiqi">热水器</label>
+                        <input type="checkbox" id="meiqi" class="cheacks" value="煤气" name="assort[]"/><label for="meiqi">煤气</label>
+                        <input type="checkbox" id="bingxiang" class="cheacks" value="冰箱" name="assort[]"/><label for="bingxiang">冰箱</label>
+                        <input type="checkbox" id="chuju" class="cheacks" value="厨具" name="assort[]"/><label for="chuju">厨具</label>
+                        <input type="checkbox" id="kongtiao" class="cheacks" value="空调" name="assort[]"/><label for="kongtiao">空调</label>
+                        <input type="checkbox" id="dianhua" class="cheacks" value="电话" name="assort[]"/><label for="dianhua">电话</label>
+                        <input type="checkbox" id="xiyiji" class="cheacks" value="洗衣机" name="assort[]"/><label for="xiyiji">洗衣机</label>
+                        <input type="checkbox" id="kuandai" class="cheacks" value="宽带网" name="assort[]"/><label for="kuandai">宽带网</label>
+                        <input type="checkbox" id="chuang" class="cheacks" valu="床" name="assort[]"/><label for="chuang">床</label>
+                    </div>
+                     <div id="imgUpLoader">
+                <!-- 图片上传控件 -->
+                <!--<span class="leftTitle">房源图片：</span><span>（最多上传5张，每张大小不超过2M）</span>
+                <div id="imgUpBox">
+                  <input type="file" id="upImgInput" />
+                  <div class="yulanImg"></div>
+                </div>-->
+
+                <!-- 测试 范围 -->
+                <p>上传图片：</p>
+                <form action="{:url('Buyroom/test')}" method="post" enctype="multipart/form-data">
+                <label for="fileUpload" class="upload-img">选择图片</label><span class="loadImg"></span>
+                <input id="fileUpload" accept="image/*" type="file" multiple="multiple" name="imgs[]"/>
+
+                <input  type="file" id="test" name="img"/>
+
+                <!-- <input  type="file" multiple="multiple" name="image[]"/> -->
+                <div class="chuanshu" style="display: none;">
+                  <span>数据载入: </span>
+                  <span id="bytesRead"></span>
+                  <!--<span>/</span>
+                  <span id="bytesTotal"></span>-->
+                </div>
+                <div id="dvPreview" class="clear"></div>
+                <div class="hide">隐藏</div>
+                <div class="testSub">测试</div>
+                <input type="submit" value="提交">
+                </form>
+              </div>
+              
+					<div class="textBox" style="border-bottom:1px solid #ddd ; padding-bottom:30px;">
+                        <span class="leftTitle" style="margin:15px 0;">基本信息：</span>
+                        <textarea style="width:900px;height:200px;" name="info"></textarea>
+					</div>
+
+                    <div class="inputBox">
+                        <span class="leftTitle">有效期：</span>
+                        <input type="text" id="youxiao" class="inputBig valid_at" name="valid_at"/>
+                    </div>
+                    <div class="inputBox">
+                        <span class="leftTitle">联系人：</span>
+                        <input type="text" id="lianxi" class="inputBig contact" name="contact"/>
+                    </div>
+                    <div class="inputBox">
+                        <span class="leftTitle">联系电话：</span>
+                        <input type="number" id="lianxidianhua" class="inputBig phone" name="phone"/>
+                    </div>
+                    <input type="hidden" name="type" value="1">
+                    <div class="inputBox">
+                        <a class="sub">提交资料</a>
+                        <a class="ret">返回列表</a>
+<!--                         <button class="tijiaoBtn" id="tijiao">提交资料</button>
+                        <button class="tijiaoBtn" id="fanhui">返回列表</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="rightMain" class="left">
+        <h2 class="rightTitle">阅读排行</h2>
+        <div class="paihangBox">
+            <?php $id=1;?>
+            {volist name='hothouse' id='hothouse'}
+            <div class="yuduBox clear ">
+                <div class="yuNum left">{$id}</div>
+                <div class="yueMeg shenglue">
+                    <a href="{:url('Buyroom/maimai_detaile')}?id={$hothouse.id}">{$hothouse.title}</a>
+                </div>
+            </div>
+            <?php $id++;?>
+            {/volist}
+        </div>
+
+    </div>
+</div>
+<!-- </form> -->
+<div id="foot">
+    {include file="public/foot"}
+</div>
+<script>
+    $(".hide").click(function(){
+        $("#test").hide();
+        // $("#test").css("visibility",'hidden');
+        alert($("#test").get(0).files);
+    })
+
+</script>
+<script>
+//执行一个laydate实例
+laydate.render({
+  elem: '#youxiao' //指定元素
+});
+$(function() {
+        var img = "";
+        var imgNum = 0; //上传图片总数
+        var imgNames = [];
+        var imgValue = [];
+        $("#fileUpload").change(function() {
+          var num = $(this).get(0).files.length;
+          //                限制上传图片数量
+          imgNum += num;
+          if(imgNum > 5) {
+            $('.loadImg').html('图片上传不得超过5张');
+            alert("图片超了" + imgNum);
+            imgNum -= num;
+            return false;
+          }
+          //          查询 文件大小
+          for(var i = 0; i < num; i++) {
+            var imgSize = $(this).get(0).files[i].size;
+            if(imgSize > 2097152) {
+              $('.loadImg').html('上传图片大于2M...请选择小于2M的图片');
+              return false;
+            }
+          }
+          if(typeof(FileReader) != undefined) {
+            $('.chuanshu').show();
+            $('.loadImg').html('图片上传中');
+            var dvPreview = $("#dvPreview");
+            var regex = /(.jpg|.jpeg|.gif|.png|.bmp)$/;
+            //            获取一次行上传的数量
+            $($(this).get(0).files).each(function(i, e) {
+              var zongshu = 0;
+              var baifenbi = 0;
+              var file = $(this);
+              if(regex.test(file[0].name.toLowerCase())) {
+                var reader = new FileReader();
+
+                reader.onloadstart = function() {
+                  // 这个事件在读取开始时触发
+                  //                  document.getElementById("bytesTotal").textContent = file[i].size;
+                  zongshu = file[0].size;
+                  console.log("onloadstart"+zongshu);
+                
+
+                }
+                reader.onprogress = function(p) {
+                  // 这个事件在读取进行中定时触发
+                  //                  document.getElementById("bytesRead").textContent = p.loaded;
+                  baifenbi =  parseFloat((p.loaded / zongshu).toFixed(2)) * 100;
+                  console.log("baifenbi=" + baifenbi + "%");
+                  document.getElementById("bytesRead").textContent = baifenbi + "%";
+
+                }
+
+                reader.onload = function(e) {
+                  img = '<div class="borderBox left"><div class="imgBox"><img src="' + e.target.result + '" alt="" /></div></div>';
+                  dvPreview.append(img);
+                  $('.loadImg').html('图片上传完成');
+                  //                获取文件名称
+                  imgNames.push(file[0].name);
+                }
+                reader.readAsDataURL(file[0]);
+              } else {
+                alert("else了");
+                alert(file[0].name + "is not a valid image file.");
+                img = "";
+                //                dvPreview.html("");
+                return false;
+
+              }
+
+            });
+
+          } else {
+
+            alert("This browser does not support HTML5 FileReader.");
+
+          }
+
+        });
+
+        // $('.dianwo').click(function() {
+
+        //   alert(imgNames);
+        // })
+
+
+
+
+$(".sub").click(function(){
+        var title=$.trim($(".title").val());
+        if(title==""){
+            alert("请输入标题");
+            return false;
+        }
+        var building=$.trim($(".building").val());
+        if(building==""){
+            alert("请输入楼盘");
+            return false;
+        }
+        var village=$.trim($(".village").val());
+        if(village==""){
+            alert("请输入小区名");
+            return false;
+        }
+        var address=$.trim($(".address").val());
+        if(address==""){
+            alert("请输入详细地址");
+            return false;
+        }
+        var valid_at=$.trim($(".valid_at").val());
+        if(valid_at==""){
+            alert("请输入有效期");
+            return false;
+        }
+        var contact=$.trim($(".contact").val());
+        if(contact==""){
+            alert("请输入联系人");
+            return false;
+        }
+        var phone=$.trim($(".phone").val());
+        if(phone==""){
+            alert("请输入联系电话");
+            return false;
+        }
+        $("#form").submit();
+    })
+
+      });
+
+
+
+
+    
+</script>
+</body>
+</html>

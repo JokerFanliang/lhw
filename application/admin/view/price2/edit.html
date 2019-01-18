@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+{include file="public/head"}
+<body>
+{include file="public/header"}
+{include file="public/left"}
+<div id="dcMain">
+    <!-- 当前位置 -->
+    <div id="urHere">管理中心<b></b><strong>价格区间/套</strong> </div>   <div id="manager" class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+    <h3><a href="{:url('Price2/index')}" class="actionBtn">返回列表</a>价格区间/套</h3>
+    <form action="{:url('Price2/edit')}"  method="post" id="form">
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <td width="100" align="right">价格区间(万)/套</td>
+                <td>
+                    <input type="text" name="min" size="20" class="inpMain min" value="{$list->min}" />--
+					
+                    <input type="text" name="max" size="20" class="inpMain max" value="{$list->max}" />
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">排序</td>
+                <td>
+                    <input type="number" name="sort" size="40" class="inpMain sort" value="{$list->sort}" placeholder="数字越大越靠前" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="hidden" name="id" value="{$list->id}">
+                    <div class="btn sub">修改</div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</div>
+<div class="clear"></div>
+{include file="public/foot"}
+<script>
+    $(".sub").click(function(){
+        var min=$.trim($(".min").val());
+		var max=$.trim($(".max").val());
+        if(min==""){
+            alert("价格区间不能为空");
+            return false;
+        }
+		if(min==""){
+            alert("价格区间不能为空");
+            return false;
+        }
+        $("#form").submit();
+    })
+</script>
+</body>
+</html>

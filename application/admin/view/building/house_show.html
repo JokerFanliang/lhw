@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+{include file="public/head"}
+<body>
+{include file="public/header"}
+{include file="public/left"}
+<style>
+    .tit{
+        font-size:20px;
+        background: green;
+        color:white;
+
+    }
+</style>
+<script type="text/javascript">
+
+    function del() {
+        var msg = "确定要删除么！";
+        if (confirm(msg)==true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+</script>
+<div id="dcMain"><!-- 当前位置 -->
+    <div id="urHere">管理中心<b>></b><strong>户型管理</strong> </div>   <div id="manager" class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+            <h3>
+        <a href="{:url('Building/show_add')}?id={$houseid}" class="actionBtn">添加楼盘展示图</a>
+        <a href="{:url('Building/edit')}?id={$houseid}" class="tit">基本信息</a>
+        <a href="{:url('Building/edit_detail')}?id={$houseid}" class="tit">参数详情</a>
+        <a href="{:url('Building/dynamic')}?id={$houseid}" class="tit">楼盘简介/动态</a>
+        <a href="{:url('Building/house_type')}?id={$houseid}" class="tit">户型图</a>
+		<a href="{:url('Building/house_show')}?id={$houseid}" class="tit">楼盘展示图</a>
+		
+    </h3>
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="30" align="center">编号</th>
+                <th align="center">户型图片</th>
+                <th align="center">排序</th>
+                <th align="center">操作</th>
+            </tr>
+            <?php $x=1;?>
+            {volist name="houseShow" id="house"} 
+            <tr> 
+                <td align="center">{$x}</td>
+                <td align="center"><img width="100px;" src="{$house.photo}"></td>
+                <td align="center">{$house.sort}</td>
+                <td align="center"><a href="{:url('Building/show_edit')}?id={$house['id']}">编辑</a> | <a href="{:url('Building/show_delete')}?id={$house['id']}&building_id={$houseid}" onclick="javascript:return del()">删除</a></td>
+            </tr>
+            <?php $x++;?>
+            {/volist}
+
+        </table>
+         {$houseShow->render()}
+    </div>
+
+</div>
+{include file="public/foot"}
+</body>
+</html>

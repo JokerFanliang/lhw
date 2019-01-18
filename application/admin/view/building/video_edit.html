@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+{include file="public/head"}
+<body>
+{include file="public/header"}
+{include file="public/left"}
+<div id="dcMain">
+    <!-- 当前位置 -->
+    <div id="urHere">管理中心<b>></b><strong>更换视频</strong> </div>   <div id="manager" class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+    <h3><a href="{:url('Building/video')}?id={$video->building_id}" class="actionBtn">返回列表</a>更换视频</h3>
+    <form action="{:url('Building/video_edit')}"  method="post" id="form" enctype="multipart/form-data">
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <td width="100" align="right">视频外链</td>
+                <td>
+                    <!--<input type="file" name="video" size="40" class="inpMain" value="" />-->
+					<input type="text" name="path" size="40" class="inpMain" value="{$video->path}" />
+					(注：请填写完整的地址，包括http/https，例:https://www.youtube.com/embed/MAjY8mCTXWk)
+                </td>
+            </tr>
+			<tr>
+                <td width="100" align="right">视频</td>
+                <td>
+                    <!--<input type="file" name="video" size="40" class="inpMain" value="" />-->
+					<iframe width="300" height="200"  frameborder="0" src="{$video->path}" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+					
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">排序</td>
+                <td>
+                    <input type="number" name="sort" size="40" class="inpMain sort" value="{$video->sort}" placeholder="数字越大越靠前" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="hidden" name="building_id" value="{$video->building_id}">
+                    <input type="hidden" name="id" value="{$video->id}">
+                    <div class="btn sub">修改</div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</div>
+<div class="clear"></div>
+{include file="public/foot"}
+<script>
+    $(".sub").click(function(){
+        $("#form").submit();
+    })
+</script>
+</body>
+</html>

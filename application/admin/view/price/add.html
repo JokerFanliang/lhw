@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+{include file="public/head"}
+<body>
+{include file="public/header"}
+{include file="public/left"}
+<div id="dcMain">
+    <!-- 当前位置 -->
+    <div id="urHere">管理中心<b>></b><strong>价格区间/平尺</strong> </div>   <div id="manager" class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+    <h3><a href="{:url('Price/index')}" class="actionBtn">返回列表</a>添加价格区间/平尺</h3>
+    <form action="{:url('Price/add')}"  method="post" id="form">
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <td width="100" align="right">价格区间/平尺</td>
+                <td>
+                    <input type="text" name="min" size="30" class="inpMain min" value="" />--
+					<input type="text" name="max" size="30" class="inpMain max" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">排序</td>
+                <td>
+                    <input type="number" name="sort" size="40" class="inpMain sort" value="" placeholder="数字越大越靠前" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="btn sub">添加</div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</div>
+<div class="clear"></div>
+{include file="public/foot"}
+<script>
+    $(".sub").click(function(){
+        var min=$.trim($(".min").val());
+		var max=$.trim($(".max").val());
+        if(min==""){
+            alert("区间不能为空");
+            return false;
+        }
+		if(max==""){
+            alert("区间不能为空");
+            return false;
+        }
+        $("#form").submit();
+    })
+</script>
+</body>
+</html>

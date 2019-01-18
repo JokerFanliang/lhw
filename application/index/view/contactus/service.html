@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="__STATIC__/index/css/rescss.css"/>
+    <link rel="stylesheet" href="__STATIC__/index/css/callme.css"/>
+</head>
+<body>
+<div id="header" class="left">
+    <!-- 头部公用 -->
+    {include file="public/head"}
+</div>
+<div id="main" class="clear">
+    <div class="mianbaoxie">
+        <a href="index.html">楼花王</a>
+        <span>></span>
+        <span>服务声明</span>
+    </div>
+    <div id="msgBox">
+        {include file="public/common"}
+        <div class="msgDetaile">
+            <div class="msgMain">
+                <div id="msgTitle">
+                    服务声明
+                </div>
+                <div class="msgText">
+                    {$list.content}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="foot">
+    {include file="public/foot"}
+</div>
+<script src="__STATIC__/index/js/jquery-1.11.3.js"></script>
+<script>
+    $(function () {
+        $('#radioBox').on('click', 'label', function () {
+            $(this).css('background', '#CC0000').css('color', '#fff');
+            $(this).siblings().css('background', '#F7F7F7').css('color', '#000');
+        });
+
+        /**
+         *
+         *      选择框 获取 value 功能  临时用的BUTTON
+         *
+         */
+        $('button').click(function () {
+            $.each($('#radioBox').find('input[type="radio"]'), function (i, e) {
+                if ($(e).is(':checked')) {
+                    alert($(e).val());
+                }
+
+            });
+        });
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+{include file="public/head"}
+<body>
+{include file="public/header"}
+{include file="public/left"}
+<div id="dcMain">
+    <!-- 当前位置 -->
+    <div id="urHere">管理中心<b>></b><strong>房源审核</strong> </div>   <div id="manager" class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+    <h3><a href="{:url('SecondHouse/index')}" class="actionBtn">返回列表</a>房源审核</h3>
+    <form action="{:url('SecondHouse/edit')}"  method="post" id="form">
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <input type="hidden" name="type" value="{$list->type}">
+                <td width="100" align="right">标题</td>
+                <td width="400"><input type="text" name="title" value="{$list->title}"></td>
+                <td width="100" align="right">所属区域</td>
+                <?php $area=explode(",",$list->area);?>
+                <td>
+                    <input type="text" placeholder="请输入城市" name="city" value="{$area[0]}"/>
+                    <input type="text" placeholder="请输入区域" name="region" value="{$area[1]}"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">详细地址</td>
+                <td>
+                    <input type="text" value="{$list->address}" name="address"/>
+                </td>
+                <td width="100" align="right">热门区域</td>
+                <td>
+                    <select name="hot_area">
+                        <option>请选择</option>
+                        {volist name='areas' id='area'}
+                          <option value ="{$area.name}" <?php if($list->hot_area==$area->name)echo 'selected';?>>{$area.name}</option>
+                        {/volist}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">房屋面积</td>
+                <td>
+                    <input type="text"  name="acreage" value="{$list->acreage}"/>
+                </td>
+                <td width="100" align="right">价格</td>
+                <td>
+                    <input type="text"  name="price" value="{$list->price}"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">户型</td>
+                <?php $layout=explode(",",$list->layout);?>
+                <td>
+                    <input type="text" name="count1" value="{$layout[0]}"/>
+                    <input type="text" name="count2" value="{$layout[1]}"/>
+                    <input type="text" name="count3" value="{$layout[2]}"/>
+                    <input type="text" name="count4" value="{$layout[3]}"/>
+                </td>
+                <td width="100" align="right">朝向</td>
+                <td>
+                    <input type="text" name="orientation" value="{$list->orientation}"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">装修</td>
+                <td>
+                    <input type="text" name="decorate" value="{$list->decorate}"/>
+                </td>
+                <td width="100" align="right">层高</td>
+                <td>
+                    <input type="text"  name="num" value="{$list->high}"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">配套</td>
+                <td>
+                        <input type="checkbox" id="dianshi" class="cheacks" value="电视" name="assort[]" <?php if(strpos($list->assort,'电视') !==false)echo 'checked';?>/><label for="dianshi">电视</label>
+                        <input type="checkbox" id="reshuiqi" class="cheacks" value="热水器" name="assort[]" <?php if(strpos($list->assort,'热水器') !==false)echo 'checked';?>/><label for="reshuiqi" >热水器</label>
+                        <input type="checkbox" id="meiqi" class="cheacks" value="煤气" name="assort[]" <?php if(strpos($list->assort,'煤气') !==false)echo 'checked';?>/><label for="meiqi">煤气</label>
+                        <input type="checkbox" id="bingxiang" class="cheacks" value="冰箱" name="assort[]" <?php if(strpos($list->assort,'冰箱') !==false)echo 'checked';?>/><label for="bingxiang">冰箱</label>
+                        <input type="checkbox" id="chuju" class="cheacks" value="厨具" name="assort[]" <?php if(strpos($list->assort,'厨具') !==false)echo 'checked';?>/><label for="chuju">厨具</label>
+                        <input type="checkbox" id="kongtiao" class="cheacks" value="空调" name="assort[]" <?php if(strpos($list->assort,'空调') !==false)echo 'checked';?>/><label for="kongtiao">空调</label>
+                        <input type="checkbox" id="dianhua" class="cheacks" value="电话" name="assort[]" <?php if(strpos($list->assort,'电话') !==false)echo 'checked';?>/><label for="dianhua">电话</label>
+                        <input type="checkbox" id="xiyiji" class="cheacks" value="洗衣机" name="assort[]" <?php if(strpos($list->assort,'洗衣机') !==false)echo 'checked';?>/><label for="xiyiji">洗衣机</label>
+                        <input type="checkbox" id="kuandai" class="cheacks" value="宽带网" name="assort[]" <?php if(strpos($list->assort,'宽带网') !==false)echo 'checked';?>/><label for="kuandai">宽带网</label>
+                        <input type="checkbox" id="chuang" class="cheacks" valu="床" name="assort[]" <?php if(strpos($list->assort,'床') !==false)echo 'checked';?>/><label for="chuang">床</label>
+                </td>
+				<td width="100" align="right">联系电话</td>
+                <td>
+                    <input type="text" name="phone" value="{$list->phone}"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">联系人</td>
+                <td>
+                    <input type="text"  name="contact" value="{$list->contact}"/>
+                </td>
+				<td width="100" align="right">热点新盘</td>
+                <td>
+                <select name="is_hot">
+                    <option value="0" <?php if($list->is_hot==0) echo "selected"?>>否</option>
+                    <option value="1" <?php if($list->is_hot==1) echo "selected"?>>是</option>                   
+                </select>
+                </td>
+                
+            </tr>
+            <tr>
+                <td width="100" align="right">基本信息</td>
+                <td>
+                    <textarea style="width:900px;height:200px;" name="info">{$list->info}</textarea>
+                </td>
+				<td width="100" align="right">审核</td>
+                <td>
+                <select name="checkout">
+                    <option value="0" <?php if($list->checkout==0) echo "selected"?>>待审核</option>
+                    <option value="1" <?php if($list->checkout==1) echo "selected"?>>通过</option>
+                    <option value="2" <?php if($list->checkout==2) echo "selected"?>>不通过</option>                   
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="hidden" name="id" value="{$list->id}">
+                    <div class="btn sub">修改</div>
+                </td>
+            </tr>
+        </table>
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            {volist name="imgs" id="img"}
+            <tr>
+                <td>
+                    <img src="__STATIC__{$img.path}">
+                </td>
+            </tr>
+            {/volist}
+        </table>
+    </form>
+</div>
+</div>
+<div class="clear"></div>
+{include file="public/foot"}
+<script>
+    $(".sub").click(function(){
+        $("#form").submit();
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="__STATIC__/index/css/rescss.css"/>
+    <link rel="stylesheet" href="__STATIC__/index/css/kanfanggonglue.css"/>
+</head>
+
+<body>
+<div id="header">
+    <!-- 头部公用 -->
+    {include file="public/head"}
+</div>
+<div id="main" class="clear">
+    <div id="leftMain" class="left">
+        <div id="dateils" class="clear">
+            <div class="deteilsBox left">
+                <h2 class="hongxian">看房攻略</h2>
+                <!--攻略信息 循环区域-->
+
+
+                <div class="deteilsMegBox">
+                    {volist name="list" id="look"}
+                    <div class="megBox clear">
+                        <div class="msgImg left">
+                            <a href="{:url('Lookroom/kanfanggonglue_msg')}?id={$look['id']}" target="_blank"><img src="{$look.photo}" alt="" width="125px" height="85px"/></a>
+                        </div>
+                        <div class="msgTextBox">
+                            <h3>
+							<a href="{:url('Lookroom/kanfanggonglue_msg')}?id={$look['id']}" target="_blank" class="xiangqing">
+							{$look.title}
+							</a>
+							</h3>
+                            <span class="msgZhaiyao">
+                                [简介]
+                            </span>
+                            <span class="msgText">
+                                <?php echo mb_substr($look['summary'],0,40,'UTF-8');?>
+                            </span>
+                            <a href="{:url('Lookroom/kanfanggonglue_msg')}?id={$look['id']}" target="_blank" class="xiangqing">[详情]</a>
+                        </div>
+                    </div>
+                    {/volist}
+                    <div id="fenye" class="clear">
+                        {$list->render()}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="rightMain" class="left">
+        <h2 class="rightTitle">热门阅读</h2>
+        {volist name="litt" id="looks"  key="k"}
+        <div class="paihangBox">
+            <div class="yuduBox clear ">
+                <div class="yuNum left">{$k}</div>
+                <div class="yueMeg shenglue">
+                    <a href="{:url('Lookroom/kanfanggonglue_msg')}?id={$looks['id']}">{$looks.title}</a>
+                </div>
+            </div>
+        </div>
+        {/volist}
+</div>
+</div>
+<div id="foot">
+    {include file="public/foot"}
+</div>
+</body>
+
+</html>

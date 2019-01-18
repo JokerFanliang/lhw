@@ -1,0 +1,101 @@
+<style type="text/css">
+      #bannerBox {
+        width: 890px;
+        height: 100px;
+        overflow: hidden;
+        position: relative;
+      }
+      
+      .bannerImg {
+        width: 890px;
+        height: 100px;
+      }
+      
+      .slideBox {
+        height: 100px;
+      }
+      
+      .slide {
+        width: 890px;
+        height: 100px;
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+      }
+      
+      .slide.active {
+        opacity: 1;
+      }
+    </style>
+<div id="top" class="clear">
+    <div id="logoBox" class="left">
+        <a href="{:url('Index/index')}">            
+            <img src="__STATIC__/index/image/logo_03.png" alt="楼花王LOGO"/>
+        </a>
+    </div>
+    <?php $path=getHeadPath();?>
+    <div id="bannerBox" class="right">
+          <div class="slideBox">
+            {volist name="path" id="pa"}
+            <a class="slide active" target="_blank" href="{$pa['url']}">
+              <img class="bannerImg" src="__STATIC__/{$pa['path']}" alt="" height="79px;" width="890px;" />
+            </a>
+            {/volist}
+
+          </div>
+
+        </div>
+</div>
+<div id="nav">
+    <div id="navBox" class="clear">
+        <a href="{:url('Index/index')}" class="navA <?php if(getTitleSession()=='shouye') echo 'active'?>">首页</a>
+        <a href="{:url('Advancesale/louhuayushou')}" class="navA <?php if(getTitleSession()=='yushou') echo 'active'?>">楼花预售</a>
+        <a href="{:url('Hotroombed/repanxianfang')}" class="navA <?php if(getTitleSession()=='xianfang') echo 'active'?>">热盘现房</a>
+        
+        <a href="{:url('Lookroom/kanfanggonglue')}" class="navA <?php if(getTitleSession()=='strategy') echo 'active'?>">看房攻略</a>
+        <a href="{:url('Buyroom/dichanmaimai')}" class="navA <?php if(getTitleSession()=='sale') echo 'active'?>">楼花买卖</a>
+        <a href="{:url('Sellroom/chuzuqiuzu')}" class="navA <?php if(getTitleSession()=='lease') echo 'active'?>">商业地产</a>
+        <a href="{:url('Videoroom/shipinkanfang')}" class="navA <?php if(getTitleSession()=='video') echo 'active'?>">视频看房</a>
+    </div>
+</div>
+<script src="__STATIC__/index/js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/wangEditor.min.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/date/laydate.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+    //轮播图方法
+        var slideNum = 1;
+        var slideLength = $('.slideBox a').length;
+//        定时器方法
+        var slideFun=function() {
+          $('.slideBox .slide').eq(slideNum).animate({
+            'opacity':'1',
+            'z-index':'1'
+          },2000);
+          $('.slideBox .slide').eq(slideNum).siblings().animate({
+            'opacity':'0',
+            'z-index':'0'
+          },2000);
+          slideNum++;
+          console.log(slideNum);
+          if(slideNum >= slideLength) {
+            slideNum = 0;
+          }
+        }
+//        执行 轮播图定时器
+        var slideTime = setInterval(slideFun, 5000);
+//        移入轮播图 停止定时器
+        $('.slideBox').mouseenter(function() {
+          clearInterval(slideTime);
+        });
+//        移出轮播图 重启定时器
+        $('.slideBox').mouseleave(function() {
+          slideTime = setInterval(slideFun, 5000);
+        })
+
+      });
+
+</script>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="__STATIC__/index/css/rescss.css"/>
+    <link rel="stylesheet" href="__STATIC__/index/css/index.css"/>
+    <style type="text/css">
+        .newUp .newBox:first-child,.newDown .newBox:first-child{
+            font-size: 18px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color:#ee0000;
+            text-align: center;
+        }
+        .newBox:first-child a,.newDown .newBox:first-child a{
+            color:#ee0000;
+            font-weight: bold;
+        }
+        .shenglue{
+            color:#000;
+        }
+
+.newUp .newBox:first-child :not(:last-child),.newDown .newBox:first-child :not(:last-child){
+    display: none;
+}
+    .footerPhoneBox{
+        width: 25%;
+        padding-left:120px;
+    }
+    .footerPhoneBox>img{
+        display: block;
+        height:100px;
+        width:200px;
+        border-radius: 10px;
+    }
+
+    </style>
+</head>
+<body>
+<div id="header">
+    <!-- 头部公用 -->
+    {include file="public/head"}
+    <!-- 头部公用 -->
+</div>
+
+<div id="main">
+    <!-- 详情内容 -->
+    <div class="longBannerBox">
+        <!-- <img src="__STATIC__/index/image/banner-2.jpg" alt=""/> -->
+        <a href="{$one_up.url}" target="_block">
+            <img src="__STATIC__/{$one_up.path}" width="1200px" height="71px" alt="">
+        </a>
+    </div>
+    <!-- 一楼 -->
+    <div id="detaile1" class="clear">
+        <div class="leftDetaile1 left">
+            <div id="floorOne">
+                <img src="__STATIC__/index/image/floor-1.jpg" alt=""/>
+            </div>
+            <div id="addressBox" class="clear">
+                <!-- 一楼左侧 -->
+
+                <!-- 按钮用 JS 实现 -->
+                {volist name="area" id="area"}
+                <a href="{:url('Advancesale/louhuayushou')}?area={$area.id}&price=0&layout=0&theme=0">
+                    <div class="btnAdd">
+                        <p class="cName">{$area.name}</p>
+                        <!--<p class="eName">Vancouver</p>-->
+                    </div>
+                </a>
+                {/volist}
+            </div>
+        </div>
+        <!--一楼中间-->
+        <div class="midDetaile1 left">
+            <div class="midheng1"></div>
+            <div class="mainBox1">
+                <div class="floor1Main">
+                    <div class="floor1Nav clear">
+                        <a href="{:url('Index/index')}" class="floor1A <?php if($theme_id==0) echo 'active';?> left">楼盘预售</a>
+                        {volist name="theme" id="theme"}
+                        <span class="floorSpan left">|</span>
+                        <a href="{:url('Index/index')}?theme_id={$theme.id}" class="floor1A <?php if($theme_id==$theme['id']) echo 'active';?> left">{$theme.name}</a>
+                        {/volist}
+
+                    </div>
+                    <div class="floor1img clear">
+                        <!-- 循环产物 -->
+                        {volist name="yushou" id="yu"}
+                        <div class="floor1detailes left">
+                            <div class="floor1imgBox">
+                                <a href="{:url('Advancesale/louhuayushou_detaile')}?id={$yu.id}">
+                                    <img style="width:215px;height:143px" src="{$imgs[$yu.id]}" alt=""/>
+                                </a>
+                                <div class="downBg">
+                                    <span class="fangName">{$yu.name}</span>
+                                </div>
+                            </div>
+                            <a href="{:url('Advancesale/louhuayushou_detaile')}?id={$yu.id}">
+                            <p class="loupanName">{$yu.name}</p>
+                            </a>
+                            <span class="loupanDizhi">{$yu.address}</span>
+                            <span class="loupanleixing">{$yu.type}</span>
+                        </div>
+                        {/volist}
+
+                        <!-- 循环产物 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rightDetaile1 left">
+            <div class="rightDetaile1title">
+                <div class="rightDetaile1titleHeng">
+                    <p><a href="{:url('Asking/index')}">房产资讯</a></p>
+                </div>
+                <div style="border:1px solid #ddd;width:100%;"></div>
+                <div class="newUp">
+                    <!-- 新闻循环产物 -->
+                    {volist name="asking_up" id="ask_up"}
+                    <div class="newBox shenglue">
+                        <a href="{:url('Asking/detail')}?id={$ask_up.id}">
+                            <span class="newTitle">{$ask_up.type}</span>
+                            <span>|</span>
+                            <span class="newMessage">{$ask_up.question}</span>
+                        </a>
+                    </div>
+                    {/volist}
+
+                </div>
+                <div class="newDown">
+                    <!-- 新闻循环产物 -->
+                    {volist name="asking_down" id="ask_down"}
+                    <div class="newBox shenglue">
+                        <a href="{:url('Asking/detail')}?id={$ask_down.id}">
+                            <span class="newTitle">{$ask_down.type}</span>
+                            <span>|</span>
+                            <span class="newMessage">{$ask_down.question}</span>
+                        </a>
+                    </div>
+                    {/volist}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="longBannerBox">
+        <!-- <img src="__STATIC__/index/image/banner-2.jpg" alt=""/> -->
+        <a href="{$two_up.url}" target="_block">
+            <img src="__STATIC__/{$two_up.path}" width="1200px" height="71px" alt=""/>
+        </a>
+    </div>
+
+    <!-- 二楼 -->
+
+    <div id="detaile2" class="clear">
+        <!-- 二楼左侧 -->
+        <div class="leftDetaile2 left">
+            <div id="floorTow">
+                <img src="__STATIC__/index/image/floor-2.jpg" alt=""/>
+            </div>
+            <div id="floor2banner" class="clear">
+                <!-- <img src="__STATIC__/index/image/leftBanner-1.jpg" alt=""/> -->
+                <a href="{$two_left.url}" target="_block">
+                    <img src="__STATIC__/{$two_left.path}" width="200px" height="326px" alt=""/>
+                </a>
+            </div>
+        </div>
+        <!-- 二楼中间 -->
+        <div class="midDetaile2 left">
+            <div class="midheng2"></div>
+            <div class="mainBox2">
+                <!--<div class="floor1Main">-->
+                <div class="floor1img clear">
+                    <!-- 循环产物 -->
+                    {volist name="xianfang" id="xian"}
+                    <div class="floor2detailes left">
+                        <div class="floor1imgBox">
+                            <a href="{:url('Hotroombed/repanxianfang_detaile')}?id={$xian.id}">
+                            <img style="width:215px;height:143px" src="{$imgs[$xian.id]}" alt=""/>
+                            </a>
+                            <div class="downBg">
+                                <span class="fangName">{$xian.name}</span>
+                            </div>
+                        </div>
+                        <a href="{:url('Hotroombed/repanxianfang_detaile')}?id={$xian.id}">
+                        <p class="loupanName">{$xian.name}</p>
+                        </a>
+                        <span class="loupanDizhi">{$xian.address}</span>
+                        <span class="loupanleixing">{$xian.type}</span>
+                    </div>
+                    {/volist}
+
+                    <!-- 循环产物 -->
+                </div>
+                <!--</div>-->
+            </div>
+        </div>
+        <!-- 二楼右侧 -->
+        <div class="rightDetaile2 left">
+            <div class="rightBannerBox">
+                <!-- <img src="__STATIC__/index/image/floor2rightbanner-1.jpg" alt=""/> -->
+                <a href="{$two_right_up.url}" target="_block">
+                    <img src="__STATIC__/{$two_right_up.path}" width="270px" height="193px" alt=""/>
+                </a>
+            </div>
+            <div class="rightBannerBox">
+                <!-- <img src="__STATIC__/index/image/floor2rightbanner-2.jpg" alt=""/> -->
+                <a href="{$two_right_down.url}" target="_block">
+                    <img src="__STATIC__/{$two_right_down.path}" width="270px" height="193px" alt=""/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="longBannerBox">
+        <!--<img src="__STATIC__/index/image/banner-2.jpg" alt=""/>-->
+        <a href="{$three_up.url}" target="_block">
+            <img src="__STATIC__/{$three_up.path}" width="1200px" height="71px"  alt=""/>
+        </a>
+    </div>
+
+    <!-- 三楼 -->
+    <div id="detaile3" class="clear">
+        <div class="leftDetaile2 left">
+            <div id="floorThree">
+                <img src="__STATIC__/index/image/floor-3.jpg" alt=""/>
+            </div>
+            <div id="floor3banner" class="clear">
+                <!-- <img src="__STATIC__/index/image/leftbanner-2.jpg" alt=""/> -->
+                <a href="{$three_left.url}" target="_block">
+                    <img src="__STATIC__/{$three_left.path}" width="200px" height="379px"  alt=""/>
+                </a>
+            </div>
+        </div>
+        <!--三楼中间-->
+        <!-- <div id="midDetaile3" class="left"> -->
+        <div class="midDetaile2 left">
+            <div class="midheng3"></div>
+            <div class="mainBox3">
+                <div class="floor1Main">
+                    <div class="clear">
+                        <a href="" class="floor1A active left">楼盘视频</a>
+                        <!--<span class="floorSpan left">|</span>-->
+                        <!--<a href="" class="floor1A left">资讯视频</a>-->
+                        <!--<span class="floorSpan left">|</span>-->
+                        <!--<a href="" class="floor1A left">其他视频</a>-->
+                    </div>
+                    <div id="floor3video" class="clear">
+                        <!-- 循环产物 -->
+                        {volist name="shipin" id="shipin"}
+                        <div class="floor3detailes">
+                            <div class="videoBox">
+                            <iframe src="{$video[$shipin.id]}" frameborder="0" allowfullscreen="true" width="215" height="140"></iframe>
+<!--                                 <video style="width:215px;height:143px" class="myVideo" src="__STATIC__/index/video/birds.mp4" poster="{$imgs[$shipin.id]}"></video>
+                                <b class="videoPlay"></b> -->
+                            </div>
+                            <a href="{:url('Videoroom/shipinkanfang_detaile')}?id={$shipin.id}">
+                            <p class="videoName">{$shipin.name}</p>
+                            </a>
+                        </div>
+                        {/volist}
+
+                        <!-- 循环产物 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 三楼右侧 -->
+        <div class="rightDetaile2 left">
+            <div class="rightBannerBox">
+                <!-- <img src="__STATIC__/index/image/floor2rightbanner-1.jpg" alt=""/> -->
+                <a href="{$three_right_up.url}" target="_block">
+                    <img src="__STATIC__/{$three_right_up.path}" width="270px" height="193px" alt=""/>
+                </a>
+            </div>
+            <div class="rightBannerBox">
+                <!-- <img src="__STATIC__/index/image/floor2rightbanner-2.jpg" alt=""/> -->
+                <a href="{$three_right_down.url}" target="_block">
+                    <img src="__STATIC__/{$three_right_down.path}" width="270px" height="193px" alt=""/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 详情内容 -->
+    <div id="footerNav" class="clear">
+        <div class="footerSpanBox left">
+            <p class="footerP">看房攻略</p>
+            <a href="{:url('Lookroom/kanfanggonglue')}" class="footerBtn">点击查看</a>
+        </div>
+        <div class="footerSpanBox left">
+            <p class="footerP">小编带你去看房</p>
+            <a href="{:url('Advancesale/louhuayushou')}" class="footerBtn">点击查看</a>
+        </div>
+        <div class="footerSpanBox left">
+            <p class="footerP">视频看房</p>
+            <a href="{:url('Videoroom/shipinkanfang')}" class="footerBtn">点击查看</a>
+        </div>
+        <div class="footerPhoneBox left">
+            <!-- <p class="footerP">服务热线</p>
+
+            <p class="footerTel">400-8500-8080</p> -->
+            <img src="{$config.img}" alt="" class="footerPhone">
+        </div>
+    </div>
+</div>
+<div id="foot">
+    <!-- 底部公用 -->
+     {include file="public/foot"}
+    <!-- 底部公用 -->
+</div>
+<script src="__STATIC__/index/js/jquery-1.11.3.js"></script>
+<script>
+    $(function () {
+        // alert($('.newUp .newBox:first-child :not(:last-child)').html());
+        $('#floor3video').on('click', '.videoPlay', function () {
+            $(this).hide();
+            $(this).prev().attr('controls', true);
+            $(this).prev().get(0).play();
+            $.each($(this).parents('.floor3detailes').siblings('.floor3detailes').find('.myVideo'), function (i, e) {
+                $(e).get(0).pause();
+                $(e).attr('controls', false);
+            });
+            $(this).parents('.floor3detailes').siblings('.floor3detailes').find('.videoPlay').show();
+        })
+    });
+</script>
+</body>
+</html>

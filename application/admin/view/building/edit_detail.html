@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+{include file="public/head"}
+<body>
+{include file="public/header"}
+{include file="public/left"}
+<style>
+    .tit{
+        font-size:20px;
+        background: green;
+        color:white;
+
+    }
+</style>
+<div id="dcMain">
+    <!-- 当前位置 -->
+    <div id="urHere">管理中心<b>></b><strong>楼盘管理</strong><b>></b><strong>参数详情</strong> </div>   <div id="manager" class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+    <h3>
+        <a href="{:url('Building/index')}" class="actionBtn">返回列表</a>
+        <a href="{:url('Building/edit')}?id={$list['id']}" class="tit">基本信息</a>
+        <a href="{:url('Building/edit_detail')}?id={$list['id']}" class="tit">参数详情</a>
+        <a href="{:url('Building/dynamic')}?id={$list['id']}" class="tit">楼盘简介/动态</a>
+        <a href="{:url('Building/house_type')}?id={$list['id']}" class="tit">户型图</a>
+		{if condition="$list['state']==2"}
+        <a href="{:url('Building/video')}?id={$list['id']}" class="tit">视频</a>
+		{else}
+		<a href="{:url('Building/house_show')}?id={$list['id']}" class="tit">楼盘展示图</a>
+		{/if}
+    </h3>
+    <form action="{:url('Building/edit_detail')}"  method="post" id="form">
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <td width="100" align="right">销售中心地址</td>
+                <td>
+                    <input type="text" name="sale_address" size="40" class="inpMain sale_address" value="{$list->sale_address}" />
+                </td>
+
+                <td width="100" align="right">所有权（产权）</td>
+                <td>
+                    <input type="text" name="ownership" size="40" class="inpMain ownership" value="{$list->ownership}" />
+                </td>
+            </tr>
+
+            <tr>
+                <td width="100" align="right">建筑类型/用途</td>
+                <td>
+                    <input type="text" name="purpose" size="40" class="inpMain purpose" value="{$list->purpose}" />
+                </td>
+
+                <td width="100" align="right">户数及层高</td>
+                <td>
+                    <input type="text" name="high" size="40" class="inpMain high" value="{$list->high}" />
+                </td>
+            </tr>
+
+            <tr>
+                <td width="100" align="right">施工状态</td>
+                <td>
+                    <input type="text" name="build_state" size="40" class="inpMain build_state" value="{$list->build_state}" />
+                </td>
+
+                <td width="100" align="right">设施</td>
+                <td>
+                    <input type="text" name="facilities" size="40" class="inpMain facilities" value="{$list->facilities}" />
+                </td>
+            </tr>
+
+            <tr>
+                <td width="100" align="right">开发商</td>
+                <td>
+                    <input type="text" name="developer" size="40" class="inpMain developer" value="{$list->developer}" />
+                </td>
+                <td width="100" align="right">网站网址</td>
+                <td>
+                    <input type="text" name="web" size="40" class="inpMain web" value="{$list->web}" />
+                </td>
+            </tr>
+
+            <tr>
+                <td width="100" align="right">室内设计师</td>
+                <td>
+                    <input type="text" name="designer" size="40" class="inpMain designer" value="{$list->designer}" />
+                </td>
+                <td width="100" align="right">建筑师</td>
+                <td>
+                    <input type="text" name="architect" size="40" class="inpMain architect" value="{$list->architect}" />
+                </td>
+            </tr>
+
+            <tr>
+                <td width="100" align="right">销售公司</td>
+                <td>
+                    <input type="text" name="sale_company" size="40" class="inpMain sale_company" value="{$list->sale_company}" />
+                </td>
+                <td width="100" align="right">运营公司</td>
+                <td>
+                    <input type="text" name="operator" size="40" class="inpMain operator" value="{$list->operator}" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="hidden" name="id" value="{$list->id}">
+                    <div class="btn sub">修改</div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</div>
+<div class="clear"></div>
+{include file="public/foot"}
+<script>
+    $(".sub").click(function(){
+        $("#form").submit();
+    })
+</script>
+</body>
+</html>
