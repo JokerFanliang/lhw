@@ -45,8 +45,31 @@ class SecondHouse extends common
             //$house->theme=$data['theme'];
 
             $house->checkout=$data['checkout'];
-			$house->is_hot=$data['is_hot'];
-            $house->checkout_at=date("Y-m-d H:i:s",time());;
+			      $house->is_hot=$data['is_hot'];
+            $house->checkout_at=date("Y-m-d H:i:s",time());
+            $files=request()->file('img');
+            $id=0;
+            foreach($files as $file){
+                $file=$file->getInfo();
+                $name=explode(".",$file['name']);
+                $count=count($name);
+                $ext=$name[$count-1];
+                $path=PUBLIC_PATH."/custom/".$data['id']."/";
+                if (! file_exists($path)) {
+                    mkdir($path,0777,true);
+                }
+                $name=$path.time().$id.".".$ext;
+                move_uploaded_file($file["tmp_name"],$name);
+                $img[]=[
+                    'second_id'=>$data['id'],
+                    'path'=>"/custom/".$data['id']."/".time().$id.".".$ext,
+                    'create_time'=>date("Y-m-d H:i:s",time()),
+                    'update_time'=>date("Y-m-d H:i:s",time())
+                ];
+                $id++;
+            }
+            $res=CustomImgModel::insertAll($img);
+
             if($house->save()){
                 $this->redirect('SecondHouse/index');
             }else{
@@ -60,10 +83,21 @@ class SecondHouse extends common
         $areas=AreaModel::where('is_delete',AreaModel::$isDelete['no']['val'])->select();
         $this->assign('areas',$areas);
         $this->assign('imgs',$imgs);
-        $this->assign('list',$list); 
+        $this->assign('list',$list);
         return $this->fetch();
     }
 
+    public function delete(){
+        $list=SecondHandHouseModel::where('id',$_GET['id'])->find();
+        $list->delete();
+        $this->success('删除成功');
+    }
+
+    public function delimg(){
+        $img=CustomImgModel::where('id',$_GET['id'])->find();
+        $img->delete();
+        $this->success('删除成功');
+    }
 
 
 

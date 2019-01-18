@@ -4,11 +4,70 @@
 <body>
 {include file="public/header"}
 {include file="public/left"}
+<link rel="stylesheet" href="__STATIC__/admin/css/rescss.css">
+<style media="screen">
+.ke-statusbar {
+  display: none;
+}
+/* 测试范围 */
+
+#imgPreview {
+  float: left;
+  border: none;
+}
+
+#imgPreview img {
+  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+}
+
+.upload-img {
+  background: #008800;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 5px 0;
+  display: inline-block;
+  border-radius: 5px;
+}
+/*//这儿是为了改变上传按钮样式把input设为了透明色*/
+
+#fileUpload {
+  visibility: hidden;
+  height: 0;
+}
+
+.delimg {
+  color:#cc0000;
+  cursor: pointer;
+}
+
+.imgBox {
+  display: table-cell;
+  width: 100px;
+  height: 100px;
+  vertical-align: middle;
+  text-align: center;
+}
+.imgBox>img{
+  width:100%;
+  height:100%;
+}
+.borderBox {
+  border: 2px solid #ddd;
+  margin-right: 20px;
+  height: 100%;
+}
+.delete:hover{
+  color:#cc0000;
+  cursor: pointer;
+}
+</style>
 <div id="dcMain">
     <!-- 当前位置 -->
     <div id="urHere">管理中心<b>></b><strong>房源审核</strong> </div>   <div id="manager" class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
     <h3><a href="{:url('SecondHouse/index')}" class="actionBtn">返回列表</a>房源审核</h3>
-    <form action="{:url('SecondHouse/edit')}"  method="post" id="form">
+    <form action="{:url('SecondHouse/edit')}"  method="post" id="form" enctype="multipart/form-data" >
         <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
             <tr>
                 <input type="hidden" name="type" value="{$list->type}">
@@ -98,10 +157,10 @@
                 <td>
                 <select name="is_hot">
                     <option value="0" <?php if($list->is_hot==0) echo "selected"?>>否</option>
-                    <option value="1" <?php if($list->is_hot==1) echo "selected"?>>是</option>                   
+                    <option value="1" <?php if($list->is_hot==1) echo "selected"?>>是</option>
                 </select>
                 </td>
-                
+
             </tr>
             <tr>
                 <td width="100" align="right">基本信息</td>
@@ -113,9 +172,28 @@
                 <select name="checkout">
                     <option value="0" <?php if($list->checkout==0) echo "selected"?>>待审核</option>
                     <option value="1" <?php if($list->checkout==1) echo "selected"?>>通过</option>
-                    <option value="2" <?php if($list->checkout==2) echo "selected"?>>不通过</option>                   
+                    <option value="2" <?php if($list->checkout==2) echo "selected"?>>不通过</option>
                 </select>
                 </td>
+            </tr>
+            <tr>
+              <td>添加图片</td>
+              <td>
+                <div id="imgUpLoader">
+                  <p>上传图片：图片大小不能大于2M</p>
+                  <label for="fileUpload" class="upload-img">选择图片</label><span class="loadImg"></span>
+                  <div id="fileBox">
+                      <input id="fileUpload" accept="image/*" type="file" name="img[]"/>
+                  </div>
+                  <div class="chuanshu" style="display: none;">
+                    <!-- <span>数据载入: </span> -->
+                    <span id="bytesRead"></span>
+                    <!--<span>/</span>
+                    <span id="bytesTotal"></span>-->
+                  </div>
+                  <div id="dvPreview" class="long-clear"></div>
+                </div>
+              </td>
             </tr>
             <tr>
                 <td></td>
@@ -129,7 +207,7 @@
             {volist name="imgs" id="img"}
             <tr>
                 <td>
-                    <img src="__STATIC__{$img.path}">
+                    <img src="__STATIC__{$img.path}"><a href="{:url('SecondHouse/delimg')}?id={$img.id}" class="delimg">删除</a>
                 </td>
             </tr>
             {/volist}
@@ -140,9 +218,118 @@
 <div class="clear"></div>
 {include file="public/foot"}
 <script>
-    $(".sub").click(function(){
-        $("#form").submit();
+    $(function(){
+      var img = "";
+      var imgNum = 0; //上传图片总数
+      var imgNames = [];
+      var imgValue = [];
+      $("#fileBox").on('change','#fileUpload',function() {
+         // alert(1);
+        var num = $(this).get(0).files.length;
+        //                限制上传图片数量
+        imgNum += num;
+
+        if(imgNum > 30) {
+          $('.loadImg').html('图片上传不得超过30张');
+          imgNum -= num;
+          return false;
+        }
+        //alert(2);
+        //          查询 文件大小
+        for(var i = 0; i < num; i++) {
+          var imgSize = $(this).get(0).files[i].size;
+          if(imgSize > 2097152) {
+            $('.loadImg').html('上传图片大于2M...请选择小于2M的图片');
+            return false;
+          }
+        }
+        if(typeof(FileReader) != undefined) {
+          $('.chuanshu').show();
+          //$('.loadImg').html('图片上传中');
+          var dvPreview = $("#dvPreview");
+          var regex = /(.jpg|.jpeg|.gif|.png|.bmp)$/;
+          //            获取一次行上传的数量
+          $($(this).get(0).files).each(function(i, e) {
+            var zongshu = 0;
+            var baifenbi = 0;
+            var file = $(this);
+            if(regex.test(file[0].name.toLowerCase())) {
+              var reader = new FileReader();
+
+              reader.onloadstart = function() {
+                // 这个事件在读取开始时触发
+                //                  document.getElementById("bytesTotal").textContent = file[i].size;
+                zongshu = file[0].size;
+                console.log("onloadstart"+zongshu);
+
+
+              }
+              reader.onprogress = function(p) {
+                // 这个事件在读取进行中定时触发
+                //                  document.getElementById("bytesRead").textContent = p.loaded;
+                baifenbi =  parseFloat((p.loaded / zongshu).toFixed(2)) * 100;
+                console.log("baifenbi=" + baifenbi + "%");
+                //document.getElementById("bytesRead").textContent = baifenbi + "%";
+                $('#fileUpload').removeAttr('id').hide();
+                if(imgNum>=30){
+                  $('.loadImg').html('一次性最多上传30张图');
+                  return;
+                }else{
+                  var html='<input id="fileUpload" accept="image/*" type="file"  name="img[]"/>';
+                }
+
+                $('#fileBox').append(html);
+              }
+
+              reader.onload = function(e) {
+                img = '<div class="borderBox left"><div class="imgBox"><img src="' + e.target.result + '" alt="" /><p class="delete">删除</p></div></div>';
+                dvPreview.append(img);
+                //$('.loadImg').html('图片上传完成');
+                //                获取文件名称
+                imgNames.push(file[0].name);
+              }
+              reader.readAsDataURL(file[0]);
+            } else {
+              alert("else了");
+              alert(file[0].name + "is not a valid image file.");
+              img = "";
+              //                dvPreview.html("");
+              return false;
+
+            }
+
+          });
+
+        } else {
+
+          alert("This browser does not support HTML5 FileReader.");
+
+        }
+
+  });
+
+  var deleteNum=0;
+
+  $("#dvPreview").on('click','.delete',function(){
+    // $('.loadImg').html('');
+    if(imgNum>=30){
+       var htmls='<input id="fileUpload" accept="image/*" type="file"  name="img[]"/>';
+    $('#fileBox').append(htmls);
+    }
+    imgNum--;
+    deleteNum=$("#dvPreview .delete").index(this);
+    $(this).parents('.borderBox').remove();
+    $('#fileBox input').eq(deleteNum).remove();
+
+  });
+
+
+  $(".sub").click(function(){
+      $("#form").submit();
+  })
+
     })
+
 </script>
 </body>
 </html>

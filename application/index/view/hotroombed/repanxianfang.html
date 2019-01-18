@@ -10,11 +10,11 @@
 			/*#rightUp:first-child :first-child a{*/
 			/*color: #F7743C;*/
 			/*}*/
-			
+
 			.newsBox:first-child a span {
 				color: #F7743C;
 			}
-			
+
 			.newsBox:first-child {
 				border-bottom: 1px dotted #ddd;
 				padding-bottom: 5px;
@@ -66,11 +66,11 @@
 					<!--户型划分-->
 					<div class="radioSunBox clear">
 						<div class="fenlei left">户型划分：</div>
-						<div class="fenleiDetailes">						
+						<div class="fenleiDetailes">
 						<label  <?php if($data['layout']=='0') {echo "class='active'";}?>>
                         	<input type="radio" name="layout_form" value="0"/>
                         不限
-                    	</label>                  	
+                    	</label>
                     	{volist name='layout' id='layout'}
                     	<label <?php if($data['layout']==$layout->id) {echo "class='active'";}?>>
                         	<input type="radio" name="layout_form" value="{$layout.id}"/>
@@ -81,7 +81,7 @@
 					</div>
 					<!--特色主题-->
 					<div class="radioSunBox clear">
-						<div class="fenlei left">特色主题：</div>
+						<div class="fenlei left">建筑类型：</div>
 						<div class="fenleiDetailes">
 
 						<label  <?php if($data['theme']=='0') {echo "class='active'";}?>>
@@ -114,22 +114,50 @@
 						</div>
 					</div>
 					<!--价格区间-->
-					<div class="radioSunBox clear">
-						<div class="fenlei left">价格区间：</div>
-						<div class="fenleiDetailes ">
-						<label  <?php if($data['price']=='0') {echo "class='active'";}?>>
-                        <input type="radio" name="price_form" value="0"/>
-                        不限
-                    	</label>
-                    	{volist name='price' id='price'}
-						<label <?php if($data['price']==$price->id) {echo "class='active'";}?>>
-                        	<input type="radio" name="price_form" value="{$price.id}"/>
-                        	{$price.min}--{$price.max}
-                    	</label>
-                    	{/volist}
+				<div class="radioSunBox clear">
+					<div class="fenlei left">价格区间：</div>
+					<div class="fenleiDetailes ">
+						<div class="priceNavBox clear">
+							<div class="left priceNav active">单价/套</div>
+							<div class="priceNav left">单价/平尺</div>
+						</div>
+						<div class="over priceBox priceTao priceTaoBox">
+							<label  <?php if($data['price']=='0') {echo "class='active'";}?>>
+								<input type="radio" name="price_form" value="0"/>
+								不限
+							</label>
+							{volist name='price' id='price'}
+							<label <?php if($data['price']==$price->id) {echo "class='active'";}?>>
+									<input type="radio" name="price_form" value="{$price.id}"/>
+									{$price.min}--{$price.max}
+							</label>
+							{/volist}
+							<div class="sureBox">
+								<input type="number" name="" value="" class="min-price" placeholder="最低"> --
+								<input type="number" name="" value="" class="max-price" placeholder="最高">
+								<span class="sureBtn">确定</span>
+							</div>
+						</div>
+						<div class="over priceBox priceChi priceTaoBox">
+							<label  <?php if($data['price']=='0') {echo "class='active'";}?>>
+								<input type="radio" name="price_form" value="0"/>
+								不限
+							</label>
+							{volist name='price' id='price'}
+							<label <?php if($data['price']==$price->id) {echo "class='active'";}?>>
+									<input type="radio" name="price_form" value="{$price.id}"/>
+									{$price.min}--{$price.max}
+							</label>
+							{/volist}
+							<div class="sureBox">
+								<input type="number" name="" value="" class="min-price" placeholder="最低"> --
+								<input type="number" name="" value="" class="max-price" placeholder="最高">
+								<span class="sureBtn">确定</span>
+							</div>
 						</div>
 					</div>
 				</div>
+			</div>
 				<form action="{:url('Hotroombed/repanxianfang')}" method="get" id="search">
 					<div id="serchBox" class="clear">
 						<input type="text" id="serchText" name="searchname" class="left searchname" />
@@ -151,7 +179,7 @@
 							<div class="deteileImgBox">
 								<img style="width:286px;height:191px" src="{$imgs[$bu.id]}" alt="" />
 							</div>
-						
+
 
 						<p class="yushouName">{$bu.name}</p>
 						<p class="yushouMsg">{$bu.address}</p>
@@ -268,7 +296,35 @@
 
 					});
 				});
-			});
+
+
+// priceNav 功能  priceTaoBox priceChiBox
+				$('.priceNavBox').on('click','.priceNav',function(){
+					 var num=$(this).index();
+					 $(this).addClass('active').siblings('.priceNav').removeClass('active');
+					 if(num==0){
+						 $('.priceTao').show();
+						 $('.priceChi').hide();
+					 }else{
+						 $('.priceTao').hide();
+						 $('.priceChi').show();
+					 }
+				})
+
+
+				// priceNav 功能  priceTaoBox priceChiBox
+				$('.priceNavBox').on('click','.priceNav',function(){
+					 var num=$(this).index();
+					 $(this).addClass('active').siblings('.priceNav').removeClass('active');
+					 if(num==0){
+						 $('.priceTao').show();
+						 $('.priceChi').hide();
+					 }else{
+						 $('.priceTao').hide();
+						 $('.priceChi').show();
+					 }
+				})
+			})
 		</script>
 	</body>
 

@@ -35,14 +35,14 @@
       <td align="center">{$list.checkout==0 ? "待审核" : ($list.checkout==1 ? "审核通过": "审核未通过")}</td>
       <td align="center">{$list.type==0 ? "出租求租" : "地产买卖"}</td>
       <td align="center">{$list.create_time}</td>
-      <td align="center"><a href="{:url('SecondHouse/edit')}?id={$list['id']}">审核</a> </td>
+      <td align="center"><a href="{:url('SecondHouse/edit')}?id={$list['id']}">审核</a> | <a href="{:url('SecondHouse/delete')}?id={$list['id']}" onclick="javascript:return del()">删除</a> </td>
      </tr>
      <?php $id++;?>
      {/volist}
     </table>
     {$lists->render()}
     </div>
-              
+
  </div>
 {include file="public/foot"}
 </body>

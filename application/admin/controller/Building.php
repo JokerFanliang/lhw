@@ -37,7 +37,7 @@ class Building extends common
     }
 
     public function add()
-    {        
+    {
         if($_POST){
             $data=request()->post();
             $building=new BuildingModel();
@@ -47,12 +47,11 @@ class Building extends common
             $building->price_id=$data['price_id'];
             $building->theme_id=$data['theme_id'];
             $building->area=$data['city'].",".$data['period'];
-            $building->type=$data['type'];
             $building->address=$data['address'];
             $building->finish_at=$data['finish_at'];
             $building->telephone=$data['telephone'];
             $building->state=$data['state'];
-			$building->is_hot=$data['is_hot'];
+			      $building->is_hot=$data['is_hot'];
             if($building->save()){
                 if(!empty($data['layout_id'])){
                     foreach($data['layout_id'] as $layout_id){
@@ -123,9 +122,8 @@ class Building extends common
             $building->price=$data['price'];
             $building->area_id=$data['area_id'];
             $building->price_id=$data['price_id'];
-            
+
             $building->theme_id=$data['theme_id'];
-            $building->type=$data['type'];
             $building->area=$data['city'].",".$data['period'];
             $building->address=$data['address'];
             $building->finish_at=$data['finish_at'];
@@ -208,7 +206,7 @@ class Building extends common
         $this->assign('price2_ids',$price2_ids);
         $this->assign('state_ids',$state_ids);
         $this->assign('theme',$theme);
-        $this->assign('list',$list); 
+        $this->assign('list',$list);
         return $this->fetch();
     }
 
@@ -238,7 +236,7 @@ class Building extends common
         }
         $id=$_GET['id'];
         $list=BuildingModel::where('id',$id)->find();
-        $this->assign('list',$list); 
+        $this->assign('list',$list);
         return $this->fetch();
     }
 
@@ -262,7 +260,7 @@ class Building extends common
         $build=BuildingModel::find($id);
 		$this->assign('build',$build);
 		$this->assign('building_id',$id);
-        $this->assign('lists',$lists); 
+        $this->assign('lists',$lists);
         return $this->fetch();
     }
 
@@ -300,7 +298,7 @@ class Building extends common
                 $url='/admin/building/dynamic?id='.$data['building_id'];
 				$this->success("修改成功",$url);
             }else{
-               $this->error('修改失败!'); 
+               $this->error('修改失败!');
             }
         }
         $id=$_GET['id'];
@@ -398,12 +396,12 @@ class Building extends common
 
             }
 
-            
+
             if($house->save()){
                 $url='/admin/building/house_type?id='.$data['building_id'];
 				$this->success("修改成功",$url);
             }else{
-               $this->error('修改失败!'); 
+               $this->error('修改失败!');
             }
         }
         $id=$_GET['id'];
@@ -486,7 +484,7 @@ class Building extends common
                 $url='/admin/building/video?id='.$data['building_id'];
                 $this->success("修改成功",$url);
             }else{
-               $this->error('修改失败!'); 
+               $this->error('修改失败!');
             }
         }
         $id=$_GET['id'];
@@ -511,8 +509,8 @@ class Building extends common
         }
         return $this->fetch();
     }
-	
-	
+
+
 	public function house_show()
     {
         $id=$_GET['id'];
@@ -584,7 +582,7 @@ class Building extends common
                 $url='/admin/building/house_show?id='.$data['building_id'];
 				$this->success("修改成功",$url);
             }else{
-               $this->error('修改失败!'); 
+               $this->error('修改失败!');
             }
         }
         $id=$_GET['id'];

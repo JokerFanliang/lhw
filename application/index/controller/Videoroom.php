@@ -25,9 +25,9 @@ class Videoroom extends Controller
         Session::set('title','video');
         $video_ids=VideoModel::group('building_id')->column('building_id');
         $data=request()->get();
-        $data['area']=isset($data['area']) ? $data['area'] : '0'; 
-        $data['price']=isset($data['price']) ? $data['price'] : '0'; 
-        $data['layout']=isset($data['layout']) ? $data['layout'] : '0'; 
+        $data['area']=isset($data['area']) ? $data['area'] : '0';
+        $data['price']=isset($data['price']) ? $data['price'] : '0';
+        $data['layout']=isset($data['layout']) ? $data['layout'] : '0';
         $data['theme']=isset($data['theme']) ? $data['theme'] : '0';
         $data['state']=isset($data['state']) ? $data['state'] : '0';
         // if(!Session::has('layouts')){
@@ -41,10 +41,10 @@ class Videoroom extends Controller
         //     }else{
         //         array_push($layouts,$data['layout']);
         //     }
-            
+
         // }else{
-        //     $layouts=[];            
-        // } 
+        //     $layouts=[];
+        // }
 
         // Session::set('layouts',$layouts);
         $video=[];
@@ -80,11 +80,11 @@ class Videoroom extends Controller
                     $build_ids=array_unique($build_ids);
                     $query->wherein('id',$build_ids);
                 }
-                
+
                 $query->where('is_delete',BuildingModel::$isDelete['no']['val']);
-    
+
             })->order('update_time','desc')->where('state',BuildingModel::$state['video']['val'])->paginate(9,false,['query'=>['area'=>$data['area'],'price'=>$data['price'],'layout'=>$data['layout'],'theme'=>$data['theme']]]);
-        } 
+        }
         $imgs=[];
         foreach($build as $list){
             $bul=HouseShowModel::where('building_id',$list->id)->find();
@@ -93,9 +93,9 @@ class Videoroom extends Controller
             }else{
                 $imgs[$list->id]="";
             }
-            
+
         }
-        
+
         $hotbuild=BuildingModel::where('is_delete',BuildingModel::$isDelete['no']['val'])->where('state',BuildingModel::$state['video']['val'])->order('is_hot','desc')->order('read_count','desc')->limit(0,8)->select();
         $area=AreaModel::where('is_delete',AreaModel::$isDelete['no']['val'])->order('sort','desc')->select();
         $price=PriceModel::where('is_delete',PriceModel::$isDelete['no']['val'])->order('sort','desc')->select();
@@ -123,14 +123,17 @@ class Videoroom extends Controller
     public function shipinkanfang_detaile()
     {
         $id=$_GET['id'];
-    	$build=BuildingModel::find($id);
+    	  $build=BuildingModel::find($id);
         $state_ids=BuildStateModel::where('build_id',$build->id)->column('state_id');
         $state_name=StateModel::wherein('id',$state_ids)->column('name');
         $state_name=implode(",",$state_name);
+        $theme_ids=BuildThemeModel::where('build_id',$build->id)->column('theme_id');
+        $theme_name=ThemeModel::wherein('id',$theme_ids)->column('name');
+        $theme_name=implode(",",$theme_name);
         $bul=HouseShowModel::where('building_id',$build->id)->find();
         $build->read_count=$build->read_count+1;
         $build->save();
-    	$dynamic=BuildingDynamicModel::where('building_id',$id)->select();
+    	  $dynamic=BuildingDynamicModel::where('building_id',$id)->select();
         $video=VideoModel::where('building_id',$id)->order('sort','desc')->select();
         $show=VideoModel::where('building_id',$id)->order('sort','desc')->find();
         if(isset($_GET['videoid'])){
@@ -141,9 +144,10 @@ class Videoroom extends Controller
         $this->assign('show',$show);
         $this->assign('video',$video);
         $this->assign('bul',$bul);
-    	$this->assign('build',$build);
-    	$this->assign('dynamic',$dynamic);
+    	  $this->assign('build',$build);
+    	  $this->assign('dynamic',$dynamic);
         $this->assign('state_name',$state_name);
+        $this->assign('theme_name',$theme_name);
         return $this->fetch();
     }
 }

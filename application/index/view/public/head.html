@@ -5,16 +5,16 @@
         overflow: hidden;
         position: relative;
       }
-      
+
       .bannerImg {
         width: 890px;
         height: 100px;
       }
-      
+
       .slideBox {
         height: 100px;
       }
-      
+
       .slide {
         width: 890px;
         height: 100px;
@@ -24,14 +24,14 @@
         left: 0;
         opacity: 0;
       }
-      
+
       .slide.active {
         opacity: 1;
       }
     </style>
 <div id="top" class="clear">
     <div id="logoBox" class="left">
-        <a href="{:url('Index/index')}">            
+        <a href="{:url('Index/index')}">
             <img src="__STATIC__/index/image/logo_03.png" alt="楼花王LOGO"/>
         </a>
     </div>
@@ -53,9 +53,9 @@
         <a href="{:url('Index/index')}" class="navA <?php if(getTitleSession()=='shouye') echo 'active'?>">首页</a>
         <a href="{:url('Advancesale/louhuayushou')}" class="navA <?php if(getTitleSession()=='yushou') echo 'active'?>">楼花预售</a>
         <a href="{:url('Hotroombed/repanxianfang')}" class="navA <?php if(getTitleSession()=='xianfang') echo 'active'?>">热盘现房</a>
-        
+
         <a href="{:url('Lookroom/kanfanggonglue')}" class="navA <?php if(getTitleSession()=='strategy') echo 'active'?>">看房攻略</a>
-        <a href="{:url('Buyroom/dichanmaimai')}" class="navA <?php if(getTitleSession()=='sale') echo 'active'?>">楼花买卖</a>
+        <a href="{:url('Buyroom/dichanmaimai')}" class="navA <?php if(getTitleSession()=='sale') echo 'active'?>">楼花转让</a>
         <a href="{:url('Sellroom/chuzuqiuzu')}" class="navA <?php if(getTitleSession()=='lease') echo 'active'?>">商业地产</a>
         <a href="{:url('Videoroom/shipinkanfang')}" class="navA <?php if(getTitleSession()=='video') echo 'active'?>">视频看房</a>
     </div>

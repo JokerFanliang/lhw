@@ -60,10 +60,12 @@
             </tr>
 
             <tr>
-                <td width="100" align="right">建筑类型</td>
-                <td>
-                    <input type="text" name="type" size="40" class="inpMain type" value="" />
-                </td>
+              <td width="100" align="right">建筑类型</td>
+              <td>
+                  {volist name='theme' id='theme'}
+                      <input type="checkbox" class="cheacks" value="{$theme->id}" name="theme_id[]"/><label for="">{$theme->name}</label>
+                  {/volist}
+              </td>
 
                 <td width="100" align="right">项目地址</td>
                 <td>
@@ -118,12 +120,7 @@
                 <td>
                     <div class="btn sub">添加</div>
                 </td>
-                <td width="100" align="right">特色主题</td>
-                <td>
-                    {volist name='theme' id='theme'}
-                        <input type="checkbox" class="cheacks" value="{$theme->id}" name="theme_id[]"/><label for="">{$theme->name}</label>
-                    {/volist}
-                </td>
+
             </tr>
         </table>
     </form>

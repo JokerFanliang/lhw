@@ -13,7 +13,7 @@ input[type="radio"]{
     visibility: hidden;
 }
 label{
-    padding:3px 15px 3px 0;
+    padding:0 15px 3px 0;
     float: left;
     cursor: pointer;
 }
@@ -215,3 +215,16 @@ input[type="number"]{
     margin:0 0 10px 52px ;
     border-radius: 10px;
 }
+
+
+
+
+
+.priceBox label{height:26px;line-height: 26px;margin-bottom: 6px;}
+.priceNavBox{width:40%;margin-bottom: 6px;text-align: center;border:1px solid #CC0000;height:32px;line-height: 30px;cursor: pointer;}
+.priceNav:hover,.priceNav.active{background: #cc0000;color:#fff;}
+.priceNav{width:50%;}
+.min-price,.max-price{width:100px;border:1px solid #cc0000;height:26px;padding:0 4px;}
+.sureBtn{padding:5px 10px;background: #cc0000;color:#fff;cursor: pointer;}
+.sureBox{display: inline-block;margin-left:10px;}
+.priceChi{display: none;}

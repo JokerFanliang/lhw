@@ -10,7 +10,7 @@
 			.newsBox:first-child a span {
 				color: #F7743C;
 			}
-			
+
 			.newsBox:first-child {
 				border-bottom: 1px dotted #ddd;
 				padding-bottom: 5px;
@@ -76,11 +76,11 @@
 					<!--户型划分-->
 					<div class="radioSunBox clear">
 						<div class="fenlei left">户型划分：</div>
-						<div class="fenleiDetailes">						
+						<div class="fenleiDetailes">
 						<label  <?php if($data['layout']=='0') {echo "class='active'";}?>>
                         	<input type="radio" name="layout_form" value="0"/>
                         不限
-                    	</label>                  	
+                    	</label>
                     	{volist name='layout' id='layout'}
                     	<label <?php if(in_array($layout->name,$layouts)) {echo "class='active'";}?>>
                         	<input type="radio" name="layout_form" value="{$layout.name}"/>
@@ -91,7 +91,7 @@
 					</div>
 					<!--特色主题-->
 					<div class="radioSunBox clear">
-						<div class="fenlei left">特色主题：</div>
+						<div class="fenlei left">建筑类型：</div>
 						<div class="fenleiDetailes">
 
 						<label  <?php if($data['theme']=='0') {echo "class='active'";}?>>
@@ -145,7 +145,7 @@
 									<span class="shu">|</span>
 									<span class="chaoxiang">{$hou.orientation}</span>
 								</div>
-								
+
 							</div>
 							<?php $area=explode(",",$hou->area)?>
 							<div class="diqu">
@@ -160,7 +160,7 @@
 						{$house->render()}
 					</div>
 				</div>
-				
+
 			</div>
 			<div id="rightMain" class="left">
 				<a href="{:url('Sellroom/chuzufabu')}">
@@ -173,14 +173,14 @@
 						<b id="hotIcon"></b> 热点新盘
 					</div>
 					<div id="newDetaile">
-						{volist name='hothouse' id='hothouse'}						
+						{volist name='hothouse' id='hothouse'}
 						<div class="newsBox clear">
 							<a href="{:url('Sellroom/chuzu_detaile')}?id={$hothouse.id}" class="clear">
 							<div class="clear">
 								<span class="newTle shenglue left">{$hothouse.building}</span>
 								<?php $area=explode(",",$hothouse->area)?>
 								<span class="newDizhi right">{$area[0]}</span>
-							</div>	
+							</div>
 							<p class="price">{$hothouse.price}</p>
 							</a>
 						</div>

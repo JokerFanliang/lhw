@@ -77,10 +77,13 @@
             </tr>
 
             <tr>
-                <td width="100" align="right">建筑类型</td>
-                <td>
-                    <input type="text" name="type" size="40" class="inpMain type" value="{$list->type}" />
-                </td>
+              <td width="100" align="right">建筑类型</td>
+              <td>
+                  {volist name='theme' id='theme'}
+                      <input type="checkbox" class="cheacks" value="{$theme->id}" name="theme_id[]" <?php if(in_array($theme->id,$theme_ids))echo 'checked';?>/><label for="">{$theme->name}</label>
+                  {/volist}
+
+              </td>
 
                 <td width="100" align="right">项目地址</td>
                 <td>
@@ -135,13 +138,7 @@
                     <input type="hidden" name="id" value="{$list->id}">
                     <div class="btn sub">修改</div>
                 </td>
-                <td width="100" align="right">特色主题</td>
-                <td>
-                    {volist name='theme' id='theme'}
-                        <input type="checkbox" class="cheacks" value="{$theme->id}" name="theme_id[]" <?php if(in_array($theme->id,$theme_ids))echo 'checked';?>/><label for="">{$theme->name}</label>
-                    {/volist}
 
-                </td>
             </tr>
         </table>
     </form>

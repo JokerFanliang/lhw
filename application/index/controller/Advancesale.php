@@ -31,13 +31,13 @@ class Advancesale extends Controller
         // exit;
         Session::set('title', "yushou");
     	$data=request()->get();
-        $data['area']=isset($data['area']) ? $data['area'] : '0'; 
-        $data['price']=isset($data['price']) ? $data['price'] : '0'; 
-        $data['layout']=isset($data['layout']) ? $data['layout'] : '0'; 
+        $data['area']=isset($data['area']) ? $data['area'] : '0';
+        $data['price']=isset($data['price']) ? $data['price'] : '0';
+        $data['layout']=isset($data['layout']) ? $data['layout'] : '0';
         $data['theme']=isset($data['theme']) ? $data['theme'] : '0';
         $data['state']=isset($data['state']) ? $data['state'] : '0';
 
-        
+
         // if(!Session::has('layouts')){
         //     $layouts=[];
         //     Session::set('layouts',$layouts);
@@ -49,13 +49,13 @@ class Advancesale extends Controller
         //     }else{
         //         array_push($layouts,$data['layout']);
         //     }
-            
+
         // }else{
-        //     $layouts=[];            
-        // } 
+        //     $layouts=[];
+        // }
 
         // Session::set('layouts',$layouts);
-        
+
         if(isset($data['searchname'])){
             $searchname=$data["searchname"];
             $build = BuildingModel::where('name','like','%'.$searchname.'%')->order('update_time','desc')->where('is_delete',BuildingModel::$isDelete['no']['val'])->where('state',BuildingModel::$state['yushou']['val'])->paginate(9,false,['query'=>['searchname'=>$searchname]]);
@@ -84,9 +84,9 @@ class Advancesale extends Controller
                     $build_ids=array_unique($build_ids);
                     $query->wherein('id',$build_ids);
                 }
-                               
+
                 $query->where('is_delete',BuildingModel::$isDelete['no']['val']);
-    
+
             })->order('update_time','desc')->where('state',BuildingModel::$state['yushou']['val'])->paginate(9,false,['query'=>['area'=>$data['area'],'price'=>$data['price'],'layout'=>$data['layout'],'theme'=>$data['theme']]]);
         }
 
@@ -98,7 +98,7 @@ class Advancesale extends Controller
             }else{
                 $imgs[$list->id]="";
             }
-            
+
         }
         $hotbuild=BuildingModel::where('is_delete',BuildingModel::$isDelete['no']['val'])->where('state',BuildingModel::$state['yushou']['val'])->order('is_hot','desc')->order('read_count','desc')->limit(0,8)->select();
         $area=AreaModel::where('is_delete',AreaModel::$isDelete['no']['val'])->order('sort','desc')->select();
@@ -124,28 +124,32 @@ class Advancesale extends Controller
         return $this->fetch();
     }
     public function louhuayushou_detaile()
-    {	
-    	$id=$_GET['id'];
-    	$build=BuildingModel::find($id);
+    {
+    	  $id=$_GET['id'];
+    	  $build=BuildingModel::find($id);
         $state_ids=BuildStateModel::where('build_id',$build->id)->column('state_id');
         $state_name=StateModel::wherein('id',$state_ids)->column('name');
         $state_name=implode(",",$state_name);
+        $theme_ids=BuildThemeModel::where('build_id',$build->id)->column('theme_id');
+        $theme_name=ThemeModel::wherein('id',$theme_ids)->column('name');
+        $theme_name=implode(",",$theme_name);
         $build->read_count= $build->read_count+1;
         $build->save();
-    	$dynamic=BuildingDynamicModel::where('building_id',$id)->select();
+    	  $dynamic=BuildingDynamicModel::where('building_id',$id)->select();
 
         $houseshow=HouseShowModel::where('building_id',$id)->order('sort','desc')->select();
-		$housetype=HouseTypeModel::where('building_id',$id)->order('sort','desc')->select();
+		    $housetype=HouseTypeModel::where('building_id',$id)->order('sort','desc')->select();
         $show=HouseShowModel::where('building_id',$id)->find();
         if(isset($_GET['houseshowid'])){
             $show=HouseShowModel::find($_GET['houseshowid']);
         }
         $this->assign('show',$show);
         $this->assign('houseshow',$houseshow);
-		$this->assign('housetype',$housetype);
-    	$this->assign('build',$build);
-    	$this->assign('dynamic',$dynamic);
+		    $this->assign('housetype',$housetype);
+    	  $this->assign('build',$build);
+    	  $this->assign('dynamic',$dynamic);
         $this->assign('state_name',$state_name);
+        $this->assign('theme_name',$theme_name);
         return $this->fetch();
     }
 
