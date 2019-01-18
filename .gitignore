@@ -1,2 +1,5 @@
 /public/uploads
+/public/ueditor
 /runtime/
+*.env
+
