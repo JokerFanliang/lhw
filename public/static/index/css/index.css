@@ -1,0 +1,266 @@
+.longBannerBox {
+    width: 1200px;
+    margin: 0 auto;
+	height:70px;
+}
+
+#detaile1, #detaile2, #detaile3 {
+    width: 1200px;
+    margin: 10px auto 20px;
+}
+
+.leftDetaile1, .leftDetaile2, .leftDetaile3 {
+    width: 200px;
+}
+
+#floorOne,#floorTow,#floorThree {
+    margin-bottom: 10px;
+}
+
+#addressBox {
+    margin-top: 12px;
+}
+#floor2banner,#floor3banner {
+    margin-top: 23px;
+}
+#floor2banner{
+	/* max-height:326px; */
+	height:326px;
+}
+#floor3banner{
+	/* max-height:379px; */
+	height:379px;
+}
+
+#detaile1 {
+    height: 470px;
+    overflow: hidden;
+}
+
+.btnAdd {
+    width: 98px;
+    height: 40px;
+    background: -webkit-linear-gradient(#fff, #D6D6D6); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#fff, #D6D6D6); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#fff, #D6D6D6); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#fff, #D6D6D6); /* 标准的语法 */
+    font-size: 12px;
+    text-align: center;
+    padding-top: 5px;
+    border: 1px solid #ddd;
+    float: left;
+    margin-top: 6px;
+    cursor: pointer;
+}
+
+.btnAdd:nth-child(even) {
+    margin-left: 4px;
+}
+
+.midDetaile1{
+    width: 730px;
+    height: 470px;
+    overflow: hidden;
+}
+
+[class^="midheng"] {
+    width: 300px;
+    height: 3px;
+}
+
+.midheng1 {
+    background: #CC0000;
+}
+.midheng2{
+    background: #008DCC;
+}
+.midheng3{
+    background: #B41873;
+}
+
+
+.mainBox1 {
+    height: 467px;
+    padding: 12px 30px 0 35px;
+}
+.mainBox2{
+    height: 440px;
+    padding: 12px 30px 0 35px;
+}
+.midDetaile2{
+    width: 730px;
+    height: 440px;
+    overflow: hidden;
+}
+
+.floor1Main {
+    height: 100%;
+}
+
+.floor1Nav {
+    background: #F1F1F1;
+}
+
+.floor1A, .floorSpan {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.floor1A {
+    width: 90px;
+}
+
+.floor1A.active, .floor1A:hover {
+    color: #CC0000;
+    border-bottom: 2px solid #CC0000;
+}
+
+.floorSpan {
+    width: 5px;
+    color: #919191;
+    font-size: 12px;
+}
+
+.floor1img {
+    height: 415px;
+    width: 676px;
+    margin-left: -5px;
+}
+
+.floor1imgBox {
+    position: relative;
+}
+
+.floor1detailes,.floor2detailes ,.floor3detailes{
+    width: 33.3%;
+    height: 206px;
+    overflow: hidden;
+    padding: 5px;
+    margin-top: 5px;
+
+}
+.floor3detailes{
+    float: left;
+}
+.downBg {
+    width: 100%;
+    background: rgba(0, 0, 0, .5);
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    padding: 3px;
+}
+
+.fangName {
+    padding-left: 10px;
+}
+
+.dizhiName, .fangName {
+    font-size: 14px;
+}
+
+.loupanName {
+    margin: 5px 0;
+}
+
+.loupanDizhi, .loupanleixing {
+    font-size: 14px;
+    color: #E70101;
+}
+
+.rightDetaile1,.rightDetaile2 {
+    width: 270px;
+}
+
+.rightDetaile1title {
+    margin-top:25px;
+}
+.rightDetaile1titleHeng{
+    position: relative;
+}
+.rightDetaile1titleHeng:after {
+    content: '';
+    width: 70px;
+    height: 2px;
+    border-bottom: 2px solid #CC0000;
+    position: absolute;
+    bottom: -2px;
+}
+.newUp,.newDown{
+    color:#EE0000;
+    /*text-align: center;*/
+    margin:20px 0;
+}
+.newBox{
+    font-size: 14px;
+    line-height: 30px;
+}
+.newTop{
+    font-weight: 600;
+}
+.rightBannerBox{
+    margin-top:25px;
+	height:190px;
+}
+
+#midDetaile3{
+    width: 1000px;
+    height: 470px;
+    overflow: hidden;
+}
+#floor3video {
+    height: 437px;
+}
+.mainBox3 {
+    height: 490px;
+    padding: 12px 30px 0 35px;
+}
+.videoName{
+    text-align: center;
+}
+.videoBox{
+    position: relative;
+}
+.videoPlay{
+    position: absolute;
+    width:50px;
+    height:50px;
+    background: url(../image/sprice.png) no-repeat 1px 1px;
+    top:50%;
+    left:50%;
+    margin:-25px 0 0 -25px;
+    z-index: 99999;
+    display: block;
+    cursor: pointer;
+}
+#footerNav{
+    height:106px;
+    width:1200px;
+    margin:0 auto;
+    background: url(../image/footBg-1.jpg) no-repeat;
+}
+
+.footerSpanBox{
+    width:25%;
+    padding:25px 0 0 120px;
+}
+.footerP{
+    color:#797979;
+    font-size: 20px;
+}
+.footerBtn{
+    padding:5px 20px;
+    background: #ED5F09;
+    border-radius: 5px;
+    color:#fff;
+    font-size: 16px;
+    margin-top:5px;
+    display: inline-block;
+}
+.footerTel{
+    color:#ED5F09;
+    font-size: 20px;
+    margin-top:5px;
+}

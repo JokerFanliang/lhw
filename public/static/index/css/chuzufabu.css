@@ -1,0 +1,155 @@
+#main {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+#leftMain {
+    width: 930px;
+    padding-right: 30px;
+}
+
+#rightMain {
+    width: 270px;
+    border:1px solid #ddd;
+    padding:10px;
+    margin-top:35px;
+}
+
+
+
+#dateils {
+    width: 930px;
+}
+
+
+
+
+.hongxian {
+    border-bottom: 3px solid #CC0000;
+    padding-bottom: 7px;
+    width: 155px;
+}
+
+.hongxian:after {
+    content: '';
+    width: 0;
+    border: 5px solid;
+    border-color: transparent transparent #CC0000 transparent;
+    position: relative;
+    bottom: -2px;
+    left: -75px;
+}
+
+.deteilsMegBox {
+    border-top: 1px solid #ddd;
+    width: 900px;
+}
+
+.rightTitle{
+    margin-bottom:10px;
+    font-weight: normal;
+}
+.yuNum{
+    width:20px;
+    height:20px;
+    line-height: 20px;
+    text-align: center;
+    background: #ddd;
+    color:#fff;
+    border-radius: 3px;
+}
+.yueMeg{
+    height:20px;
+    line-height: 20px;
+    padding-left:10px;
+    font-size: 14px;
+}
+.yuduBox{
+    margin:10px 0;
+    height:30px;
+    line-height: 30px;
+}
+.leftTitle{
+    display: inline-block;
+    width:100px;
+    height:30px;
+    line-height: 30px;
+}
+.inputBox{
+    height:80px;
+    line-height: 80px;
+    border-bottom:1px solid #ddd;
+}
+.inputBig{
+    height:30px;
+    line-height: 30px;
+    font-size: 16px;
+    width:300px;
+    padding:0 10px;
+    border:1px solid #ddd;
+    background: #FCFCFC;
+    margin-right:30px;
+}
+
+.inputMid{
+    height:30px;
+    line-height: 30px;
+    font-size: 16px;
+    width:100px;
+    padding:0 10px;
+    border:1px solid #ddd;
+    background: #FCFCFC;
+    margin-right:3px;
+}
+#googleBox{
+    margin-bottom:20px;
+    border: 1px solid #ddd;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.inputSmall{
+    height:24px;
+    line-height: 24px;
+    font-size: 16px;
+    width:30px;
+    padding:0 10px;
+    border:1px solid #ddd;
+    background: #FCFCFC;
+    text-align: center;
+}
+.leftMargin{
+    margin:0 10px 0 5px;
+}
+label{
+    margin:0 10px 0 3px;
+}
+.cheackBox{
+    height: 80px;
+    line-height: 80px;
+    border-bottom:1px solid #ddd;
+}
+.fuwenbenBox{
+    padding-bottom:10px;
+    border-bottom:1px solid #ddd;
+}
+
+.tijiaoBtn{
+    display: inline-block;
+    padding:8px 30px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left:30px;
+    color:#fff;
+}
+#tijiao{
+    margin-left:100px;
+    background: #FF9A66;
+}

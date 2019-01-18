@@ -1,0 +1,79 @@
+#main{
+    width:1200px;
+    height:100%;
+    margin:0 auto;
+    padding:200px 0 155px;
+}
+.mianbaoxie{
+    font-size: 14px;
+    margin-top:10px;
+}
+html,body{
+    height:100%;
+}
+#header{
+    width:100%;
+}
+#foot{
+    position: fixed;
+    bottom:0;
+}
+.msgIcon{
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    background: url(../image/sprice.png) no-repeat -75px -22px;
+    width: 25px;
+    height: 25px;
+}
+.msgDetaile{
+    overflow: auto;
+    padding:0 0 60px 30px;
+    height:100%;
+}
+.msgNavBox{
+    position: relative;
+    height:50px;
+    line-height: 50px;
+    width:220px;
+    background: #FAFAFA;
+    padding-left:70px;
+    cursor: pointer;
+}
+
+.msgNavBox.active,.msgNavBox:hover{
+    background: #cc0000;
+    color:#fff;
+}
+.msgNavBox:hover .msgIcon{
+    display: block;
+}
+#msgBox{
+    margin-top:20px;
+    height:100%;
+}
+.msgIcon.active{
+    display: block;
+}
+.msgMain{
+    border:1px solid #ddd;
+    height:100%;
+    overflow: auto;
+}
+.msgLeft{
+    border:1px solid #ddd;
+}
+.hangju{
+    margin:30px 0;
+}
+#msgTitle{
+    height:50px;
+    font-size: 20px;
+    background: #FAFAFA;
+    line-height: 50px;
+    padding-left:20px;
+}
+.msgText{
+    padding:0 30px 30px;
+}

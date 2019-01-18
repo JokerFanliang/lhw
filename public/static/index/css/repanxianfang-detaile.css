@@ -1,0 +1,239 @@
+#main {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+
+
+.mianbaoxie {
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+.mainImgBox {
+    width: 545px;
+    height: 365px;
+    margin-bottom: 10px;
+}
+
+#smallImgBox {
+    position: relative;
+    width: 545px;
+    overflow: hidden;
+}
+
+
+#prevBtn, #nextBtn {
+    background: rgba(0, 0, 0, .5);
+    color: #fff;
+    font-size: 20px;
+    position: absolute;
+    height: 30px;
+    line-height: 20px;
+    z-index: 99;
+    top: 20px;
+    width: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#prevBtn {
+    left: 0;
+}
+
+#nextBtn {
+    right: 0;
+}
+.mainsLeft {
+    width: 545px;
+}
+
+.smallBox {
+    width:99px;
+    height:71px;
+    margin:0 auto;
+    overflow: hidden;
+}
+
+.smallBigBox {
+    width: 99px;
+    overflow: hidden;
+    position: relative;
+    margin:0 5px;
+    cursor: pointer;
+}
+
+.imgBgText {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    padding: 2px 0;
+}
+.mainsRight{
+    overflow: auto;
+    padding-left:40px;
+}
+#price{
+    color:#F90303;
+    font-size: 24px;
+}
+.hong{
+    color:#F10303;
+    font-size: 24px;
+    margin:0 5px;
+}
+.msgBox{
+    height:50px;
+    line-height: 50px;
+    padding-left:20px;
+}
+.loupanName{
+    margin-bottom:20px;
+}
+.telBox{
+    background: #F7F7F7;
+    padding:10px 20px ;
+}
+.goGoogleBox{
+    background: #CC0000;
+    border-radius: 3px;
+    width: 190px;
+    height:45px;
+    line-height: 45px;
+    text-align: center;
+    padding-left:30px;
+    position: relative;
+    margin-top:27px;
+}
+.goA{
+    color:#fff;
+}
+
+.goGoogleIcon {
+    display: block;
+    position: absolute;
+    top: 7px;
+    left: 45px;
+    background: url(../image/sprice.png) no-repeat -48px 8px;
+    width: 25px;
+    height: 25px;
+}
+.guanggaoImgBox{
+    margin:20px 0;
+}
+.downLeft{
+    width:900px;
+    border:1px solid #ddd;
+    margin-top:20px;
+}
+.nav{
+    padding:0 30px;
+    cursor: pointer;
+}
+.nav:hover,.nav.active{
+    border-bottom:2px solid #cc0000;
+    color: #cc0000;
+}
+
+.downNav{
+    background: #F7F7F7;
+    height:55px;
+    line-height: 55px;
+    font-size: 18px;
+}
+.downMsg{
+    height:50px;
+    line-height: 50px;
+    width:50%;
+    border-bottom:1px dotted #ddd;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    padding-right:10px;
+    font-size: 14px;
+}
+.downMsgBox{
+    padding:0 30px 50px 30px;
+
+}
+.dongtaiTitleBox{
+    font-size: 16px;
+}
+#canshuBox,#huxingBox{
+    display: none;
+}
+.donttaiTime,.dongtaiTest{
+    font-size: 14px;
+    color:#696969;
+}
+.dongtaiMsgBox{
+    margin:5px 0;
+    border-bottom:1px dotted #ddd;
+    padding-bottom:15px;
+}
+.dtTitle{
+    margin:10px 0;
+}
+.chakan{
+    text-align: right;
+    margin-top:20px;
+}
+#chakanA{
+    color:#cc0000;
+    font-size: 14px;
+}
+
+.huxingDetaileBox{
+    width:25%;
+    padding:0 10px;
+    margin:20px 0;
+}
+
+.mtkBox{
+    position: relative;
+    overflow: hidden;
+    border:1px solid #ddd;
+}
+.huxingTest{
+    position: absolute;
+    bottom: 0;
+    font-size: 14px;
+    color:#fff;
+    background: rgba(0, 0, 0, .3);
+    width:100%;
+    padding:3px 5px;
+}
+.jianjieBox{
+    margin-bottom:10px;
+}
+.smallFont{
+    font-size: 10px;
+}
+.font{
+    font-size: 12px;
+}
+.upJli{
+    padding-top:5px;
+}
+.zaishou,.daishou,.shouwan{
+    border:1px solid;
+    padding:3px 5px;
+    font-size: 14px;
+}
+.zaishou{
+    color:#FF6666;
+    border-color:#FF6666;
+}
+.daishou{
+    color:#FF9900;
+    border-color:#FF9900;
+}
+.shouwan{
+     color:#CCCCCC;
+     border-color:#CCCCCC;
+ }

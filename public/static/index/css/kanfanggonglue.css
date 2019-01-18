@@ -1,0 +1,130 @@
+#main {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+#leftMain {
+    width: 930px;
+    padding-right: 30px;
+}
+
+#rightMain {
+    width: 270px;
+    border:1px solid #ddd;
+    padding:10px;
+    margin-top:35px;
+}
+
+input[type="radio"] {
+    visibility: hidden;
+}
+
+label {
+    padding: 3px 15px 3px 0;
+    float: left;
+    cursor: pointer;
+}
+
+#dateils {
+    width: 920px;
+    margin-left: -10px;
+}
+
+#fenye {
+    width: 900px;
+    text-align: center;
+}
+
+#fenyeBox {
+    display: inline-block;
+    font-size: 14px;
+    margin: 20px auto 0;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+}
+
+.fenyeBtnBox {
+    padding: 10px;
+    border-left: 1px solid #ddd;
+
+}
+
+.fenyeDetails {
+    padding: 10px;
+
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+#zixuan {
+    width: 40px;
+    padding: 0 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.hongxian {
+    border-bottom: 3px solid #CC0000;
+    padding-bottom: 5px;
+    width: 110px;
+}
+
+.hongxian:after {
+    content: '';
+    width: 0;
+    border: 5px solid;
+    border-color: transparent transparent #CC0000 transparent;
+    position: relative;
+    bottom: 0;
+    left: -50px;
+}
+
+.deteilsMegBox {
+    border-top: 1px solid #ddd;
+    width: 900px;
+}
+.msgImg{
+    width:125px;
+    height:85px;
+}
+.megBox{
+    padding:20px 0;
+    border-bottom: 1px dotted #ddd;
+
+}
+.msgImg{
+    margin-right:20px;
+}
+.xiangqing{
+    color:#CC0000;
+}
+.rightTitle{
+    margin-bottom:10px;
+    font-weight: normal;
+}
+.yuNum{
+    width:20px;
+    height:20px;
+    line-height: 20px;
+    text-align: center;
+    background: #ddd;
+    color:#fff;
+    border-radius: 3px;
+}
+.yueMeg{
+    height:20px;
+    line-height: 20px;
+    padding-left:10px;
+    font-size: 14px;
+}
+.yuduBox{
+    margin:10px 0;
+}

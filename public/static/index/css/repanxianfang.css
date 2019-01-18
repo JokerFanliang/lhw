@@ -1,0 +1,215 @@
+#main{
+    width:1200px;
+    margin:0 auto;
+}
+#leftMain{
+    width:930px;
+    padding-right:30px;
+}
+#rightMain{
+    width:270px;
+}
+input[type="radio"]{
+    visibility: hidden;
+}
+label{
+    padding:3px 15px 3px 0;
+    float: left;
+    cursor: pointer;
+}
+.radioSunBox{
+    margin:10px 0;
+}
+.fenlei {
+    /*width:90px;*/
+    padding:3px 0;
+}
+.fenleiDetailes{
+    overflow: auto;
+}
+#radioBox{
+    background: #F7F7F7;
+    padding:5px 15px;
+    font-size: 14px;
+}
+#serchBox{
+    height:50px;
+    line-height: 50px;
+    margin:20px 0;
+}
+#serchText{
+    border-radius: 3px;
+    height:50px;
+    line-height: 50px;
+    padding-left:8px;
+    border:1px solid #ED600A;
+    width:633px;
+    font-size: 18px;
+}
+#serchBtn{
+    background: #ED600A;
+    color:#fff;
+    position: relative;
+    cursor: pointer;
+    padding:0 20px 0 45px;
+    margin-left:20px;
+    border-radius: 3px;
+}
+#goGoogleBox{
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+    padding:0 20px 0 45px;
+    margin-left:20px;
+    background: #A60000;
+}
+#goGoogle{
+    color:#fff;
+}
+#serchIcon,#goGoogleIcon{
+    display: block;
+    position: absolute;
+    top:11px;
+    left:16px;
+    background: url(../image/sprice.png) no-repeat;
+    width:25px;
+    height:25px;
+}
+#serchIcon{
+    background-position:-51px -19px;
+}
+#goGoogleIcon{
+    background-position:-51px 5px;
+}
+#dateils{
+    width: 920px;
+    margin-left: -10px;
+}
+.deteilsBox{
+    width:33.3%;
+    padding:5px 10px;
+}
+.yushouName{
+    font-size: 16px;
+    margin:5px 0;
+}
+.yushouMsg{
+    font-size: 14px;
+    color:#919191;
+}
+#fenye{
+    width:900px;
+    text-align: center;
+}
+#fenyeBox{
+    display: inline-block;
+    font-size: 14px;
+    margin:20px auto 0;
+    border-radius: 3px;
+    border:1px solid #ddd;
+}
+
+.fenyeBtnBox{
+    padding:10px;
+    border-left:1px solid #ddd;
+
+}
+.fenyeDetails{
+    padding:10px;
+
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"]{
+    -moz-appearance: textfield;
+}
+
+#zixuan{
+    width:40px;
+    padding:0 5px;
+    text-align: center;
+    border:1px solid #ddd;
+    border-radius: 3px;
+}
+#hotIcon{
+    display: block;
+    position: absolute;
+    top: 7px;
+    left: 5px;
+    background: url(../image/sprice.png) no-repeat -75px 4px;
+    width: 25px;
+    height: 25px;
+}
+.newHot{
+    height:40px;
+    line-height: 40px;
+    background: #ED600A;
+    position: relative;
+    color:#fff;
+    padding-left:40px;
+    font-size: 16px;
+}
+.newsBox{
+    margin-bottom:5px;
+    width:100%;
+    font-size: 14px;
+    padding: 3px 5px;
+}
+.newTle{
+    min-width:60%;
+}
+.newDizhi{
+    min-width:15%;
+    color:#ddd;
+}
+.price{
+    min-width:25%;
+    text-align: right;
+    color:#E3B037;
+}
+#newDetaile{
+    border:1px dashed #ddd;
+    padding:5px;
+    border-top:0;
+}
+
+
+#rightMid{
+    background: #ED600A;
+    color:#fff;
+    padding:10px;
+    text-align: center;
+    margin-top:30px;
+}
+#rightDown{
+    margin-top:30px;
+}
+.inputBox{
+    width:100%;
+    margin:15px auto;
+}
+.bmTitle{
+    margin:10px 0;
+}
+#bmName,#bmTel{
+    height:30px;
+    line-height: 30px;
+}
+#bmText{
+    resize:none;
+    outline: none;
+    border:none;
+    width:169px;
+    min-height:100px;
+}
+#bmBtn{
+    background: linear-gradient(#FFE1B3,#F7BA59);
+    text-align: center;
+    height:35px;
+    line-height: 35px;
+    width:169px;
+    margin:0 0 10px 52px ;
+    border-radius: 10px;
+}
