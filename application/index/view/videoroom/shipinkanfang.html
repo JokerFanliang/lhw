@@ -139,9 +139,9 @@
               	</label>
               	{/volist}
 								<div class="sureBox">
-									<input type="number" name="" value="" class="min-price" placeholder="最低"> --
-									<input type="number" name="" value="" class="max-price" placeholder="最高">(加元/平尺)
-									<span class="sureBtn">确定</span>
+									<input type="number" name="min" value="{$min1}" class="min-price smallmin" placeholder="最低"> --
+									<input type="number" name="max" value="{$max1}" class="max-price smallmax" placeholder="最高">(加元/平尺)
+									<span class="sureBtn small">确定</span>
 								</div>
 							</div>
 
@@ -157,9 +157,9 @@
               	</label>
               	{/volist}
 								<div class="sureBox">
-									<input type="number" name="" value="" class="min-price" placeholder="最低"> --
-									<input type="number" name="" value="" class="max-price" placeholder="最高">万(加元)
-									<span class="sureBtn">确定</span>
+									<input type="number" name="min" value="{$min2}" class="min-price bigmin" placeholder="最低"> --
+									<input type="number" name="max" value="{$max2}" class="max-price bigmax" placeholder="最高">万(加元)
+									<span class="sureBtn big">确定</span>
 								</div>
 							</div>
 						</div>
@@ -295,6 +295,11 @@
 		<script>
 			$(function() {
 				var types="{$price_type}";
+				var area="{$area_id}";
+				var price="{$price_id}";
+				var layout="{$layout_id}";
+				var theme="{$theme_id}";
+				var state="{$state_id}";
 				if(types==1){
 					$('.priceTao').show();
 					$('.priceChi').hide();
@@ -302,16 +307,29 @@
 					$('.priceTao').hide();
 					$('.priceChi').show();
 				}
+				$(".small").click(function(){
+					var min=$(".smallmin").val();
+					var max=$(".smallmax").val();
+					window.location.href="/index/Advancesale/louhuayushou?area="+area+"&price="+price+"&layout="+layout+"&theme="+theme+"&state="+state+"&price_type="+"1"+"&min1="+min+"&max1="+max;
+				})
+				$(".big").click(function(){
+					var min=$(".bigmin").val();
+					var max=$(".bigmax").val();
+					window.location.href="/index/Advancesale/louhuayushou?area="+area+"&price="+price+"&layout="+layout+"&theme="+theme+"&state="+state+"&price_type="+"2"+"&min2="+min+"&max2="+max;
+				})
 				$('#radioBox').on('click', 'input', function() {
 					var cla=$(this).attr('name');
-					var val=$(this).val();
-					var price_type=1;
-					if(cla=="price_form"){
-						price_type=$(this).attr('price_type');
+					if(cla!="min" && cla!="max"){
+						var val=$(this).val();
+						var price_type=1;
+						if(cla=="price_form"){
+							price_type=$(this).attr('price_type');
+						}
+						$(".price_type").val(price_type);
+						$("."+cla).val(val);
+						$("#form").submit();
 					}
-					$(".price_type").val(price_type);
-					$("."+cla).val(val);
-					$("#form").submit();
+
 				});
 
 				/**

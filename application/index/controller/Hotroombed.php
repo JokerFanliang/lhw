@@ -31,6 +31,13 @@ class Hotroombed extends Controller
         $data['theme']=isset($data['theme']) ? $data['theme'] : '0';
         $data['state']=isset($data['state']) ? $data['state'] : '0';
         $data['price_type']=isset($data['price_type']) ? $data['price_type'] : '1';
+        $data['min1']=isset($data['min1']) ? $data['min1'] : '';
+        $data['max1']=isset($data['max1']) ? $data['max1'] : '';
+        $data['min2']=isset($data['min2']) ? $data['min2'] : '';
+        $data['max2']=isset($data['max2']) ? $data['max2'] : '';
+        if($data['min1']!="" || $data['max1']!="" || $data['min2']!="" || $data['max2']!=""){
+            $data['price']=0;
+        }
         // if(!Session::has('layouts')){
         //     $layouts=[];
         //     Session::set('layouts',$layouts);
@@ -68,6 +75,28 @@ class Hotroombed extends Controller
                     $query->wherein('id',$build_ids);
                   }
                 }
+                if($data['min1']!="" || $data['max1']!="" || $data['min2']!="" || $data['max2']!=""){
+                    $price_ids=[];
+                    if($data['price_type']==1){
+                        $buildprices=PriceModel::select();
+                        foreach($buildprices as $price){
+                           if((($price->max)>$data['min1'] && $data['min1']>($price->min)) || (($price->max)>$data['max1'] && $data['max1']>($price->min))){
+                              array_push($price_ids,$price->id);
+                           }
+                        }
+                        $build_ids=BuildPriceModel::wherein('price_id',$price_ids)->column('build_id');
+                    }else{
+                        $buildprices=Price2Model::select();
+                        foreach($buildprices as $price){
+                           if((($price->max)>$data['min2'] && $data['min2']>($price->min)) || (($price->max)>$data['max2'] && $data['max2']>($price->min))){
+                              array_push($price_ids,$price->id);
+                           }
+                        }
+                        $build_ids=BuildPrice2Model::wherein('price_id',$price_ids)->column('build_id');
+                    }
+                    $build_ids=array_unique($build_ids);
+                    $query->wherein('id',$build_ids);
+                }
                 if(isset($data['layout']) && $data['layout']!='0'){
                     $build_ids=BuildLayoutModel::wherein('layout_id',$data['layout'])->column('build_id');
                     $build_ids=array_unique($build_ids);
@@ -86,7 +115,7 @@ class Hotroombed extends Controller
 
                 $query->where('is_delete',BuildingModel::$isDelete['no']['val']);
 
-            })->order('update_time','desc')->where('state',BuildingModel::$state['xianfang']['val'])->paginate(9,false,['query'=>['area'=>$data['area'],'price'=>$data['price'],'layout'=>$data['layout'],'theme'=>$data['theme']]]);
+            })->order('update_time','desc')->where('state',BuildingModel::$state['xianfang']['val'])->paginate(9,false,['query'=>request()->param()]);
         }
 
         $imgs=[];
@@ -123,6 +152,15 @@ class Hotroombed extends Controller
         $this->assign('imgs',$imgs);
         $this->assign('price_type',$data['price_type']);
         $this->assign('price2',$price2);
+        $this->assign('area_id',$data['area']);
+        $this->assign('price_id',$data['price']);
+        $this->assign('layout_id',$data['layout']);
+        $this->assign('theme_id',$data['theme']);
+        $this->assign('state_id',$data['state']);
+        $this->assign('min1',$data['min1']);
+        $this->assign('max1',$data['max1']);
+        $this->assign('min2',$data['min2']);
+        $this->assign('max2',$data['max2']);
         return $this->fetch();
     }
     public function repanxianfang_detaile()
