@@ -52,6 +52,7 @@ class Building extends common
             $building->telephone=$data['telephone'];
             $building->state=$data['state'];
 			      $building->is_hot=$data['is_hot'];
+            $building->has_ad=$data['has_ad'];
             if($building->save()){
                 if(!empty($data['layout_id'])){
                     foreach($data['layout_id'] as $layout_id){
@@ -129,7 +130,8 @@ class Building extends common
             $building->finish_at=$data['finish_at'];
             $building->telephone=$data['telephone'];
             $building->state=$data['state'];
-			$building->is_hot=$data['is_hot'];
+            $building->has_ad=$data['has_ad'];
+			      $building->is_hot=$data['is_hot'];
             if($building->save()){
                 BuildLayoutModel::where('build_id',$building->id)->delete();
                 if(!empty($data['layout_id'])){

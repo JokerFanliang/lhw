@@ -138,7 +138,13 @@
                     <input type="hidden" name="id" value="{$list->id}">
                     <div class="btn sub">修改</div>
                 </td>
-
+                <td width="100" align="right">是否有广告</td>
+                        <td>
+                        <select name="has_ad">
+                            <option value="0" <?php if($list->has_ad==0) echo "selected"?>>否</option>
+                            <option value="1" <?php if($list->has_ad==1) echo "selected"?>>是</option>
+                        </select>
+                        </td>
             </tr>
         </table>
     </form>
