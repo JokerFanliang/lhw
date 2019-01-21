@@ -7,24 +7,24 @@
     <link rel="stylesheet" href="__STATIC__/index/css/maimaifabu.css"/>
     <!-- 文本编辑器 范围 -->
     <!--<link rel="stylesheet" href="kindeditor/themes/default/default.css" />-->
-    
+
     <style>
       .ke-statusbar {
         display: none;
       }
       /* 测试范围 */
-      
+
       #imgPreview {
         float: left;
         border: none;
       }
-      
+
       #imgPreview img {
         margin-right: 10px;
         width: 50px;
         height: 50px;
       }
-      
+
       .upload-img {
         background: #008800;
         color: #fff;
@@ -34,12 +34,12 @@
         border-radius: 5px;
       }
       /*//这儿是为了改变上传按钮样式把input设为了透明色*/
-      
+
       #fileUpload {
         visibility: hidden;
         height: 0;
       }
-      
+
       .imgBox {
         display: table-cell;
         width: 100px;
@@ -47,7 +47,7 @@
         vertical-align: middle;
         text-align: center;
       }
-      
+
       .borderBox {
         border: 2px solid #ddd;
         margin-right: 20px;
@@ -157,7 +157,7 @@
                         第<input type="number" class="inputSmall" oninput="if(value.length>2)value=value.slice(0,2)"   name="num"/><span class="leftMargin">层</span>
 
                         共<input type="number" class="inputSmall" oninput="if(value.length>2)value=value.slice(0,2)"  name="all"/><span class="leftMargin">层</span>
- 
+
                     </div>
 
                     <div class="inputBox">
@@ -195,7 +195,7 @@
                       </div>
                       <div id="dvPreview" class="clear"></div>
                     </div>
-              
+
           					<div class="textBox" style="border-bottom:1px solid #ddd ; padding-bottom:30px;">
                         <span class="leftTitle" style="margin:15px 0;">基本信息：</span>
                         <textarea style="width:900px;height:200px;" name="info"></textarea>
@@ -221,8 +221,8 @@
         </div>
     </div>
     <div id="rightMain" class="left">
-        <img src="__STATIC__/{$buy_up.path}" alt="" class="maimaiAd">
-        <img src="__STATIC__/{$buy_down.path}" alt="" class="maimaiAd">
+        <a href="{$buy_up.url}" target="_blank"><img src="__STATIC__/{$buy_up.path}" alt="" class="maimaiAd"></a>
+        <a href="{$buy_down.url}" target="_blank"><img src="__STATIC__/{$buy_down.path}" alt="" class="maimaiAd"></a>
         <!-- <h2 class="rightTitle">阅读排行</h2>
         <div class="paihangBox">
             <?php $id=1;?>
@@ -291,7 +291,7 @@ $(function() {
                   //                  document.getElementById("bytesTotal").textContent = file[i].size;
                   zongshu = file[0].size;
                   console.log("onloadstart"+zongshu);
-                
+
 
                 }
                 reader.onprogress = function(p) {
@@ -306,8 +306,8 @@ $(function() {
                     return;
                   }else{
                     var html='<input id="fileUpload" accept="image/*" type="file"  name="img[]"/>';
-                  }         
-                  
+                  }
+
                   $('#fileBox').append(html);
                 }
 
@@ -387,7 +387,7 @@ $(".sub").click(function(){
 
 
 
-    
+
 </script>
 </body>
 </html>
