@@ -49,26 +49,29 @@ class SecondHouse extends common
             $house->checkout_at=date("Y-m-d H:i:s",time());
             $files=request()->file('img');
             $id=0;
-            foreach($files as $file){
-                $file=$file->getInfo();
-                $name=explode(".",$file['name']);
-                $count=count($name);
-                $ext=$name[$count-1];
-                $path=PUBLIC_PATH."/custom/".$data['id']."/";
-                if (! file_exists($path)) {
-                    mkdir($path,0777,true);
-                }
-                $name=$path.time().$id.".".$ext;
-                move_uploaded_file($file["tmp_name"],$name);
-                $img[]=[
-                    'second_id'=>$data['id'],
-                    'path'=>"/custom/".$data['id']."/".time().$id.".".$ext,
-                    'create_time'=>date("Y-m-d H:i:s",time()),
-                    'update_time'=>date("Y-m-d H:i:s",time())
-                ];
-                $id++;
+            if(!empty($files)){
+              foreach($files as $file){
+                  $file=$file->getInfo();
+                  $name=explode(".",$file['name']);
+                  $count=count($name);
+                  $ext=$name[$count-1];
+                  $path=PUBLIC_PATH."/custom/".$data['id']."/";
+                  if (! file_exists($path)) {
+                      mkdir($path,0777,true);
+                  }
+                  $name=$path.time().$id.".".$ext;
+                  move_uploaded_file($file["tmp_name"],$name);
+                  $img[]=[
+                      'second_id'=>$data['id'],
+                      'path'=>"/custom/".$data['id']."/".time().$id.".".$ext,
+                      'create_time'=>date("Y-m-d H:i:s",time()),
+                      'update_time'=>date("Y-m-d H:i:s",time())
+                  ];
+                  $id++;
+              }
+              $res=CustomImgModel::insertAll($img);
             }
-            $res=CustomImgModel::insertAll($img);
+
 
             if($house->save()){
                 $this->redirect('SecondHouse/index');

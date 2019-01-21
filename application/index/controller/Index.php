@@ -22,9 +22,9 @@ class Index extends Controller
     	$area=AreaModel::where('is_delete',AreaModel::$isDelete['no']['val'])->order('sort','desc')->select();
         $theme=ThemeModel::where('is_delete',ThemeModel::$isDelete['no']['val'])->order('sort','desc')->select();
 
-        $yushou=BuildingModel::where('is_delete',BuildingModel::$isDelete['no']['val'])->where('state',BuildingModel::$state['yushou']['val'])->order('update_time','desc')->limit('0,6')->select();
-        $xianfang=BuildingModel::where('is_delete',BuildingModel::$isDelete['no']['val'])->where('state',BuildingModel::$state['xianfang']['val'])->order('update_time','desc')->limit('0,6')->select();
-        $shipin=BuildingModel::where('is_delete',BuildingModel::$isDelete['no']['val'])->where('state',BuildingModel::$state['video']['val'])->order('update_time','desc')->limit('0,6')->select();
+        $yushou=BuildingModel::where('is_delete',BuildingModel::$isDelete['no']['val'])->where('state',BuildingModel::$state['yushou']['val'])->order('has_ad','desc')->order('update_time','desc')->limit('0,6')->select();
+        $xianfang=BuildingModel::where('is_delete',BuildingModel::$isDelete['no']['val'])->where('state',BuildingModel::$state['xianfang']['val'])->order('has_ad','desc')->order('update_time','desc')->limit('0,6')->select();
+        $shipin=BuildingModel::where('is_delete',BuildingModel::$isDelete['no']['val'])->where('state',BuildingModel::$state['video']['val'])->order('has_ad','desc')->order('update_time','desc')->limit('0,6')->select();
         if(isset($_GET['theme_id'])){
         	$yushou=BuildingModel::where('is_delete',BuildingModel::$isDelete['no']['val'])->where('theme_id',$_GET['theme_id'])->where('state',BuildingModel::$state['yushou']['val'])->order('update_time','desc')->limit('0,6')->select();
         }
@@ -45,12 +45,12 @@ class Index extends Controller
             }else{
                 $video[$list->id]="";
             }
-            
-            
+
+
         }
         $theme_id=isset($_GET['theme_id']) ? $_GET['theme_id'] : '0';
         //广告
-        
+
         $one_up=AdModel::where('position','one_up')->find();
         $two_up=AdModel::where('position','two_up')->find();
         $two_left=AdModel::where('position','two_left')->find();
