@@ -66,25 +66,13 @@
 <div id="dcMain">
     <!-- 当前位置 -->
     <div id="urHere">管理中心<b>></b><strong>房源审核</strong> </div>   <div id="manager" class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
-    <h3><a href="{:url('SecondHouse/index')}" class="actionBtn">返回列表</a>房源审核</h3>
+    <h3><a href="{:url('SecondHouse/index')}" class="actionBtn">返回列表</a>房源审核({$list->price})</h3>
     <form action="{:url('SecondHouse/edit')}"  method="post" id="form" enctype="multipart/form-data" >
         <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
             <tr>
                 <input type="hidden" name="type" value="{$list->type}">
                 <td width="100" align="right">标题</td>
                 <td width="400"><input type="text" name="title" value="{$list->title}"></td>
-                <td width="100" align="right">所属区域</td>
-                <?php $area=explode(",",$list->area);?>
-                <td>
-                    <input type="text" placeholder="请输入城市" name="city" value="{$area[0]}"/>
-                    <input type="text" placeholder="请输入区域" name="region" value="{$area[1]}"/>
-                </td>
-            </tr>
-            <tr>
-                <td width="100" align="right">详细地址</td>
-                <td>
-                    <input type="text" value="{$list->address}" name="address"/>
-                </td>
                 <td width="100" align="right">热门区域</td>
                 <td>
                     <select name="hot_area">
@@ -96,13 +84,33 @@
                 </td>
             </tr>
             <tr>
+                <td width="100" align="right">详细地址</td>
+                <td>
+                    <input type="text" value="{$list->address}" name="address"/>
+                </td>
+                <td width="100" align="right">房龄</td>
+                <td>
+                    <input type="number"  name="age" value="{$list->age}"/>
+                </td>
+            </tr>
+            <tr>
                 <td width="100" align="right">房屋面积</td>
                 <td>
-                    <input type="text"  name="acreage" value="{$list->acreage}"/>
+                    <input type="number"  name="house_acreage" value="{$list->house_acreage}"/>
                 </td>
-                <td width="100" align="right">价格</td>
+                <td width="100" align="right">土地面积</td>
                 <td>
-                    <input type="text"  name="price" value="{$list->price}"/>
+                    <input type="number"  name="land_acreage" value="{$list->land_acreage}"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">总价/套</td>
+                <td>
+                    <input type="number"  name="price1" value="{$list->price1}"/>
+                </td>
+                <td width="100" align="right">单价/平尺</td>
+                <td>
+                    <input type="number"  name="price2" value="{$list->price2}"/>
                 </td>
             </tr>
             <tr>
@@ -120,9 +128,9 @@
                 </td>
             </tr>
             <tr>
-                <td width="100" align="right">装修</td>
+                <td width="100" align="right">车位</td>
                 <td>
-                    <input type="text" name="decorate" value="{$list->decorate}"/>
+                    <input type="text" name="car" value="{$list->car}"/>
                 </td>
                 <td width="100" align="right">层高</td>
                 <td>
@@ -132,20 +140,36 @@
             <tr>
                 <td width="100" align="right">配套</td>
                 <td>
-                        <input type="checkbox" id="dianshi" class="cheacks" value="电视" name="assort[]" <?php if(strpos($list->assort,'电视') !==false)echo 'checked';?>/><label for="dianshi">电视</label>
-                        <input type="checkbox" id="reshuiqi" class="cheacks" value="热水器" name="assort[]" <?php if(strpos($list->assort,'热水器') !==false)echo 'checked';?>/><label for="reshuiqi" >热水器</label>
-                        <input type="checkbox" id="meiqi" class="cheacks" value="煤气" name="assort[]" <?php if(strpos($list->assort,'煤气') !==false)echo 'checked';?>/><label for="meiqi">煤气</label>
-                        <input type="checkbox" id="bingxiang" class="cheacks" value="冰箱" name="assort[]" <?php if(strpos($list->assort,'冰箱') !==false)echo 'checked';?>/><label for="bingxiang">冰箱</label>
-                        <input type="checkbox" id="chuju" class="cheacks" value="厨具" name="assort[]" <?php if(strpos($list->assort,'厨具') !==false)echo 'checked';?>/><label for="chuju">厨具</label>
-                        <input type="checkbox" id="kongtiao" class="cheacks" value="空调" name="assort[]" <?php if(strpos($list->assort,'空调') !==false)echo 'checked';?>/><label for="kongtiao">空调</label>
-                        <input type="checkbox" id="dianhua" class="cheacks" value="电话" name="assort[]" <?php if(strpos($list->assort,'电话') !==false)echo 'checked';?>/><label for="dianhua">电话</label>
-                        <input type="checkbox" id="xiyiji" class="cheacks" value="洗衣机" name="assort[]" <?php if(strpos($list->assort,'洗衣机') !==false)echo 'checked';?>/><label for="xiyiji">洗衣机</label>
-                        <input type="checkbox" id="kuandai" class="cheacks" value="宽带网" name="assort[]" <?php if(strpos($list->assort,'宽带网') !==false)echo 'checked';?>/><label for="kuandai">宽带网</label>
-                        <input type="checkbox" id="chuang" class="cheacks" valu="床" name="assort[]" <?php if(strpos($list->assort,'床') !==false)echo 'checked';?>/><label for="chuang">床</label>
+                        <input type="checkbox" id="reshuiqi" class="cheacks" value="热水器" name="assort[]" <?php if(strpos($list->assort,'热水器') !==false)echo 'checked';?>/><label>热水器</label>
+                        <input type="checkbox" id="meiqi" class="cheacks" value="煤气" name="assort[]" <?php if(strpos($list->assort,'煤气') !==false)echo 'checked';?>/><label>煤气</label>
+                        <input type="checkbox" id="bingxiang" class="cheacks" value="冰箱" name="assort[]" <?php if(strpos($list->assort,'冰箱') !==false)echo 'checked';?>/><label>冰箱</label>
+                        <input type="checkbox" id="chuju" class="cheacks" value="厨具" name="assort[]" <?php if(strpos($list->assort,'厨具') !==false)echo 'checked';?>/><label>厨具</label>
+                        <input type="checkbox" id="xiyiji" class="cheacks" value="洗衣机" name="assort[]" <?php if(strpos($list->assort,'洗衣机') !==false)echo 'checked';?>/><label>洗衣机</label>
+                        <input type="checkbox" id="hongganji" class="cheacks" value="烘干机" name="assort[]" <?php if(strpos($list->assort,'烘干机') !==false)echo 'checked';?>/><label>烘干机</label>
+                        <input type="checkbox" id="chucangshi" class="cheacks" value="储藏室" name="assort[]" <?php if(strpos($list->assort,'储藏室') !==false)echo 'checked';?>/><label>储藏室</label>
+                        <input type="checkbox" id="xiwanji" class="cheacks" value="洗碗机" name="assort[]" <?php if(strpos($list->assort,'洗碗机') !==false)echo 'checked';?>/><label>洗碗机</label>
+                        <input type="checkbox" id="weibolu" class="cheacks" value="微波炉" name="assort[]" <?php if(strpos($list->assort,'微波炉') !==false)echo 'checked';?>/><label>微波炉</label>
+                        <input type="checkbox" id="kaoxiang" class="cheacks" value="烤箱" name="assort[]" <?php if(strpos($list->assort,'烤箱') !==false)echo 'checked';?>/><label>烤箱</label>
+                        <input type="checkbox" id="kongtiao" class="cheacks" value="空调" name="assort[]" <?php if(strpos($list->assort,'空调') !==false)echo 'checked';?>/><label>空调</label>
+                        <input type="checkbox" id="dire" class="cheacks" value="地热" name="assort[]" <?php if(strpos($list->assort,'地热') !==false)echo 'checked';?>/><label>地热</label>
+                        <input type="checkbox" id="jianshenfang" class="cheacks" value="健身房" name="assort[]" <?php if(strpos($list->assort,'健身房') !==false)echo 'checked';?>/><label>健身房</label>
+                        <input type="checkbox" id="youyongchi" class="cheacks" value="游泳池" name="assort[]" <?php if(strpos($list->assort,'游泳池') !==false)echo 'checked';?>/><label>游泳池</label>
+                        <input type="checkbox" id="zhengqifang" class="cheacks" value="蒸汽房" name="assort[]" <?php if(strpos($list->assort,'蒸汽房') !==false)echo 'checked';?>/><label>蒸汽房</label>
+
                 </td>
-				<td width="100" align="right">联系电话</td>
+				        <td width="100" align="right">联系电话</td>
                 <td>
                     <input type="text" name="phone" value="{$list->phone}"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">邮箱</td>
+                <td>
+                    <input type="text" name="email" value="{$list->email}"/>
+                </td>
+                <td width="100" align="right">微信</td>
+                <td>
+                    <input type="text"  name="weixin" value="{$list->weixin}"/>
                 </td>
             </tr>
             <tr>

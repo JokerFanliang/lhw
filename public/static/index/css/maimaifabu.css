@@ -74,11 +74,21 @@
     width:100px;
     height:30px;
     line-height: 30px;
+    text-align: justify;
 }
 .inputBox{
     height:80px;
     line-height: 80px;
     border-bottom:1px solid #ddd;
+}
+
+.inputBox select{
+  height:30px;
+  line-height: 30px;
+  border:1px solid #a2a2a2;
+  outline: none;
+  background: #FCFCFC;
+  border-radius: 5px 5px 0 0;
 }
 .inputBig{
     height:30px;
@@ -86,9 +96,10 @@
     font-size: 16px;
     width:300px;
     padding:0 10px;
-    border:1px solid #ddd;
+    border:1px solid #a2a2a2;
     background: #FCFCFC;
     margin-right:30px;
+    border-radius: 5px;
 }
 
 .inputMid{
@@ -97,9 +108,10 @@
     font-size: 16px;
     width:100px;
     padding:0 10px;
-    border:1px solid #ddd;
+    border:1px solid #a2a2a2;
     background: #FCFCFC;
     margin-right:3px;
+    border-radius: 5px;
 }
 #googleBox{
     margin-bottom:20px;
@@ -121,10 +133,11 @@ input[type="number"] {
     font-size: 16px;
     width:40px;
     padding:0 2px;
-    border:1px solid #ddd;
+    border:1px solid #a2a2a2;
     background: #FCFCFC;
     text-align: center;
-	margin:0 5px;
+	  margin:0 5px;
+    border-radius: 5px;
 }
 .leftMargin{
     margin:0 10px 0 5px;
@@ -133,10 +146,18 @@ label{
     margin:0 10px 0 3px;
 }
 .cheackBox{
-    height: 80px;
-    line-height: 80px;
+    /* height: 80px; */
+    /* line-height: 80px; */
     border-bottom:1px solid #ddd;
+    padding:10px 0;
 }
+.cheackBoxs{
+  overflow: auto;
+  line-height: 30px;
+}
+/* .cheackBox .leftTitle{
+  display: inline-block;
+} */
 .fuwenbenBox{
     padding-bottom:10px;
     border-bottom:1px solid #ddd;
@@ -169,4 +190,15 @@ label{
     margin-bottom: 20px;
     /*background: #000;
     height:100px;*/
+}
+
+.tip{
+  padding-left:10px;
+  font-size: 14px;
+  color:#cc0000;
+}
+
+#imgUpLoader{
+  padding:10px 0;
+  border-bottom:1px solid #ddd;
 }

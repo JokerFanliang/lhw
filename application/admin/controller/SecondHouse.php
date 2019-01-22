@@ -23,15 +23,15 @@ class SecondHouse extends common
             $data=request()->post();
             $house=SecondHandHouseModel::find($data['id']);
             $house->title=$data['title'];
-            $house->area=$data['city'].','.$data['region'];
+            //$house->area=$data['city'].','.$data['region'];
             $house->address=$data['address'];
-            $house->acreage=$data['acreage'];
-            $house->price=$data['price'];
+            //$house->acreage=$data['acreage'];
+            //$house->price=$data['price'];
             $house->layout=$data['count1'].','.$data['count2'].','.$data['count3'].','.$data['count4'].'';
             $house->high=$data['num'];
             $house->orientation=$data['orientation'];
             //$house->lease_type=$data['lease_type'];
-            $house->decorate=$data['decorate'];
+            //$house->decorate=$data['decorate'];
             if(isset($data['assort'])){
                 $house->assort=implode(",",$data['assort']);
             }
@@ -40,6 +40,14 @@ class SecondHouse extends common
             $house->phone=$data['phone'];
             $house->type=$data['type'];
             $house->hot_area=$data['hot_area'];
+            $house->house_acreage=$data['house_acreage'];
+            $house->land_acreage=$data['land_acreage'];
+            $house->price1=$data['price1'];
+            $house->price2=$data['price2'];
+            $house->age=$data['age'];
+            $house->car=$data['car'];
+            $house->email=$data['email'];
+            $house->weixin=$data['weixin'];
             //$house->price_period=$data['price_period'];
             //$house->layout_diff=$data['layout_diff'];
             //$house->theme=$data['theme'];

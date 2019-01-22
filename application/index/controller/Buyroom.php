@@ -16,10 +16,10 @@ class Buyroom extends Controller
     {
         Session::set('title','sale');
         $data=request()->get();
-        $data['area']=isset($data['area']) ? $data['area'] : '0'; 
-        $data['price']=isset($data['price']) ? $data['price'] : '0'; 
-        $data['layout']=isset($data['layout']) ? $data['layout'] : '0'; 
-        $data['theme']=isset($data['theme']) ? $data['theme'] : '0'; 
+        $data['area']=isset($data['area']) ? $data['area'] : '0';
+        $data['price']=isset($data['price']) ? $data['price'] : '0';
+        $data['layout']=isset($data['layout']) ? $data['layout'] : '0';
+        $data['theme']=isset($data['theme']) ? $data['theme'] : '0';
         if(!Session::has('layout')){
             $layouts=[];
             Session::set('layout',$layouts);
@@ -31,10 +31,10 @@ class Buyroom extends Controller
             }else{
                 array_push($layouts,$data['layout']);
             }
-            
+
         }else{
-            $layouts=[];            
-        } 
+            $layouts=[];
+        }
         Session::set('layouts',$layouts);
         if(isset($data['searchname'])){
             $searchname=$data["searchname"];
@@ -56,22 +56,22 @@ class Buyroom extends Controller
                 if(isset($data['theme']) && $data['theme']!='0'){
                     $query->where('theme',$data['theme']);
                 }
-                
+
                 $query->where('type',SecondHandHouseModel::$types['sale']['val']);
             })->order('update_time','desc')->where("checkout",1)->paginate(10,false,['query'=>['area'=>$data['area'],'price'=>$data['price'],'layout'=>$data['layout'],'theme'=>$data['theme']]]);
         }
 
         $imgs=[];
         $lists=SecondHandHouseModel::column('id');
-        foreach($lists as $list){            
+        foreach($lists as $list){
             $vid=CustomImgModel::order('update_time','desc')->where('second_id',$list)->find();
             if($vid){
                 $imgs[$list]=$vid->path;
             }else{
                 $imgs[$list]="";
             }
-            
-            
+
+
         }
         $hothouse=SecondHandHouseModel::order('is_hot','desc')->where('type',SecondHandHouseModel::$types['sale']['val'])->where("checkout",1)->order('read_count','desc')->select();
 
@@ -100,54 +100,62 @@ class Buyroom extends Controller
 
             $house=new SecondHandHouseModel();
             $house->title=$data['title'];
-            $house->area=$data['city'].','.$data['region'];
+            //$house->area=$data['city'].','.$data['region'];
             $house->address=$data['address'];
-            $house->acreage=$data['acreage'];
-            $house->price=$data['price'];
+            //$house->acreage=$data['acreage'];
+            $house->house_acreage=$data['house_acreage'];
+            $house->land_acreage=$data['land_acreage'];
+            $house->price1=$data['price1'];
+            $house->price2=$data['price2'];
+            $house->age=$data['age'];
+            $house->car=$data['car'];
+            $house->email=$data['email'];
+            $house->weixin=$data['weixin'];
             $house->layout=$data['count1'].'房,'.$data['count2'].'厅,'.$data['count3'].'厨,'.$data['count4'].'卫';
             $house->high="第".$data['num']."层,共".$data['all']."层";
             $house->orientation=$data['orientation'];
-            $house->decorate=$data['decorate'];
-            $house->assort=implode(",",$data['assort']);
+            //$house->decorate=$data['decorate'];
+            if(isset($data['assort'])){
+              $house->assort=implode(",",$data['assort']);
+            }
             $house->info=$data['info'];
             $house->contact=$data['contact'];
             $house->phone=$data['phone'];
             $house->type=$data['type'];
             $house->hot_area=$data['hot_area'];
-            $house->price_period=$data['price_period'];
+            //$house->price_period=$data['price_period'];
             $house->layout_diff=$data['layout_diff'];
             $house->theme=$data['theme'];
+            $house->sn=uniqid().rand(1000000, 9999999);
             $house->save();
 
 
             $files=request()->file('img');
             $second_id=$house->id;
-            $id=0;
-            foreach($files as $file){
-                $file=$file->getInfo();
-                $name=explode(".",$file['name']);
-                $count=count($name);
-                $ext=$name[$count-1];
-                $path=PUBLIC_PATH."/custom/".$second_id."/";
-                if (! file_exists($path)) {
-                    mkdir($path,0777,true);
-                }
-                $name=$path.time().$id.".".$ext;
-                move_uploaded_file($file["tmp_name"],$name);
-                $img[]=[
-                    'second_id'=>$second_id,
-                    'path'=>"/custom/".$second_id."/".time().$id.".".$ext,
-                    'create_time'=>date("Y-m-d H:i:s",time()),
-                    'update_time'=>date("Y-m-d H:i:s",time())
-                ];
-                $id++;
+            if(!empty($files)){
+              $id=0;
+              foreach($files as $file){
+                  $file=$file->getInfo();
+                  $name=explode(".",$file['name']);
+                  $count=count($name);
+                  $ext=$name[$count-1];
+                  $path=PUBLIC_PATH."/custom/".$second_id."/";
+                  if (! file_exists($path)) {
+                      mkdir($path,0777,true);
+                  }
+                  $name=$path.time().$id.".".$ext;
+                  move_uploaded_file($file["tmp_name"],$name);
+                  $img[]=[
+                      'second_id'=>$second_id,
+                      'path'=>"/custom/".$second_id."/".time().$id.".".$ext,
+                      'create_time'=>date("Y-m-d H:i:s",time()),
+                      'update_time'=>date("Y-m-d H:i:s",time())
+                  ];
+                  $id++;
+              }
+              $res=CustomImgModel::insertAll($img);
             }
-            $res=CustomImgModel::insertAll($img);
-            if($res){
-                $this->success("提交成功，等待后台审核",'Buyroom/maimaifabu');
-            }else{
-                $this->error("提交失败，请重新提交");
-            }
+              $this->success("提交成功，等待后台审核",'Buyroom/maimaifabu');
         }
         $hothouse=SecondHandHouseModel::where('type',SecondHandHouseModel::$types['sale']['val'])->order('read_count','desc')->select();
         $area=AreaModel::where('is_delete',AreaModel::$isDelete['no']['val'])->select();

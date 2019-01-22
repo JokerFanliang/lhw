@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="__STATIC__/index/css/maimaifabu.css"/>
     <!-- 文本编辑器 范围 -->
     <!--<link rel="stylesheet" href="kindeditor/themes/default/default.css" />-->
+
     <style>
       .ke-statusbar {
         display: none;
@@ -54,13 +55,14 @@
       }
       /* 测试范围 */
     </style>
+    <!-- 文本编辑器 范围 -->
 </head>
 <body>
 <div id="header">
     <!-- 头部公用 -->
     {include file="public/head"}
 </div>
-<form action="{:url('Sellroom/chuzufabu')}" enctype="multipart/form-data" method="post" id="form">
+<form action="{:url('Sellroom/chuzufabu')}" enctype="multipart/form-data"  method="post" id="form">
 <div id="main" class="clear">
     <div id="leftMain" class="left">
         <div id="dateils" class="clear">
@@ -72,11 +74,11 @@
                         <span class="leftTitle">标题：</span>
                         <input type="text" id="biaoti" class="inputBig title" name="title"/>
                     </div>
-                    <div class="inputBox">
+                    <!-- <div class="inputBox">
                         <span class="leftTitle">所属区域：</span>
                         <input type="text" id="chengshi" class="inputBig city" placeholder="请输入城市" name="city"/>
                         <input type="text" id="quyu" class="inputBig" placeholder="请输入区域" name="region"/>
-                    </div>
+                    </div> -->
                     <div class="inputBox">
                         <span class="leftTitle">热门区域：</span>
                         <select name="hot_area">
@@ -98,25 +100,27 @@
                         <iframe width="898" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://ditu.google.cn/maps?f=q&amp;source=s_q&amp;hl=zh-CN&amp;geocode=&amp;q=%E5%90%89%E6%9E%97%E7%9C%81%E9%95%BF%E6%98%A5%E4%BA%8C%E9%81%93%E5%8C%BA%E4%BB%99%E5%8F%B0%E5%A4%A7%E8%A1%971468%E5%8F%B7&amp;aq=0&amp;oq=%E5%90%89%E6%9E%97%E7%9C%81%E9%95%BF%E6%98%A5%E4%BA%8C%E9%81%93%E5%8C%BA%E4%BB%99%E5%8F%B0%E5%A4%A7%E8%A1%97146&amp;sll=43.849159,125.376878&amp;sspn=0.005115,0.00929&amp;brcurrent=3,0x5e384eb3f72ee7eb:0x2ba447d3bd324cc2,0,0x5e385df36dbd9a6f:0x9fc7d4f42756b198%3B5,0,0&amp;ie=UTF8&amp;hq=&amp;hnear=%E5%90%89%E6%9E%97%E7%9C%81%E9%95%BF%E6%98%A5%E4%BA%8C%E9%81%93%E5%8C%BA%E4%BB%99%E5%8F%B0%E5%A4%A7%E8%A1%971468%E5%8F%B7&amp;t=m&amp;z=14&amp;ll=43.856258,125.379522&amp;output=embed"></iframe>
                     </div>
 					-->
-<!--                     <div class="inputBox">
+					          <div class="inputBox">
                         <span class="leftTitle">房屋面积：</span>
-                        <input type="number" id="mianji" class="inputMid" name="acreage"/>尺
-                        <span>PS：请输入数字</span>
+                        <input type="number" id="mianji1" class="inputMid" name="house_acreage"/>尺
+                        <span class="tip">PS：请输入数字</span>
                     </div>
                     <div class="inputBox">
-                        <span class="leftTitle">出租总价：</span>
-                        <input type="number" id="chushou" class="inputMid" name="price"/>万
-                        <span>PS：请输入数字</span>
-                    </div> -->
-                    <div class="inputBox">
-                        <span class="leftTitle">房屋面积：</span>
-                        <input type="text" id="mianji" class="inputBig" name="acreage"/>
+                        <span class="leftTitle">土地面积：</span>
+                        <input type="number" id="mianji2" class="inputMid" name="land_acreage"/>尺
+                        <span class="tip">PS：请输入数字</span>
                     </div>
                     <div class="inputBox">
-                        <span class="leftTitle">出租价格：</span>
-                        <input type="text" id="chushou" class="inputBig" name="price"/>
+                        <span class="leftTitle">出售总价：</span>
+                        <input type="number" id="chushou1" class="inputMid" name="price1"/>/套
+                        <span class="tip">PS：请输入数字</span>
                     </div>
                     <div class="inputBox">
+                        <span class="leftTitle">出售单价：</span>
+                        <input type="number" id="chushou2" class="inputMid" name="price2"/>/平尺
+                        <span class="tip">PS：请输入数字</span>
+                    </div>
+                    <!-- <div class="inputBox">
                         <span class="leftTitle">价格区间：</span>
                         <select name="price_period">
                         <option>请选择</option>
@@ -124,7 +128,7 @@
                           <option value ="{$price.id}">{$price.min}--{$price.max}</option>
                         {/volist}
                         </select>
-                    </div>
+                    </div> -->
                     <div class="inputBox">
                         <span class="leftTitle">户型：</span>
                         <input type="number" id="fang" class="inputSmall" name="count1"/><span class="leftMargin">房</span>
@@ -133,12 +137,8 @@
                         <input type="number" id="wei" class="inputSmall" name="count4"/><span class="leftMargin">卫</span>
                     </div>
                     <div class="inputBox">
-                        <span class="leftTitle">类型：</span>
-                        <select name="lease_type">
-                        <option>请选择</option>
-                            <option value ="整租">整租</option>
-                            <option value ="合租">合租</option>
-                        </select>
+                        <span class="leftTitle">房龄：</span>
+                        <input type="text" id="fangling" class="inputBig" name="age"/>
                     </div>
                     <div class="inputBox">
                         <span class="leftTitle">户型划分：</span>
@@ -149,9 +149,8 @@
                         {/volist}
                         </select>
                     </div>
-
                     <div class="inputBox">
-                        <span class="leftTitle">特色主题：</span>
+                        <span class="leftTitle">建筑类型：</span>
                         <select name="theme">
                         <option>请选择</option>
                         {volist name='theme' id='theme'}
@@ -172,24 +171,65 @@
                         <input type="text" id="chaoxiang" class="inputBig" name="orientation"/>
                     </div>
                     <div class="inputBox">
+                        <span class="leftTitle">车位：</span>
+                        <input type="text" id="chewei" class="inputBig" name="car"/>
+                    </div>
+                    <!-- <div class="inputBox">
                         <span class="leftTitle">装修：</span>
                         <input type="text" id="zhuangxiu" class="inputBig" name="decorate"/>
-                    </div>
-                    <div class="cheackBox">
-                        <span class="leftTitle">配套：</span>
-                        <input type="checkbox" id="dianshi" class="cheacks" value="电视" name="assort[]"/><label for="dianshi">电视</label>
-                        <input type="checkbox" id="reshuiqi" class="cheacks" value="热水器" name="assort[]"/><label for="reshuiqi">热水器</label>
-                        <input type="checkbox" id="meiqi" class="cheacks" value="煤气" name="assort[]"/><label for="meiqi">煤气</label>
-                        <input type="checkbox" id="bingxiang" class="cheacks" value="冰箱" name="assort[]"/><label for="bingxiang">冰箱</label>
-                        <input type="checkbox" id="chuju" class="cheacks" value="厨具" name="assort[]"/><label for="chuju">厨具</label>
-                        <input type="checkbox" id="kongtiao" class="cheacks" value="空调" name="assort[]"/><label for="kongtiao">空调</label>
-                        <input type="checkbox" id="dianhua" class="cheacks" value="电话" name="assort[]"/><label for="dianhua">电话</label>
-                        <input type="checkbox" id="xiyiji" class="cheacks" value="洗衣机" name="assort[]"/><label for="xiyiji">洗衣机</label>
-                        <input type="checkbox" id="kuandai" class="cheacks" value="宽带网" name="assort[]"/><label for="kuandai">宽带网</label>
-                        <input type="checkbox" id="chuang" class="cheacks" valu="床" name="assort[]"/><label for="chuang">床</label>
+                    </div> -->
+                    <div class="cheackBox clear">
+                        <div class="leftTitle left">配套：</div>
+                        <div class="cheackBoxs clear">
+                            <div class="left">
+                              <input type="checkbox" id="reshuiqi" class="cheacks" value="热水器" name="assort[]"/><label for="reshuiqi">热水器</label>
+                            </div>
+                            <div class="left">
+                              <input type="checkbox" id="meiqi" class="cheacks" value="煤气" name="assort[]"/><label for="meiqi">煤气</label>
+                            </div>
+                            <div class="left">
+                              <input type="checkbox" id="bingxiang" class="cheacks" value="冰箱" name="assort[]"/><label for="bingxiang">冰箱</label>
+                            </div>
+                            <div class="left">
+                              <input type="checkbox" id="chuju" class="cheacks" value="厨具" name="assort[]"/><label for="chuju">厨具</label>
+                            </div>
+                            <div class="left">
+                              <input type="checkbox" id="xiyiji" class="cheacks" value="洗衣机" name="assort[]"/><label for="xiyiji">洗衣机</label>
+                            </div>
+                            <div class="left">
+                              <input type="checkbox" id="hongganji" class="cheacks" value="烘干机" name="assort[]"/><label for="hongganji">烘干机</label>
+                            </div>
+                            <div class="left">
+                              <input type="checkbox" id="chucangshi" class="cheacks" value="储藏室" name="assort[]"/><label for="chucangshi">储藏室</label>
+                            </div>
+                            <div class="left">
+                              <input type="checkbox" id="xiwanji" class="cheacks" value="洗碗机" name="assort[]"/><label for="xiwanji">洗碗机</label>
+                            </div>
+                            <div class="left">
+                              <input type="checkbox" id="weibolu" class="cheacks" value="微波炉" name="assort[]"/><label for="weibolu">微波炉</label>
+                            </div>
+                            <div class="left">
+                              <input type="checkbox" id="kaoxiang" class="cheacks" value="烤箱" name="assort[]"/><label for="kaoxiang">烤箱</label>
+                            </div>
+                            <div class="left">
+                              <input type="checkbox" id="kongtiao" class="cheacks" value="空调" name="assort[]"/><label for="kongtiao">空调</label>
+                            </div>
+                            <div class="left">
+                              <input type="checkbox" id="dire" class="cheacks" value="地热" name="assort[]"/><label for="dire">地热</label>
+                            </div>
+                            <div class="left">
+                              <input type="checkbox" id="jianshenfang" class="cheacks" value="健身房" name="assort[]"/><label for="jianshenfang">健身房</label>
+                            </div>
+                            <div class="left">
+                              <input type="checkbox" id="youyongchi" class="cheacks" value="游泳池" name="assort[]"/><label for="youyongchi">游泳池</label>
+                            </div>
+                            <div class="left">
+                              <input type="checkbox" id="zhengqifang" class="cheacks" value="蒸汽房" name="assort[]"/><label for="zhengqifang">蒸汽房</label>
+                            </div>
+                      </div>
                     </div>
                     <div id="imgUpLoader">
-                      <p>上传图片：图片大小不能大于2M</p>
+                      <p>上传图片：图片大小不能大于2M，最多15张</p>
                       <label for="fileUpload" class="upload-img">选择图片</label><span class="loadImg"></span>
                       <div id="fileBox">
                           <input id="fileUpload" accept="image/*" type="file" name="img[]"/>
@@ -202,10 +242,11 @@
                       </div>
                       <div id="dvPreview" class="clear"></div>
                     </div>
-                    <div class="textBox" style="border-bottom:1px solid #ddd ; padding-bottom:30px;">
+
+          					<div class="textBox" style="border-bottom:1px solid #ddd ; padding-bottom:30px;">
                         <span class="leftTitle" style="margin:15px 0;">基本信息：</span>
                         <textarea style="width:900px;height:200px;" name="info"></textarea>
-                    </div>
+          					</div>
 
                     <div class="inputBox">
                         <span class="leftTitle">联系人：</span>
@@ -214,6 +255,14 @@
                     <div class="inputBox">
                         <span class="leftTitle">联系电话：</span>
                         <input type="text" id="lianxidianhua" class="inputBig phone" name="phone"/>
+                    </div>
+                    <div class="inputBox">
+                        <span class="leftTitle">电子邮箱：</span>
+                        <input type="text" id="email" class="inputBig email" name="email"/>
+                    </div>
+                    <div class="inputBox">
+                        <span class="leftTitle">微信：</span>
+                        <input type="text" id="weixin" class="inputBig weixin" name="weixin"/>
                     </div>
                     <input type="hidden" name="type" value="0">
                     <div class="inputBox">
@@ -227,8 +276,12 @@
         </div>
     </div>
     <div id="rightMain" class="left">
-        <a href="{$sell_up.url}" target="_blank"><img src="__STATIC__/{$sell_up.path}" alt="" class="maimaiAd"></a>
-        <a href="{$sell_down.url}" target="_blank"><img src="__STATIC__/{$sell_down.path}" alt="" class="maimaiAd"></a>
+        <a href="{$sell_up.url}" target="_blank">
+          <img src="__STATIC__/{$sell_up.path}" alt="" class="maimaiAd">
+        </a>
+        <a href="{$sell_down.url}" target="_blank">
+          <img src="__STATIC__/{$sell_down.path}" alt="" class="maimaiAd">
+        </a>
         <!-- <h2 class="rightTitle">阅读排行</h2>
         <div class="paihangBox">
             <?php $id=1;?>
@@ -236,13 +289,12 @@
             <div class="yuduBox clear ">
                 <div class="yuNum left">{$id}</div>
                 <div class="yueMeg shenglue">
-                    <a href="{:url('Sellroom/chuzu_detaile')}?id={$hothouse.id}">{$hothouse.title}</a>
+                    <a href="{:url('Buyroom/maimai_detaile')}?id={$hothouse.id}">{$hothouse.title}</a>
                 </div>
             </div>
             <?php $id++;?>
             {/volist}
         </div> -->
-
 
     </div>
 </div>
@@ -266,8 +318,8 @@ $(function() {
           //                限制上传图片数量
           imgNum += num;
 
-          if(imgNum > 30) {
-            $('.loadImg').html('图片上传不得超过30张');
+          if(imgNum > 15) {
+            $('.loadImg').html('图片上传不得超过15张');
             imgNum -= num;
             return false;
           }
@@ -343,26 +395,29 @@ $(function() {
 
           }
 
-    });
+        });
 
-    var deleteNum=0;
+        // $('.dianwo').click(function() {
 
-    $("#dvPreview").on('click','.delete',function(){
-      // $('.loadImg').html('');
-      if(imgNum>=30){
-         var htmls='<input id="fileUpload" accept="image/*" type="file"  name="img[]"/>';
-      $('#fileBox').append(htmls);
-      }
-      imgNum--;
-      deleteNum=$("#dvPreview .delete").index(this);
-      $(this).parents('.borderBox').remove();
-      $('#fileBox input').eq(deleteNum).remove();
+        //   alert(imgNames);
+        // })
+var deleteNum=0;
 
-    });
+$("#dvPreview").on('click','.delete',function(){
+  // $('.loadImg').html('');
+  if(imgNum>=30){
+     var htmls='<input id="fileUpload" accept="image/*" type="file"  name="img[]"/>';
+  $('#fileBox').append(htmls);
+  }
+  imgNum--;
+  deleteNum=$("#dvPreview .delete").index(this);
+  $(this).parents('.borderBox').remove();
+  $('#fileBox input').eq(deleteNum).remove();
+
+});
 
 
-
-    $(".sub").click(function(){
+$(".sub").click(function(){
         var title=$.trim($(".title").val());
         if(title==""){
             alert("请输入标题");
@@ -383,10 +438,25 @@ $(function() {
             alert("请输入联系电话");
             return false;
         }
+        var email=$.trim($(".email").val());
+        if(email==""){
+            alert("请输入邮箱");
+            return false;
+        }
+        var mailReg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+        if(!mailReg.test(email)){
+          alert("邮箱格式有问题");
+          return false;
+        }
         $("#form").submit();
     })
-})
-</script>
 
+      });
+
+
+
+
+
+</script>
 </body>
 </html>
