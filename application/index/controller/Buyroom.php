@@ -173,6 +173,94 @@ class Buyroom extends Controller
         $this->assign('buy_down',$buy_down);
         return $this->fetch();
     }
+
+    public function maimaifabu_edit()
+    {
+        if($_POST){
+            $data=request()->post();
+
+            $house=SecondHandHouseModel::where('id',$data['id'])->find();
+            $house->title=$data['title'];
+            //$house->area=$data['city'].','.$data['region'];
+            $house->address=$data['address'];
+            //$house->acreage=$data['acreage'];
+            $house->house_acreage=$data['house_acreage'];
+            $house->land_acreage=$data['land_acreage'];
+            $house->price1=$data['price1'];
+            $house->price2=$data['price2'];
+            $house->age=$data['age'];
+            $house->car=$data['car'];
+            $house->email=$data['email'];
+            $house->weixin=$data['weixin'];
+            $house->layout=$data['count1'].','.$data['count2'].','.$data['count3'].','.$data['count4'];
+            $house->high=$data['high'];
+            $house->orientation=$data['orientation'];
+            //$house->decorate=$data['decorate'];
+            if(isset($data['assort'])){
+              $house->assort=implode(",",$data['assort']);
+            }
+            $house->info=$data['info'];
+            $house->contact=$data['contact'];
+            $house->phone=$data['phone'];
+            $house->type=$data['type'];
+            $house->type=$data['type'];
+            $house->hot_area=$data['hot_area'];
+            //$house->price_period=$data['price_period'];
+            $house->layout_diff=$data['layout_diff'];
+            $house->theme=$data['theme'];
+            $house->save();
+
+
+            $files=request()->file('img');
+            $second_id=$house->id;
+            if(!empty($files)){
+              $id=0;
+              foreach($files as $file){
+                  $file=$file->getInfo();
+                  $name=explode(".",$file['name']);
+                  $count=count($name);
+                  $ext=$name[$count-1];
+                  $path=PUBLIC_PATH."/custom/".$second_id."/";
+                  if (! file_exists($path)) {
+                      mkdir($path,0777,true);
+                  }
+                  $name=$path.time().$id.".".$ext;
+                  move_uploaded_file($file["tmp_name"],$name);
+                  $img[]=[
+                      'second_id'=>$second_id,
+                      'path'=>"/custom/".$second_id."/".time().$id.".".$ext,
+                      'create_time'=>date("Y-m-d H:i:s",time()),
+                      'update_time'=>date("Y-m-d H:i:s",time())
+                  ];
+                  $id++;
+              }
+              $res=CustomImgModel::insertAll($img);
+            }
+              $this->success("提交成功，等待后台审核",'Buyroom/maimaifabu');
+        }
+        $sn=$_GET['sn'];
+        $list=SecondHandHouseModel::where('sn',$sn)->find();
+        if(!$list){
+             $this->error('不要调皮=_=');
+        }
+        $hothouse=SecondHandHouseModel::where('type',SecondHandHouseModel::$types['sale']['val'])->order('read_count','desc')->select();
+        $area=AreaModel::where('is_delete',AreaModel::$isDelete['no']['val'])->select();
+        $price=PriceModel::where('is_delete',PriceModel::$isDelete['no']['val'])->select();
+        $layout=LayoutModel::where('is_delete',LayoutModel::$isDelete['no']['val'])->select();
+        $theme=ThemeModel::where('is_delete',ThemeModel::$isDelete['no']['val'])->select();
+        $buy_up=AdModel::where('position','buy_up')->find();
+        $buy_down=AdModel::where('position','buy_down')->find();
+        $this->assign('hothouse',$hothouse);
+        $this->assign('area',$area);
+        $this->assign('list',$list);
+        $this->assign('price',$price);
+        $this->assign('layout',$layout);
+        $this->assign('theme',$theme);
+        $this->assign('buy_up',$buy_up);
+        $this->assign('buy_down',$buy_down);
+        return $this->fetch();
+    }
+
     public function maimai_detaile()
     {
         $id=$_GET['id'];
@@ -197,6 +285,7 @@ class Buyroom extends Controller
         $this->assign('house',$house);
         return $this->fetch();
     }
+
 
 
 }
