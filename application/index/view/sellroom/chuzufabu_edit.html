@@ -68,9 +68,13 @@
     <div id="leftMain" class="left">
         <div id="dateils" class="clear">
             <div class="deteilsBox left">
-                <h2 class="hongxian">发布二手房源({$list.checkout==0 ? "待审核" : ($list.checkout==1 ? "审核通过": "审核未通过")})</h2>
+                <h2 class="hongxian">发布二手房源</h2>
                 <!--攻略信息 循环区域-->
                 <div class="deteilsMegBox">
+                  <div class="inputBox">
+                      <span class="leftTitle">状态：</span>
+                      {$list.checkout==0 ? "待审核" : ($list.checkout==1 ? "审核通过": "审核未通过")}
+                  </div>
                     <div class="inputBox">
                         <span class="leftTitle">标题：</span>
                         <input type="text" id="biaoti" class="inputBig title" name="title" value="{$list->title}"/>

@@ -2,6 +2,7 @@
 namespace app\index\controller;
 use think\Controller;
 use think\Session;
+use think\Config;
 use app\model\AreaModel;
 use app\model\PriceModel;
 use app\model\LayoutModel;
@@ -9,6 +10,7 @@ use app\model\ThemeModel;
 use app\model\SecondHandHouseModel;
 use app\model\CustomImgModel;
 use app\model\AdModel;
+use app\service\EmailService;
 
 class Buyroom extends Controller
 {
@@ -127,7 +129,15 @@ class Buyroom extends Controller
             $house->layout_diff=$data['layout_diff'];
             $house->theme=$data['theme'];
             $house->sn=uniqid().rand(1000000, 9999999);
-            $house->save();
+            if($house->save()){
+              $email=new EmailService();
+              $type="发布房源";
+              $receiver=$data['email'];
+              $title=$data['title'];
+              $content="<a href='".Config::get('host')."/index/buyroom/maimaifabu_edit?sn=".$house->sn."'>点击对您提交的房源进行修改</a>";
+              $email->sendEmail($type,$receiver,$title,$content);
+            }
+
 
 
             $files=request()->file('img');

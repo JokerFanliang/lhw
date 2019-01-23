@@ -237,4 +237,13 @@ return [
         'list_rows' => 15,
     ],
 
+    /*************************发送邮件配置*************************/
+    'EmailSender'=>'906280213@qq.com',
+    'EmailSecret'=>'hwvefswcrtjubbge',
+    'EmailHost'=>'smtp.qq.com',
+    'EmailPort'=>465,
+
+
+    'host'=>'http://lhw.jokerfan.com',
+
 ];
