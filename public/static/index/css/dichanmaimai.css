@@ -127,7 +127,7 @@ label{
 .diqu{
 	font-size: 14px;
 	color:#666;
-	
+
 }
 .xiaoshu{
 	margin:0 5px;
@@ -244,3 +244,14 @@ input[type="number"]{
 .newTle:hover{
 	color:#CC0000;
 }
+
+
+
+.priceBox label{height:26px;line-height: 26px;margin-bottom: 6px;}
+.min-price,.max-price{width:100px;border:1px solid #cc0000;height:26px;padding:0 4px;background:#F7F7F7;}
+.sureBtn{padding:5px 10px;background: #cc0000;color:#fff;cursor: pointer;margin-left:10px;}
+.sureBox{display: inline-block;margin-left:10px;}
+
+.moreBox{text-align: center;border-top:1px dotted #cc0000;height:20px;margin-top:20px;}
+.moreBtn{color:#cc0000;cursor: pointer;background: #f7f7f7;display:block;width:100px;margin:-11px auto 0;}
+.moreMsgBox{display: none;}

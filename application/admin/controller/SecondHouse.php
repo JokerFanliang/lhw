@@ -44,7 +44,12 @@ class SecondHouse extends common
             $house->land_acreage=$data['land_acreage'];
             $house->price1=$data['price1'];
             $house->price2=$data['price2'];
-            $house->age=$data['age'];
+            if($house->type==1){
+              $house->give_date=$data['give_date'];
+            }else{
+              $house->age=$data['age'];
+            }
+
             $house->car=$data['car'];
             $house->email=$data['email'];
             $house->weixin=$data['weixin'];

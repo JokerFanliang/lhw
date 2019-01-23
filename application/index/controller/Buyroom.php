@@ -10,6 +10,7 @@ use app\model\ThemeModel;
 use app\model\SecondHandHouseModel;
 use app\model\CustomImgModel;
 use app\model\AdModel;
+use app\model\ConfigModel;
 use app\service\EmailService;
 
 class Buyroom extends Controller
@@ -109,7 +110,9 @@ class Buyroom extends Controller
             $house->land_acreage=$data['land_acreage'];
             $house->price1=$data['price1'];
             $house->price2=$data['price2'];
-            $house->age=$data['age'];
+            $house->give_date=$data['give_date'];
+
+
             $house->car=$data['car'];
             $house->email=$data['email'];
             $house->weixin=$data['weixin'];
@@ -130,11 +133,14 @@ class Buyroom extends Controller
             $house->theme=$data['theme'];
             $house->sn=uniqid().rand(1000000, 9999999);
             if($house->save()){
+              $config=ConfigModel::where('id',1)->find();
               $email=new EmailService();
-              $type="发布房源";
-              $receiver=$data['email'];
+              $type="楼花王-发布房源";
+              $receiver=$config->email;
               $title=$data['title'];
-              $content="<a href='".Config::get('host')."/index/buyroom/maimaifabu_edit?sn=".$house->sn."'>点击对您提交的房源进行修改</a>";
+              $link=Config::get('host')."/index/buyroom/maimaifabu_edit?sn=".$house->sn;
+              //$content="<a href='".Config::get('host')."/index/buyroom/maimaifabu_edit?sn=".$house->sn."'>点击对您提交的房源进行修改</a>";
+              $content=$config->content."<br/><a href='".Config::get('host')."/index/buyroom/maimaifabu_edit?sn=".$house->sn."'>点击对您提交的房源进行修改</a>";
               $email->sendEmail($type,$receiver,$title,$content);
             }
 
@@ -198,7 +204,7 @@ class Buyroom extends Controller
             $house->land_acreage=$data['land_acreage'];
             $house->price1=$data['price1'];
             $house->price2=$data['price2'];
-            $house->age=$data['age'];
+            $house->give_date=$data['give_date'];
             $house->car=$data['car'];
             $house->email=$data['email'];
             $house->weixin=$data['weixin'];

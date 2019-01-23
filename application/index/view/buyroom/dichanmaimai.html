@@ -58,7 +58,7 @@
 						</div>
 					</div>
 					<!--价格区间-->
-					<div class="radioSunBox clear">
+					<div class="radioSunBox priceBox clear">
 						<div class="fenlei left">价格区间：</div>
 						<div class="fenleiDetailes ">
 						<label  <?php if($data['price']=='0') {echo "class='active'";}?>>
@@ -71,6 +71,11 @@
                         	{$price.min}--{$price.max}
                     	</label>
                     	{/volist}
+											<div class="sureBox">
+												<input type="number" name="min" value="" class="min-price bigmin" placeholder="最低"> --
+												<input type="number" name="max" value="" class="max-price bigmax" placeholder="最高">万(加元)
+												<span class="sureBtn big">确定</span>
+											</div>
 						</div>
 					</div>
 					<!--户型划分-->
@@ -105,6 +110,55 @@
                     	</label>
                     	{/volist}
 						</div>
+					</div>
+					<div class="moreMsgBox">
+						<div class="radioSunBox priceBox clear">
+							<div class="fenlei left">价格区间：</div>
+							<div class="fenleiDetailes ">
+								<label>
+		               <input type="radio" name="price_form" value="0"/>不限
+		            </label>
+								<label>
+		                <input type="radio" name="price_form" value="300--500"/>300--500
+		            </label>
+								<div class="sureBox">
+									<input type="number" name="min" value="" class="min-price bigmin" placeholder="最低"> --
+									<input type="number" name="max" value="" class="max-price bigmax" placeholder="最高">万(加元)
+									<span class="sureBtn big">确定</span>
+								</div>
+							</div>
+						</div>
+						<div class="radioSunBox priceBox clear">
+							<div class="fenlei left">价格区间：</div>
+							<div class="fenleiDetailes ">
+								<label>
+		               <input type="radio" name="price_form" value="0"/>不限
+		            </label>
+								<label>
+		                <input type="radio" name="price_form" value="300--500"/>300--500
+		            </label>
+								<div class="sureBox">
+									<input type="number" name="min" value="" class="min-price bigmin" placeholder="最低"> --
+									<input type="number" name="max" value="" class="max-price bigmax" placeholder="最高">万(加元)
+									<span class="sureBtn big">确定</span>
+								</div>
+							</div>
+						</div>
+						<div class="radioSunBox priceBox clear">
+							<div class="fenlei left">交房时间：</div>
+							<div class="fenleiDetailes ">
+								<!-- <label>
+		               <input type="radio" name="price_form" value="0"/>不限
+		            </label> -->
+								<div class="sureBox">
+									<input type="text" name="min" value="" class="min-price bigmin" placeholder="最低">
+									<span class="sureBtn big">确定</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="moreBox">
+							<p class="moreBtn">查看更多</p>
 					</div>
 				</div>
 				<form action="{:url('Buyroom/dichanmaimai')}" method="get" id="search">
@@ -231,6 +285,19 @@
 
 					});
 				});
+
+
+				$('.moreBtn').click(function(){
+						var more=$('.moreMsgBox').css('display');
+						if(more=='none'){
+							$('.moreMsgBox').fadeIn();
+							$(this).text('收起');
+						}else{
+							$('.moreMsgBox').fadeOut(function(){
+								$('.moreBtn').text('查看更多');
+							});
+						}
+				})
 			});
 		</script>
 	</body>

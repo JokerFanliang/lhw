@@ -49,9 +49,22 @@
                 </td>
             </tr>
             <tr>
+                <td align="right">发送邮件内容</td>
+                <td>
+                    <input type="hidden" name="content" class="content">
+                    <script id="editor" type="text/plain" style="width:1024px;height:300px;">{$list->content}</script>
+                </td>
+            </tr>
+            <tr>
+                <td width="100" align="right">发送邮箱</td>
+                <td>
+                    <input type="text" name="email" size="40" class="inpMain email" value="{$list->email}" />
+                </td>
+            </tr>
+            <tr>
                 <td></td>
                 <td>
-                    <div class="btn sub">添加</div>
+                    <div class="btn sub">修改</div>
                 </td>
             </tr>
         </table>
@@ -61,8 +74,13 @@
 <div class="clear"></div>
 {include file="public/foot"}
 <script>
+	  var ue = UE.getEditor('editor');
     $(".sub").click(function(){
-        $("#form").submit();
+      var arr = [];
+      arr.push(UE.getEditor('editor').getContent());
+      var text=arr.join("\n");
+      $(".content").val(text);
+      $("#form").submit();
     })
 </script>
 </body>

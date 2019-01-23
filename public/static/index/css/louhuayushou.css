@@ -225,7 +225,7 @@ input[type="number"]{
 .priceNavBox{width:40%;margin-bottom: 6px;text-align: center;border:1px solid #CC0000;height:32px;line-height: 30px;cursor: pointer;}
 .priceNav:hover,.priceNav.active{background: #cc0000;color:#fff;}
 .priceNav{width:50%;}
-.min-price,.max-price{width:100px;border:1px solid #cc0000;height:26px;padding:0 4px;}
-.sureBtn{padding:5px 10px;background: #cc0000;color:#fff;cursor: pointer;}
+.min-price,.max-price{width:100px;border:1px solid #cc0000;height:26px;padding:0 4px;background: #F7F7F7;}
+.sureBtn{padding:5px 10px;background: #cc0000;color:#fff;cursor: pointer;margin-left:10px;}
 .sureBox{display: inline-block;margin-left:10px;}
 .priceChi{display: none;}
