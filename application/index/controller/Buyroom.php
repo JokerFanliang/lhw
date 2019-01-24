@@ -136,7 +136,7 @@ class Buyroom extends Controller
               $config=ConfigModel::where('id',1)->find();
               $email=new EmailService();
               $type="楼花王-发布房源";
-              $receiver=$config->email;
+              $receiver=$data['email'];
               $title=$data['title'];
               $link=Config::get('host')."/index/buyroom/maimaifabu_edit?sn=".$house->sn;
               //$content="<a href='".Config::get('host')."/index/buyroom/maimaifabu_edit?sn=".$house->sn."'>点击对您提交的房源进行修改</a>";
