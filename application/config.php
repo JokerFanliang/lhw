@@ -238,9 +238,9 @@ return [
     ],
 
     /*************************发送邮件配置*************************/
-    'EmailSender'=>'906280213@qq.com',
-    'EmailSecret'=>'hwvefswcrtjubbge',
-    'EmailHost'=>'smtp.qq.com',
+    'EmailSender'=>'johntangsurreyoffice@gmail.com',
+    'EmailSecret'=>'riva2017',
+    'EmailHost'=>'smtp.gmail.com',
     'EmailPort'=>465,
 
 
