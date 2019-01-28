@@ -87,7 +87,7 @@
                         不限
                     	</label>
                     	{volist name='layout' id='layout'}
-                    	<label <?php if(in_array($layout->name,$layouts)) {echo "class='active'";}?>>
+                    	<label <?php if($data['layout']==$layout->name) {echo "class='active'";}?>>
                         	<input type="radio" name="layout_form" value="{$layout.name}"/>
                         	{$layout.name}
                     	</label>

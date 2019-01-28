@@ -22,38 +22,35 @@ class Sellroom extends Controller
         $data['price']=isset($data['price']) ? $data['price'] : '0';
         $data['layout']=isset($data['layout']) ? $data['layout'] : '0';
         $data['theme']=isset($data['theme']) ? $data['theme'] : '0';
-        if(!Session::has('layout')){
-            $layouts=[];
-            Session::set('layout',$layouts);
-        }
-        if($data['layout']){
-            $layouts=Session::get('layouts');
-            if(in_array($data['layout'], $layouts)){
-                $layouts = array_diff($layouts, [$data['layout']]);
-            }else{
-                array_push($layouts,$data['layout']);
-            }
-
-        }else{
-            $layouts=[];
-        }
-        Session::set('layouts',$layouts);
+        // if(!Session::has('layout')){
+        //     $layouts=[];
+        //     Session::set('layout',$layouts);
+        // }
+        // if($data['layout']){
+        //     $layouts=Session::get('layouts');
+        //     if(in_array($data['layout'], $layouts)){
+        //         $layouts = array_diff($layouts, [$data['layout']]);
+        //     }else{
+        //         array_push($layouts,$data['layout']);
+        //     }
+        //
+        // }else{
+        //     $layouts=[];
+        // }
+        // Session::set('layouts',$layouts);
         if(isset($data['searchname'])){
             $searchname=$data["searchname"];
             $house = SecondHandHouseModel::order('update_time','desc')->where('title','like','%'.$searchname.'%')->where("checkout",1)->where('type',SecondHandHouseModel::$types['lease']['val'])->paginate(9,false,['query'=>['searchname'=>$searchname]]);
         }else{
-            $house = SecondHandHouseModel::where(function($query)use($data,$layouts){
+            $house = SecondHandHouseModel::where(function($query)use($data){
                 if(isset($data['area']) && $data['area']!='0'){
                     $query->where('hot_area',$data['area']);
                 }
                 if(isset($data['price']) && $data['price']!='0'){
                     $query->where('price_period',$data['price']);
                 }
-                // if(isset($data['layout']) && $data['layout']!='0'){
-                //     $query->where('layout_diff',$data['layout']);
-                // }
-                if(!empty($layouts)){
-                    $query->wherein('layout_diff',$layouts);
+                if(isset($data['layout']) && $data['layout']!='0'){
+                    $query->where('layout_diff',$data['layout']);
                 }
                 if(isset($data['theme']) && $data['theme']!='0'){
                     $query->where('theme',$data['theme']);
@@ -84,7 +81,6 @@ class Sellroom extends Controller
         $this->assign('imgs',$imgs);
         $this->assign('price',$price);
         $this->assign('layout',$layout);
-        $this->assign('layouts',$layouts);
         $this->assign('theme',$theme);
         $this->assign('data',$data);
         $this->assign('hothouse',$hothouse);
