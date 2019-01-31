@@ -194,9 +194,10 @@
 								<a href="{:url('Sellroom/chuzu_detaile')}?id={$hou.id}">{$hou.title}
 								</a>
 							</h2>
+							<?php $price1=number_format($hou->price1,2);$price2=number_format($hou->price2,2);?>
 							<div class="jianjieBox clear">
 								<div class="priceBox">
-									<span class="maimaiprice">{$hou.price}</span>
+									<span class="maimaiprice">${$price1}/套（${$price2}/平尺）</span>
 								</div>
 								<div class="jianjie">
 									<span class="tingshi">{$hou.layout}</span>

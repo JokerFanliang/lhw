@@ -61,7 +61,7 @@
 						</div>
 						<div class="msgBox left">
 							<div class="xiangqingBox">
-								<span class="mianji">{$house->acreage}</span>
+								<span class="mianji">{$house->house_acreage}</span>
 							</div>
 							<p class="biaozhu">建筑面积</p>
 						</div>
@@ -81,7 +81,7 @@
 
 					<div class="dizhiBox">
 						<span class="biaozhu">小区</span>
-						<span class="xiaoqu">{$house->village}</span>
+						<span class="xiaoqu">{$house->address}</span>
 					</div>
 					<div class="dizhiBox">
 						<span class="biaozhu">地址</span>
@@ -147,9 +147,9 @@
 		<script>
 			$(function() {
 				//var smallBoxWidth = parseInt($('.smallBigBox').width()) + parseInt($('.smallBigBox').css("margin-left")) + parseInt($('.smallBigBox').css("margin-right"));
-				
+
 				//var mySloderWidth = parseInt($('.smallBigBox').length) * (parseInt($('.smallBigBox').width()) + parseInt($('.smallBigBox').css("margin-left")) + parseInt($('.smallBigBox').css("margin-right")));
-				
+
 				var smallBoxWidth = 110;
 				var mySloderWidth = parseInt($('.smallBigBox').length) *smallBoxWidth;
 				var num = parseInt($('.smallBigBox').length) - 5;
