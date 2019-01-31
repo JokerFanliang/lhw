@@ -61,21 +61,22 @@
 					<div class="radioSunBox priceBox clear">
 						<div class="fenlei left">价格区间：</div>
 						<div class="fenleiDetailes ">
-						<label  <?php if($data['price']=='0') {echo "class='active'";}?>>
-                        <input type="radio" name="price_form" value="0"/>
-                        不限
-                    	</label>
-                    	{volist name='price' id='price'}
-						<label <?php $pri=$price->min."--".$price->max; if($data['price']==$pri) {echo "class='active'";}?>>
-                        	<input type="radio" name="price_form" value="{$price.min}--{$price.max}"/>
-                        	{$price.min}--{$price.max}
-                    	</label>
-                    	{/volist}
-											<div class="sureBox">
-												<input type="number" name="min" value="" class="min-price bigmin" placeholder="最低"> --
-												<input type="number" name="max" value="" class="max-price bigmax" placeholder="最高">万(加元)
-												<span class="sureBtn big">确定</span>
-											</div>
+							<p style="line-height:30px;">单价/套（总价万元）</p>
+							<label  <?php if($data['price']=='0') {echo "class='active'";}?>>
+                <input type="radio" name="price_form" value="0"/>
+                不限
+            	</label>
+            	{volist name='price' id='price'}
+							<label <?php $pri=$price->min."--".$price->max; if($data['price']==$pri) {echo "class='active'";}?>>
+                	<input type="radio" name="price_form" value="{$price.min}--{$price.max}"/>
+                	{$price.min}--{$price.max}
+            	</label>
+            	{/volist}
+							<div class="sureBox">
+								<input type="number" name="min" value="" class="min-price bigmin" placeholder="最低"> --
+								<input type="number" name="max" value="" class="max-price bigmax" placeholder="最高">万(加元)
+								<span class="sureBtn big">确定</span>
+							</div>
 						</div>
 					</div>
 					<!--户型划分-->
