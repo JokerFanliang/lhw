@@ -10,6 +10,7 @@ use app\model\AdModel;
 use app\model\HouseShowModel;
 use app\model\ConfigModel;
 use app\model\VideoModel;
+use app\model\BuildThemeModel;
 
 class Index extends Controller
 {
@@ -26,7 +27,9 @@ class Index extends Controller
         $xianfang=BuildingModel::where('is_delete',BuildingModel::$isDelete['no']['val'])->where('state',BuildingModel::$state['xianfang']['val'])->order('has_ad','desc')->order('update_time','desc')->limit('0,6')->select();
         $shipin=BuildingModel::where('is_delete',BuildingModel::$isDelete['no']['val'])->where('state',BuildingModel::$state['video']['val'])->order('has_ad','desc')->order('update_time','desc')->limit('0,6')->select();
         if(isset($_GET['theme_id'])){
-        	$yushou=BuildingModel::where('is_delete',BuildingModel::$isDelete['no']['val'])->where('theme_id',$_GET['theme_id'])->where('state',BuildingModel::$state['yushou']['val'])->order('update_time','desc')->limit('0,6')->select();
+          $build_ids=BuildThemeModel::wherein('theme_id',$_GET['theme_id'])->column('build_id');
+          $build_ids=array_unique($build_ids);
+        	$yushou=BuildingModel::wherein('id',$build_ids)->where('is_delete',BuildingModel::$isDelete['no']['val'])->where('state',BuildingModel::$state['yushou']['val'])->order('update_time','desc')->limit('0,6')->select();
         }
         $lists=BuildingModel::where('is_delete',BuildingModel::$isDelete['no']['val'])->order('update_time','desc')->select();
         $imgs=[];
