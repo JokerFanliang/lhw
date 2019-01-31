@@ -12,6 +12,8 @@ use app\model\CustomImgModel;
 use app\model\AdModel;
 use app\model\ConfigModel;
 use app\model\SecondPriceModel;
+use app\model\SecondHouseModel;
+use app\model\SecondLandModel;
 use app\service\EmailService;
 
 class Buyroom extends Controller
@@ -32,6 +34,8 @@ class Buyroom extends Controller
         $data=request()->get();
         $data['area']=isset($data['area']) ? $data['area'] : '0';
         $data['price']=isset($data['price']) ? $data['price'] : '0';
+        $data['house_s']=isset($data['house_s']) ? $data['house_s'] : '0';
+        $data['land_s']=isset($data['land_s']) ? $data['land_s'] : '0';
         $data['layout']=isset($data['layout']) ? $data['layout'] : '0';
         $data['theme']=isset($data['theme']) ? $data['theme'] : '0';
         $data['price_min']=isset($data['price_min']) ? $data['price_min'] : '';
@@ -109,6 +113,8 @@ class Buyroom extends Controller
 
         $area=AreaModel::where('is_delete',AreaModel::$isDelete['no']['val'])->order('sort','desc')->select();
         $price=SecondPriceModel::order('create_time','desc')->select();
+        $house_s=SecondHouseModel::order('create_time','desc')->select();
+        $land_s=SecondLandModel::order('create_time','desc')->select();
         $layout=LayoutModel::where('is_delete',LayoutModel::$isDelete['no']['val'])->order('sort','desc')->select();
         $theme=ThemeModel::where('is_delete',ThemeModel::$isDelete['no']['val'])->order('sort','desc')->select();
 
@@ -118,6 +124,8 @@ class Buyroom extends Controller
         $this->assign('house',$house);
         $this->assign('area',$area);
         $this->assign('price',$price);
+        $this->assign('house_s',$house_s);
+        $this->assign('land_s',$land_s);
         $this->assign('layout',$layout);
         $this->assign('theme',$theme);
         $this->assign('data',$data);

@@ -114,33 +114,39 @@
 					</div>
 					<div class="moreMsgBox">
 						<div class="radioSunBox priceBox clear">
-							<div class="fenlei left">价格区间：</div>
+							<div class="fenlei left">房屋面积：</div>
 							<div class="fenleiDetailes ">
-								<label>
-		               <input type="radio" name="price_form" value="0"/>不限
+								<label <?php if($data['house_s']=='0') {echo "class='active'";}?>>
+		               <input type="radio" name="house_form" value="0"/>不限
 		            </label>
-								<label>
-		                <input type="radio" name="price_form" value="300--500"/>300--500
-		            </label>
+								{volist name='house_s' id='house_s'}
+								<label <?php $s=$house_s->min."--".$house_s->max; if($data['house_s']===$s) {echo "class='active'";}?>>
+	                	<input type="radio" name="house_form" value="{$house_s.min}--{$house_s.max}"/>
+	                	{$house_s.min}--{$house_s.max==0 ? "以上" : $house_s.max}
+	            	</label>
+	            	{/volist}
 								<div class="sureBox">
 									<input type="number" name="min" value="" class="min-price bigmin" placeholder="最低"> --
-									<input type="number" name="max" value="" class="max-price bigmax" placeholder="最高">万(加元)
+									<input type="number" name="max" value="" class="max-price bigmax" placeholder="最高">平尺
 									<span class="sureBtn big">确定</span>
 								</div>
 							</div>
 						</div>
 						<div class="radioSunBox priceBox clear">
-							<div class="fenlei left">价格区间：</div>
+							<div class="fenlei left">土地面积：</div>
 							<div class="fenleiDetailes ">
-								<label>
-		               <input type="radio" name="price_form" value="0"/>不限
+								<label  <?php if($data['land_s']=='0') {echo "class='active'";}?>>
+		               <input type="radio" name="land_form" value="0"/>不限
 		            </label>
-								<label>
-		                <input type="radio" name="price_form" value="300--500"/>300--500
-		            </label>
+								{volist name='land_s' id='land_s'}
+								<label <?php $s=$land_s->min."--".$land_s->max; if($data['land_s']===$s) {echo "class='active'";}?>>
+	                	<input type="radio" name="land_form" value="{$land_s.min}--{$land_s.max}"/>
+	                	{$land_s.min}--{$land_s.max==0 ? "以上" : $land_s.max}
+	            	</label>
+	            	{/volist}
 								<div class="sureBox">
 									<input type="number" name="min" value="" class="min-price bigmin" placeholder="最低"> --
-									<input type="number" name="max" value="" class="max-price bigmax" placeholder="最高">万(加元)
+									<input type="number" name="max" value="" class="max-price bigmax" placeholder="最高">平尺
 									<span class="sureBtn big">确定</span>
 								</div>
 							</div>
@@ -300,13 +306,23 @@
 					});
 				});
 
-
+				var openSession=0;
+				var getOpen=sessionStorage.getItem('moreOpen');
+				if(getOpen==1){
+						$('.moreMsgBox').show();
+						$('.moreBtn').text('收起');
+				}else{
+					$('.moreMsgBox').hide();
+					$('.moreBtn').text('查看更多');
+				}
 				$('.moreBtn').click(function(){
 						var more=$('.moreMsgBox').css('display');
 						if(more=='none'){
+							openSession=sessionStorage.setItem('moreOpen', 1);
 							$('.moreMsgBox').fadeIn();
 							$(this).text('收起');
 						}else{
+							openSession=sessionStorage.setItem('moreOpen', 0);
 							$('.moreMsgBox').fadeOut(function(){
 								$('.moreBtn').text('查看更多');
 							});

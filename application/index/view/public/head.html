@@ -96,6 +96,11 @@
           slideTime = setInterval(slideFun, 5000);
         })
 
+        $('#navBox').on('click','.navA',function(){
+          sessionStorage.setItem('moreOpen',0);
+            sessionStorage.setItem('moreOpenZ',0);
+        })
+
       });
 
 </script>
