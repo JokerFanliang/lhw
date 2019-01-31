@@ -11,6 +11,7 @@ use app\model\SecondHandHouseModel;
 use app\model\CustomImgModel;
 use app\model\AdModel;
 use app\model\ConfigModel;
+use app\model\SecondPriceModel;
 use app\service\EmailService;
 
 class Buyroom extends Controller
@@ -33,6 +34,11 @@ class Buyroom extends Controller
         $data['price']=isset($data['price']) ? $data['price'] : '0';
         $data['layout']=isset($data['layout']) ? $data['layout'] : '0';
         $data['theme']=isset($data['theme']) ? $data['theme'] : '0';
+        $data['price_min']=isset($data['price_min']) ? $data['price_min'] : '';
+        $data['price_max']=isset($data['price_max']) ? $data['price_max'] : '';
+        if($data['price_min']!="" || $data['price_max']!=""){
+            $data['price']=0;
+        }
         // if(!Session::has('layout')){
         //     $layouts=[];
         //     Session::set('layout',$layouts);
@@ -58,7 +64,20 @@ class Buyroom extends Controller
                     $query->where('hot_area',$data['area']);
                 }
                 if(isset($data['price']) && $data['price']!='0'){
-                    $query->where('price_period',$data['price']);
+                    $price_period=explode("--",$data['price']);
+                    $min_price=$price_period[0];
+                    $max_price=$price_period[1];
+                    if($max_price==0){
+                        $query->where('price1','>=',$min_price);
+                    }else{
+                        $query->where('price1','>=',$min_price)->where('price1','<=',$max_price);
+                    }
+                }
+                if($data['price_min']!=""){
+                    $query->where('price1','>=',$data['price_min']);
+                }
+                if($data['price_max']!=""){
+                    $query->where('price1','<=',$data['price_max']);
                 }
                 if(isset($data['layout']) && $data['layout']!='0'){
                     $query->where('layout_diff',$data['layout']);
@@ -89,7 +108,7 @@ class Buyroom extends Controller
         $hothouse=SecondHandHouseModel::order('is_hot','desc')->where('type',SecondHandHouseModel::$types['sale']['val'])->where("checkout",1)->order('read_count','desc')->select();
 
         $area=AreaModel::where('is_delete',AreaModel::$isDelete['no']['val'])->order('sort','desc')->select();
-        $price=PriceModel::where('is_delete',PriceModel::$isDelete['no']['val'])->order('sort','desc')->select();
+        $price=SecondPriceModel::order('create_time','desc')->select();
         $layout=LayoutModel::where('is_delete',LayoutModel::$isDelete['no']['val'])->order('sort','desc')->select();
         $theme=ThemeModel::where('is_delete',ThemeModel::$isDelete['no']['val'])->order('sort','desc')->select();
 

@@ -66,16 +66,16 @@
                         <input type="radio" name="price_form" value="0"/>
                         不限
                     	</label>
-                    	{volist name='price' id='price'}
-						<label <?php $pri=$price->min."--".$price->max; if($data['price']==$pri) {echo "class='active'";}?>>
-                        	<input type="radio" name="price_form" value="{$price.min}--{$price.max}"/>
-                        	{$price.min}--{$price.max}
-                    	</label>
-                    	{/volist}
+											{volist name='price' id='price'}
+											<label <?php $pri=$price->min."--".$price->max; if($data['price']===$pri) {echo "class='active'";}?>>
+				                	<input type="radio" name="price_form" value="{$price.min}--{$price.max}"/>
+				                	{$price.min}--{$price.max==0 ? "以上" : $price.max}
+				            	</label>
+				            	{/volist}
 											<div class="sureBox">
-												<input type="number" name="min" value="" class="min-price bigmin" placeholder="最低"> --
-												<input type="number" name="max" value="" class="max-price bigmax" placeholder="最高">万(加元)
-												<span class="sureBtn big">确定</span>
+												<input type="number" name="price_min" value="{$data['price_min']}" class="min-price price_min" placeholder="最低"> --
+												<input type="number" name="price_max" value="{$data['price_max']}" class="max-price price_max" placeholder="最高">万(加元)
+												<span class="sureBtn priceSearch">确定</span>
 											</div>
 						</div>
 					</div>
@@ -269,15 +269,25 @@
 			})
 		</script>
 		<script>
+			var area="{$data['area']}";
+			var price="{$data['price']}";
+			var layout="{$data['layout']}";
+			var theme="{$data['theme']}";
 			$(function() {
 				$('#radioBox').on('click', 'input', function() {
 					$(this).addClass('active').siblings('.active').removeClass('active');
 					var cla=$(this).attr('name');
-					var val=$(this).val();
-					$("."+cla).val(val);
-					$("#form").submit();
+					if(cla!="price_min" && cla!="price_max"){
+						var val=$(this).val();
+						$("."+cla).val(val);
+						$("#form").submit();
+					}
 				});
-
+				$(".priceSearch").click(function(){
+					var price_min=$(".price_min").val();
+					var price_max=$(".price_max").val();
+					window.location.href="/index/sellroom/chuzuqiuzu?area="+area+"&price="+price+"&layout="+layout+"&theme="+theme+"&price_min="+price_min+"&price_max="+price_max;
+				})
 				/**
 				 *
 				 *      选择框 获取 value 功能  临时用的BUTTON
