@@ -17,16 +17,16 @@ class Buyroom extends Controller
 {
     public function dichanmaimai()
     {
-      $secs=SecondHandHouseModel::select();
-      foreach($secs as $sec){
-        if($sec->give_date){
-             $yea=explode("-",$sec->give_date);
-             $house=SecondHandHouseModel::find($sec->id);
-             $house->give_date=$yea[0];
-             $house->save();
-        }
-      }
-      exit;
+      // $secs=SecondHandHouseModel::select();
+      // foreach($secs as $sec){
+      //   if($sec->give_date){
+      //        $yea=explode("-",$sec->give_date);
+      //        $house=SecondHandHouseModel::find($sec->id);
+      //        $house->give_date=$yea[0];
+      //        $house->save();
+      //   }
+      // }
+      // exit;
         Session::set('title','sale');
         $data=request()->get();
         $data['area']=isset($data['area']) ? $data['area'] : '0';
