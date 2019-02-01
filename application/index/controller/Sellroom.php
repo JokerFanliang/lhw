@@ -143,7 +143,7 @@ class Sellroom extends Controller
                 }
 
                 $query->where('type',SecondHandHouseModel::$types['lease']['val']);
-            })->order('update_time','desc')->where("checkout",1)->paginate(10,false,['query'=>['area'=>$data['area'],'price'=>$data['price'],'layout'=>$data['layout'],'theme'=>$data['theme']]]);
+            })->order('update_time','desc')->where("checkout",1)->paginate(10,false,['query' => request()->param()]);
         }
         $imgs=[];
         $lists=SecondHandHouseModel::column('id');

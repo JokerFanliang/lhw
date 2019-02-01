@@ -140,7 +140,7 @@ class Buyroom extends Controller
                 }
 
                 $query->where('type',SecondHandHouseModel::$types['sale']['val']);
-            })->order('update_time','desc')->where("checkout",1)->paginate(10,false,['query'=>['area'=>$data['area'],'price'=>$data['price'],'layout'=>$data['layout'],'theme'=>$data['theme']]]);
+            })->order('update_time','desc')->where("checkout",1)->paginate(10,false,['query' => request()->param()]);
         }
 
         $imgs=[];
