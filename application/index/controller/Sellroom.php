@@ -23,9 +23,15 @@ class Sellroom extends Controller
         $data['area']=isset($data['area']) ? $data['area'] : '0';
         $data['price']=isset($data['price']) ? $data['price'] : '0';
         $data['house_s']=isset($data['house_s']) ? $data['house_s'] : '0';
+        $data['age']=isset($data['age']) ? $data['age'] : '0';
         $data['land_s']=isset($data['land_s']) ? $data['land_s'] : '0';
         $data['layout']=isset($data['layout']) ? $data['layout'] : '0';
         $data['theme']=isset($data['theme']) ? $data['theme'] : '0';
+        $data['age_min']=isset($data['age_min']) ? $data['age_min'] : '';
+        $data['age_max']=isset($data['age_max']) ? $data['age_max'] : '';
+        if($data['age_min']!="" || $data['age_max']!=""){
+            $data['age']=0;
+        }
         $data['price_min']=isset($data['price_min']) ? $data['price_min'] : '';
         $data['price_max']=isset($data['price_max']) ? $data['price_max'] : '';
         if($data['price_min']!="" || $data['price_max']!=""){
@@ -85,6 +91,16 @@ class Sellroom extends Controller
                         $query->where('house_acreage','>=',$min_house)->where('house_acreage','<=',$max_house);
                     }
                 }
+                if(isset($data['age']) && $data['age']!='0'){
+                    $age_period=explode("--",$data['age']);
+                    $min_age=$age_period[0];
+                    $max_age=$age_period[1];
+                    if($max_age==0){
+                        $query->where('age','>=',$min_age);
+                    }else{
+                        $query->where('age','>=',$min_age)->where('age','<=',$max_age);
+                    }
+                }
                 if(isset($data['land_s']) && $data['land_s']!='0'){
                     $land_period=explode("--",$data['land_s']);
                     $min_land=$land_period[0];
@@ -94,6 +110,12 @@ class Sellroom extends Controller
                     }else{
                         $query->where('land_acreage','>=',$min_land)->where('land_acreage','<=',$max_land);
                     }
+                }
+                if($data['age_min']!=""){
+                    $query->where('age','>=',$data['age_min']);
+                }
+                if($data['age_max']!=""){
+                    $query->where('age','<=',$data['age_max']);
                 }
                 if($data['price_min']!=""){
                     $query->where('price1','>=',$data['price_min']);
