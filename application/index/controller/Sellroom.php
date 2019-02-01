@@ -65,6 +65,26 @@ class Sellroom extends Controller
                         $query->where('price1','>=',$min_price)->where('price1','<=',$max_price);
                     }
                 }
+                if(isset($data['house_s']) && $data['house_s']!='0'){
+                    $house_period=explode("--",$data['house_s']);
+                    $min_house=$house_period[0];
+                    $max_house=$house_period[1];
+                    if($max_house==0){
+                        $query->where('house_acreage','>=',$min_house);
+                    }else{
+                        $query->where('house_acreage','>=',$min_house)->where('house_acreage','<=',$max_house);
+                    }
+                }
+                if(isset($data['land_s']) && $data['land_s']!='0'){
+                    $land_period=explode("--",$data['land_s']);
+                    $min_land=$land_period[0];
+                    $max_land=$land_period[1];
+                    if($max_land==0){
+                        $query->where('land_acreage','>=',$min_land);
+                    }else{
+                        $query->where('land_acreage','>=',$min_land)->where('land_acreage','<=',$max_land);
+                    }
+                }
                 if($data['price_min']!=""){
                     $query->where('price1','>=',$data['price_min']);
                 }
