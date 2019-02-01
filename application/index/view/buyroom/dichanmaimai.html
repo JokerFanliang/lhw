@@ -38,6 +38,12 @@
 			<input type="hidden" class="theme_form" name="theme" value="{$data['theme']}">
 			<input type="hidden" class="house_form" name="house_s" value="{$data['house_s']}">
 			<input type="hidden" class="land_form" name="land_s" value="{$data['land_s']}">
+			<input type="hidden" class="price_min_form" name="price_min" value="{$data['price_min']}">
+			<input type="hidden" class="price_max_form" name="price_max" value="{$data['price_max']}">
+			<input type="hidden" class="house_min_form" name="house_min" value="{$data['house_min']}">
+			<input type="hidden" class="house_max_form" name="house_max" value="{$data['house_max']}">
+			<input type="hidden" class="land_min_form" name="land_min" value="{$data['land_min']}">
+			<input type="hidden" class="land_max_form" name="land_max" value="{$data['land_max']}">
 		</form>
 		<div id="main" class="clear">
 			<div id="leftMain" class="left">
@@ -128,9 +134,9 @@
 	            	</label>
 	            	{/volist}
 								<div class="sureBox">
-									<input type="number" name="min" value="" class="min-price bigmin" placeholder="最低"> --
-									<input type="number" name="max" value="" class="max-price bigmax" placeholder="最高">平尺
-									<span class="sureBtn big">确定</span>
+									<input type="number" name="house_min" value="{$data['house_min']}" class="min-price house_min" placeholder="最低"> --
+									<input type="number" name="house_max" value="{$data['house_max']}" class="max-price house_max" placeholder="最高">平尺
+									<span class="sureBtn houseSearch">确定</span>
 								</div>
 							</div>
 						</div>
@@ -147,9 +153,9 @@
 	            	</label>
 	            	{/volist}
 								<div class="sureBox">
-									<input type="number" name="min" value="" class="min-price bigmin" placeholder="最低"> --
-									<input type="number" name="max" value="" class="max-price bigmax" placeholder="最高">平尺
-									<span class="sureBtn big">确定</span>
+									<input type="number" name="land_min" value="{$data['land_min']}" class="min-price land_min" placeholder="最低"> --
+									<input type="number" name="land_max" value="{$data['land_max']}" class="max-price land_max" placeholder="最高">平尺
+									<span class="sureBtn landSearch">确定</span>
 								</div>
 							</div>
 						</div>
@@ -160,7 +166,7 @@
 		               <input type="radio" name="price_form" value="0"/>不限
 		            </label> -->
 								<div class="sureBox">
-									<input type="text" name="min" value="" class="min-price bigmin" placeholder="最低">
+									<input type="text" name="give_date" value="" class="min-price give_date" placeholder="请输入年份">
 									<span class="sureBtn big">确定</span>
 								</div>
 							</div>
@@ -280,7 +286,19 @@
 				$('#radioBox').on('click', 'input', function() {
 					$(this).addClass('active').siblings('.active').removeClass('active');
 					var cla=$(this).attr('name');
-					if(cla!="price_min" && cla!="price_max"){
+					if(cla!="price_min" && cla!="price_max" && cla!="house_min" && cla!="house_max" && cla!="land_min" && cla!="land_max" && cla!="give_date"){
+						if(cla=="price_form"){
+							$(".price_min_form").val("");
+							$(".price_max_form").val("");
+						}
+						if(cla=="house_form"){
+							$(".house_min_form").val("");
+							$(".house_max_form").val("");
+						}
+						if(cla=="land_form"){
+							$(".land_min_form").val("");
+							$(".land_max_form").val("");
+						}
 						var val=$(this).val();
 						$("."+cla).val(val);
 						$("#form").submit();
@@ -289,9 +307,19 @@
 				});
 
 				$(".priceSearch").click(function(){
-					var price_min=$(".price_min").val();
-					var price_max=$(".price_max").val();
-					window.location.href="/index/buyroom/dichanmaimai?area="+area+"&price="+price+"&layout="+layout+"&theme="+theme+"&price_min="+price_min+"&price_max="+price_max;
+					$(".price_min_form").val($(".price_min").val());
+					$(".price_max_form").val($(".price_max").val());
+					$("#form").submit();
+				})
+				$(".houseSearch").click(function(){
+					$(".house_min_form").val($(".house_min").val());
+					$(".house_max_form").val($(".house_max").val());
+					$("#form").submit();
+				})
+				$(".landSearch").click(function(){
+					$(".land_min_form").val($(".land_min").val());
+					$(".land_max_form").val($(".land_max").val());
+					$("#form").submit();
 				})
 
 				/**

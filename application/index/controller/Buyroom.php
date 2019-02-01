@@ -43,6 +43,16 @@ class Buyroom extends Controller
         if($data['price_min']!="" || $data['price_max']!=""){
             $data['price']=0;
         }
+        $data['house_min']=isset($data['house_min']) ? $data['house_min'] : '';
+        $data['house_max']=isset($data['house_max']) ? $data['house_max'] : '';
+        if($data['house_min']!="" || $data['house_max']!=""){
+            $data['house_s']=0;
+        }
+        $data['land_min']=isset($data['land_min']) ? $data['land_min'] : '';
+        $data['land_max']=isset($data['land_max']) ? $data['land_max'] : '';
+        if($data['land_min']!="" || $data['land_max']!=""){
+            $data['land_s']=0;
+        }
         // if(!Session::has('layout')){
         //     $layouts=[];
         //     Session::set('layout',$layouts);
@@ -102,6 +112,18 @@ class Buyroom extends Controller
                 }
                 if($data['price_max']!=""){
                     $query->where('price1','<=',$data['price_max']);
+                }
+                if($data['house_min']!=""){
+                    $query->where('house_acreage','>=',$data['house_min']);
+                }
+                if($data['house_max']!=""){
+                    $query->where('house_acreage','<=',$data['house_max']);
+                }
+                if($data['land_min']!=""){
+                    $query->where('land_acreage','>=',$data['land_min']);
+                }
+                if($data['land_max']!=""){
+                    $query->where('land_acreage','<=',$data['land_max']);
                 }
                 if(isset($data['layout']) && $data['layout']!='0'){
                     $query->where('layout_diff',$data['layout']);
