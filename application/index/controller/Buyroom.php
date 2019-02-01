@@ -37,6 +37,7 @@ class Buyroom extends Controller
         $data['house_s']=isset($data['house_s']) ? $data['house_s'] : '0';
         $data['land_s']=isset($data['land_s']) ? $data['land_s'] : '0';
         $data['layout']=isset($data['layout']) ? $data['layout'] : '0';
+        $data['give_date']=isset($data['give_date']) ? $data['give_date'] : '0';
         $data['theme']=isset($data['theme']) ? $data['theme'] : '0';
         $data['price_min']=isset($data['price_min']) ? $data['price_min'] : '';
         $data['price_max']=isset($data['price_max']) ? $data['price_max'] : '';
@@ -76,6 +77,9 @@ class Buyroom extends Controller
             $house = SecondHandHouseModel::where(function($query)use($data){
                 if(isset($data['area']) && $data['area']!='0'){
                     $query->where('hot_area',$data['area']);
+                }
+                if($data['give_date']!='0'){
+                    $query->where('give_date',$data['give_date']);
                 }
                 if(isset($data['price']) && $data['price']!='0'){
                     $price_period=explode("--",$data['price']);

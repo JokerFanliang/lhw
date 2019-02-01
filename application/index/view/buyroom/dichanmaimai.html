@@ -44,6 +44,7 @@
 			<input type="hidden" class="house_max_form" name="house_max" value="{$data['house_max']}">
 			<input type="hidden" class="land_min_form" name="land_min" value="{$data['land_min']}">
 			<input type="hidden" class="land_max_form" name="land_max" value="{$data['land_max']}">
+			<input type="hidden" class="give_date_form" name="give_date" value="{$data['give_date']}">
 		</form>
 		<div id="main" class="clear">
 			<div id="leftMain" class="left">
@@ -166,8 +167,8 @@
 		               <input type="radio" name="price_form" value="0"/>不限
 		            </label> -->
 								<div class="sureBox">
-									<input type="text" name="give_date" value="" class="min-price give_date" placeholder="请输入年份">
-									<span class="sureBtn big">确定</span>
+									<input type="text" name="give_date" value="{$data['give_date']==0 ? "" : $data['give_date']}" class="min-price give_date" placeholder="请输入年份">
+									<span class="sureBtn dateSearch">确定</span>
 								</div>
 							</div>
 						</div>
@@ -319,6 +320,10 @@
 				$(".landSearch").click(function(){
 					$(".land_min_form").val($(".land_min").val());
 					$(".land_max_form").val($(".land_max").val());
+					$("#form").submit();
+				})
+				$(".dateSearch").click(function(){
+					$(".give_date_form").val($(".give_date").val());
 					$("#form").submit();
 				})
 
