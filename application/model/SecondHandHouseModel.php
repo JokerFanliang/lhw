@@ -8,8 +8,9 @@ class SecondHandHouseModel extends Model
 
     public static $types=[
     	'lease'=>['txt'=>'出租','val'=>0],
-    	'sale'=>['txt'=>'买卖','val'=>1]
+    	'sale'=>['txt'=>'买卖','val'=>1],
+      'business'=>['txt'=>'business','val'=>2]
     ];
-    
+
 
 }

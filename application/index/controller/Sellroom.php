@@ -157,7 +157,7 @@ class Sellroom extends Controller
 
 
         }
-        $hothouse=SecondHandHouseModel::order('is_hot','desc')->where('type',SecondHandHouseModel::$types['lease']['val'])->where("checkout",1)->order('read_count','desc')->select();
+        $hothouse=SecondHandHouseModel::order('is_hot','desc')->where('type',SecondHandHouseModel::$types['lease']['val'])->where("checkout",1)->order('read_count','desc')->limit(0,20)->select();
         $area=AreaModel::where('is_delete',AreaModel::$isDelete['no']['val'])->order('sort','desc')->select();
         $price=SecondPriceModel::order('create_time','desc')->select();
         $house_s=SecondHouseModel::order('create_time','desc')->select();

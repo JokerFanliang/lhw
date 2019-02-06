@@ -31,22 +31,20 @@
 			<!-- 头部公用 -->
 			{include file="public/head"}
 		</div>
-		<form action="{:url('Sellroom/chuzuqiuzu')}" method="get" id="form">
+		<form action="{:url('Business/index')}" method="get" id="form">
 			<input type="hidden" class="area_form" name="area" value="{$data['area']}">
 			<input type="hidden" class="price_form" name="price" value="{$data['price']}">
 			<input type="hidden" class="layout_form" name="layout" value="{$data['layout']}">
 			<input type="hidden" class="theme_form" name="theme" value="{$data['theme']}">
 			<input type="hidden" class="house_form" name="house_s" value="{$data['house_s']}">
 			<input type="hidden" class="land_form" name="land_s" value="{$data['land_s']}">
-			<input type="hidden" class="age_form" name="age" value="{$data['age']}">
 			<input type="hidden" class="price_min_form" name="price_min" value="{$data['price_min']}">
 			<input type="hidden" class="price_max_form" name="price_max" value="{$data['price_max']}">
 			<input type="hidden" class="house_min_form" name="house_min" value="{$data['house_min']}">
 			<input type="hidden" class="house_max_form" name="house_max" value="{$data['house_max']}">
 			<input type="hidden" class="land_min_form" name="land_min" value="{$data['land_min']}">
 			<input type="hidden" class="land_max_form" name="land_max" value="{$data['land_max']}">
-			<input type="hidden" class="age_min_form" name="age_min" value="{$data['age_min']}">
-			<input type="hidden" class="age_max_form" name="age_max" value="{$data['age_max']}">
+			<input type="hidden" class="give_date_form" name="give_date" value="{$data['give_date']}">
 		</form>
 		<div id="main" class="clear">
 			<div id="leftMain" class="left">
@@ -73,21 +71,21 @@
 						<div class="fenlei left">价格区间：</div>
 						<div class="fenleiDetailes ">
 							<p style="line-height:30px;">单价/套（总价万元）</p>
-						<label  <?php if($data['price']=='0') {echo "class='active'";}?>>
-                        <input type="radio" name="price_form" value="0"/>
-                        不限
-                    	</label>
-											{volist name='price' id='price'}
-											<label <?php $pri=$price->min."--".$price->max; if($data['price']===$pri) {echo "class='active'";}?>>
-				                	<input type="radio" name="price_form" value="{$price.min}--{$price.max}"/>
-				                	{$price.min}--{$price.max==0 ? "以上" : $price.max}
-				            	</label>
-				            	{/volist}
-											<div class="sureBox">
-												<input type="number" name="price_min" value="{$data['price_min']}" class="min-price price_min" placeholder="最低"> --
-												<input type="number" name="price_max" value="{$data['price_max']}" class="max-price price_max" placeholder="最高">万(加元)
-												<span class="sureBtn priceSearch">确定</span>
-											</div>
+							<label  <?php if($data['price']=='0') {echo "class='active'";}?>>
+                <input type="radio" name="price_form" value="0"/>
+                不限
+            	</label>
+            	{volist name='price' id='price'}
+							<label <?php $pri=$price->min."--".$price->max; if($data['price']===$pri) {echo "class='active'";}?>>
+                	<input type="radio" name="price_form" value="{$price.min}--{$price.max}"/>
+                	{$price.min}--{$price.max==0 ? "以上" : $price.max}
+            	</label>
+            	{/volist}
+							<div class="sureBox">
+								<input type="number" name="price_min" value="{$data['price_min']}" class="min-price price_min" placeholder="最低"> --
+								<input type="number" name="price_max" value="{$data['price_max']}" class="max-price price_max" placeholder="最高">万(加元)
+								<span class="sureBtn priceSearch">确定</span>
+							</div>
 						</div>
 					</div>
 					<!--户型划分-->
@@ -163,40 +161,23 @@
 							</div>
 						</div>
 						<div class="radioSunBox priceBox clear">
-							<div class="fenlei left">建筑房龄：</div>
+							<div class="fenlei left">交房时间：</div>
 							<div class="fenleiDetailes ">
-								<label <?php if($data['age']=='0') {echo "class='active'";}?>>
-		               <input type="radio" name="age_form" value="0"/>不限
-		            </label>
-								<label <?php if($data['age']==='0--2') {echo "class='active'";}?>>
-									<input type="radio" name="age_form" value="0--2"/>0--2
-		            </label>
-								<label <?php if($data['age']==='2--5') {echo "class='active'";}?>>
-									<input type="radio" name="age_form" value="2--5"/>2--5
-								</label>
-								<label <?php if($data['age']==='5--10') {echo "class='active'";}?>>
-									<input type="radio" name="age_form" value="5--10"/>5--10
-								</label>
-								<label <?php if($data['age']==='10--20') {echo "class='active'";}?>>
-									<input type="radio" name="age_form" value="10--20"/>10--20
-								</label>
-								<label <?php if($data['age']==='20--以上') {echo "class='active'";}?>>
-									<input type="radio" name="age_form" value="20--以上"/>20--以上
-								</label>
+								<!-- <label>
+		               <input type="radio" name="price_form" value="0"/>不限
+		            </label> -->
 								<div class="sureBox">
-									<input type="number" name="age_min" value="{$data['age_min']}" class="min-price age_min" placeholder="最低"> --
-									<input type="number" name="age_max" value="{$data['age_max']}" class="max-price age_max" placeholder="最高">年
-									<span class="sureBtn ageSearch">确定</span>
+									<input type="text" name="give_date" value="{$data['give_date']==0 ? "" : $data['give_date']}" class="min-price give_date" placeholder="请输入年份">
+									<span class="sureBtn dateSearch">确定</span>
 								</div>
 							</div>
 						</div>
-
 					</div>
 					<div class="moreBox">
 							<p class="moreBtn">查看更多</p>
 					</div>
 				</div>
-				<form action="{:url('Sellroom/chuzuqiuzu')}" method="get" id="search">
+				<form action="{:url('Business/index')}" method="get" id="search">
 					<div id="serchBox" class="clear">
 						<input type="text" id="serchText" name="searchname" class="left searchname" />
 
@@ -214,24 +195,24 @@
 					{volist name='house' id='hou'}
 					<div class="deteilsBox clear">
 						<div class="deteilsImgBox left">
-							<a href="{:url('Sellroom/chuzu_detaile')}?id={$hou.id}">
+							<a href="{:url('Business/info_detaile')}?id={$hou.id}">
 								<img src="/static/{$imgs[$hou.id]}" alt="" />
 							</a>
 						</div>
 						<div class="msgBox left">
 							<h2 class="jieshao">
-								<a href="{:url('Sellroom/chuzu_detaile')}?id={$hou.id}">{$hou.title}
+								<a href="{:url('Business/info_detaile')}?id={$hou.id}">{$hou.title}
 								</a>
 							</h2>
-							<?php $price1=number_format($hou->price1,2);$price2=number_format($hou->price2,2);?>
 							<div class="jianjieBox clear">
+								<?php $price1=number_format($hou->price1,2);$price2=number_format($hou->price2,2);?>
 								<div class="priceBox">
 									<span class="maimaiprice">${$price1}/套（${$price2}/平尺）</span>
 								</div>
 								<div class="jianjie">
 									<span class="tingshi">{$hou.layout}</span>
 									<span class="shu">|</span>
-									<span class="mianji">{$hou.house_acreage}平尺</sup></span>
+									<span class="mianji">{$hou.house_acreage}平尺</span>
 									<span class="shu">|</span>
 									<span class="chaoxiang">{$hou.orientation}</span>
 								</div>
@@ -250,9 +231,9 @@
 
 			</div>
 			<div id="rightMain" class="left">
-				<a href="{:url('Sellroom/chuzufabu')}">
+				<a href="{:url('Business/sendinfo')}">
 					<div id="fabuBox">
-						<b class="fbIcon"></b> 发布二手房房源
+						<b class="fbIcon"></b> 发布商业地产
 					</div>
 				</a>
 				<div id="rightUp">
@@ -262,14 +243,13 @@
 					<div id="newDetaile">
 						{volist name='hothouse' id='hothouse'}
 						<div class="newsBox clear">
-							<a href="{:url('Buyroom/maimai_detaile')}?id={$hothouse.id}" class="clear">
+							<a href="{:url('Business/info_detaile')}?id={$hothouse.id}" class="clear">
 							<div class="clear">
 								<span class="newTle shenglue left">{$hothouse.title}</span>
 								<?php $area=explode(",",$hothouse->area)?>
-								<span class="newDizhi right">{$hothouse->hot_area}</span>
+								<span class="newDizhi right">{$hothouse.hot_area}</span>
 							</div>
-							<?php $price3=number_format($hothouse->price1,2);$price4=number_format($hothouse->price2,2);?>
-							<p class="price">${$price3}/套（${$price4}/平尺）</p>
+							<p class="price">{$hothouse.price1}</p>
 							</a>
 						</div>
 						{/volist}
@@ -307,7 +287,7 @@
 				$('#radioBox').on('click', 'input', function() {
 					$(this).addClass('active').siblings('.active').removeClass('active');
 					var cla=$(this).attr('name');
-					if(cla!="price_min" && cla!="price_max" && cla!="house_min" && cla!="house_max" && cla!="land_min" && cla!="land_max" && cla!="give_date" && cla!="age_min" && cla!="age_max"){
+					if(cla!="price_min" && cla!="price_max" && cla!="house_min" && cla!="house_max" && cla!="land_min" && cla!="land_max" && cla!="give_date"){
 						if(cla=="price_form"){
 							$(".price_min_form").val("");
 							$(".price_max_form").val("");
@@ -320,15 +300,13 @@
 							$(".land_min_form").val("");
 							$(".land_max_form").val("");
 						}
-						if(cla=="age_form"){
-							$(".age_min_form").val("");
-							$(".age_max_form").val("");
-						}
 						var val=$(this).val();
 						$("."+cla).val(val);
 						$("#form").submit();
 					}
+
 				});
+
 				$(".priceSearch").click(function(){
 					$(".price_min_form").val($(".price_min").val());
 					$(".price_max_form").val($(".price_max").val());
@@ -344,11 +322,11 @@
 					$(".land_max_form").val($(".land_max").val());
 					$("#form").submit();
 				})
-				$(".ageSearch").click(function(){
-					$(".age_min_form").val($(".age_min").val());
-					$(".age_max_form").val($(".age_max").val());
+				$(".dateSearch").click(function(){
+					$(".give_date_form").val($(".give_date").val());
 					$("#form").submit();
 				})
+
 				/**
 				 *
 				 *      选择框 获取 value 功能  临时用的BUTTON
@@ -363,10 +341,9 @@
 					});
 				});
 
-
-				var openSessionZ=0;
-				var getOpenZ=sessionStorage.getItem('moreOpenZ');
-				if(getOpenZ==1){
+				var openSession=0;
+				var getOpen=sessionStorage.getItem('moreOpen');
+				if(getOpen==1){
 						$('.moreMsgBox').show();
 						$('.moreBtn').text('收起');
 				}else{
@@ -376,17 +353,16 @@
 				$('.moreBtn').click(function(){
 						var more=$('.moreMsgBox').css('display');
 						if(more=='none'){
-							openSessionZ=sessionStorage.setItem('moreOpenZ', 1);
+							openSession=sessionStorage.setItem('moreOpen', 1);
 							$('.moreMsgBox').fadeIn();
 							$(this).text('收起');
 						}else{
-							openSessionZ=sessionStorage.setItem('moreOpenZ', 0);
+							openSession=sessionStorage.setItem('moreOpen', 0);
 							$('.moreMsgBox').fadeOut(function(){
 								$('.moreBtn').text('查看更多');
 							});
 						}
 				})
-
 			});
 		</script>
 	</body>

@@ -245,11 +245,12 @@
 						<div class="newsBox clear">
 							<a href="{:url('Buyroom/maimai_detaile')}?id={$hothouse.id}" class="clear">
 							<div class="clear">
-								<span class="newTle shenglue left">{$hothouse.building}</span>
+								<span class="newTle shenglue left">{$hothouse.title}</span>
 								<?php $area=explode(",",$hothouse->area)?>
-								<span class="newDizhi right">{$area[0]}</span>
+								<span class="newDizhi right">{$hothouse->hot_area}</span>
 							</div>
-							<p class="price">{$hothouse.price}</p>
+							<?php $price3=number_format($hothouse->price1,2);$price4=number_format($hothouse->price2,2);?>
+							<p class="price">${$price3}/套（${$price4}/平尺）</p>
 							</a>
 						</div>
 						{/volist}
