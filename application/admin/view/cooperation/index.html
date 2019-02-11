@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+{include file="public/head"}
+<body>
+{include file="public/header"}
+{include file="public/left"}
+<div id="dcMain">
+    <!-- 当前位置 -->
+    <div id="urHere">管理中心<b>></b><strong>市场合作</strong> </div>   <div id="manager" class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+    <h3>市场合作</h3>
+    <form action=""  method="post" id="form"  enctype="multipart/form-data">
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <td align="right">频道共建图</td>
+                <td>
+                    <input type="file" name="channel_img">
+                    <span>（尺寸：200*200）</span>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">当前频道共建图</td>
+                <td>
+                    <div style="width:200px;"><img  width="100%" src="{$list.channel_img}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">频道共建简介</td>
+                <td>
+                    <input type="hidden" name="channel_content" class="channel_content">
+                    <script id="channel_content" type="text/plain" style="width:1024px;height:300px;">{$list->channel_content}</script>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="right">媒体支持图</td>
+                <td>
+                    <input type="file" name="media_img">
+                    <span>（尺寸：200*200）</span>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">当前媒体支持图</td>
+                <td>
+                    <div style="width:200px;"><img  width="100%" src="{$list.media_img}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">媒体支持简介</td>
+                <td>
+                    <input type="hidden" name="media_content" class="media_content">
+                    <script id="media_content" type="text/plain" style="width:1024px;height:300px;">{$list->media_content}</script>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="right">友情链接图</td>
+                <td>
+                    <input type="file" name="link_img">
+                    <span>（尺寸：200*200）</span>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">当前友情链接图</td>
+                <td>
+                    <div style="width:200px;"><img  width="100%" src="{$list.link_img}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">友情链接简介</td>
+                <td>
+                    <input type="hidden" name="link_content" class="link_content">
+                    <script id="link_content" type="text/plain" style="width:1024px;height:300px;">{$list->link_content}</script>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="right">广告互换图</td>
+                <td>
+                    <input type="file" name="adchange_img">
+                    <span>（尺寸：200*200）</span>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">当前广告互换图</td>
+                <td>
+                    <div style="width:200px;"><img  width="100%" src="{$list.adchange_img}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">广告互换简介</td>
+                <td>
+                    <input type="hidden" name="adchange_content" class="adchange_content">
+                    <script id="adchange_content" type="text/plain" style="width:1024px;height:300px;">{$list->adchange_content}</script>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="right">广告投放图</td>
+                <td>
+                    <input type="file" name="adsend_img">
+                    <span>（尺寸：200*200）</span>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">当前广告投放图</td>
+                <td>
+                    <div style="width:200px;"><img  width="100%" src="{$list.adsend_img}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">广告投放简介</td>
+                <td>
+                    <input type="hidden" name="adsend_content" class="adsend_content">
+                    <script id="adsend_content" type="text/plain" style="width:1024px;height:300px;">{$list->adsend_content}</script>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="right">其他合作方式图</td>
+                <td>
+                    <input type="file" name="other_img">
+                    <span>（尺寸：200*200）</span>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">当前其他合作方式图</td>
+                <td>
+                    <div style="width:200px;"><img  width="100%" src="{$list.other_img}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">其他合作方式简介</td>
+                <td>
+                    <input type="hidden" name="other_content" class="other_content">
+                    <script id="other_content" type="text/plain" style="width:1024px;height:300px;">{$list->other_content}</script>
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>
+                    <div class="btn sub">修改</div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</div>
+<div class="clear"></div>
+{include file="public/foot"}
+<script>
+	  var ue1 = UE.getEditor('channel_content');
+    var ue2 = UE.getEditor('media_content');
+    var ue3 = UE.getEditor('link_content');
+    var ue4 = UE.getEditor('adsend_content');
+    var ue5 = UE.getEditor('adchange_content');
+    var ue6 = UE.getEditor('other_content');
+    $(".sub").click(function(){
+      var arr1 = [];
+      var arr2 = [];
+      var arr3 = [];
+      var arr4 = [];
+      var arr5 = [];
+      var arr6 = [];
+
+      arr1.push(UE.getEditor('channel_content').getContent());
+      var text1=arr1.join("\n");
+      $(".channel_content").val(text1);
+
+      arr2.push(UE.getEditor('media_content').getContent());
+      var text2=arr2.join("\n");
+      $(".media_content").val(text2);
+
+      arr3.push(UE.getEditor('link_content').getContent());
+      var text3=arr3.join("\n");
+      $(".link_content").val(text3);
+
+      arr4.push(UE.getEditor('adsend_content').getContent());
+      var text4=arr4.join("\n");
+      $(".adsend_content").val(text4);
+
+      arr5.push(UE.getEditor('adchange_content').getContent());
+      var text5=arr5.join("\n");
+      $(".adchange_content").val(text5);
+
+      arr6.push(UE.getEditor('other_content').getContent());
+      var text6=arr6.join("\n");
+      $(".other_content").val(text6);
+      $("#form").submit();
+    })
+</script>
+</body>
+</html>
