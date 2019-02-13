@@ -105,13 +105,15 @@
 						<label  <?php if($data['state']=='0') {echo "class='active'";}?>>
                         	<input type="radio" name="state_form" value="0"/>
                         不限
-                    	</label>
+            </label>
 						{volist name='state' id='state'}
+						{if condition="$state->name!='开发商预售'"}
 						<label <?php if($data['state']==$state->id) {echo "class='active'";}?>>
                         	<input type="radio" name="state_form" value="{$state.id}"/>
                         	{$state.name}
-                    	</label>
-                    	{/volist}
+            </label>
+						{/if}
+            {/volist}
 						</div>
 					</div>
 					<!--价格区间-->

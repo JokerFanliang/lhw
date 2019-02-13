@@ -100,7 +100,9 @@
                 <td width="100" align="right">销售状态</td>
                 <td>
                     {volist name='state' id='state'}
+                    {if condition="!($list->state==1 && $state->name=='开发商预售')"}
                         <input type="checkbox" class="cheacks" value="{$state->id}" name="state_id[]" <?php if(in_array($state->id,$state_ids))echo 'checked';?>/><label for="">{$state->name}</label>
+                    {/if}
                     {/volist}
                 </td>
             </tr>
