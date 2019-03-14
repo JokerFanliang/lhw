@@ -101,7 +101,7 @@
                     </div>
 					-->
 					          <div class="inputBox">
-                        <span class="leftTitle">房屋面积：</span>
+                        <span class="leftTitle">建筑面积：</span>
                         <input type="number" id="mianji1" class="inputMid" name="house_acreage"/>尺
                         <span class="tip">PS：请输入数字</span>
                     </div>
@@ -115,11 +115,11 @@
                         <input type="number" id="chushou1" class="inputMid" name="price1"/>/套
                         <span class="tip">PS：请输入数字</span>
                     </div>
-                    <div class="inputBox">
+                    <!-- <div class="inputBox">
                         <span class="leftTitle">出售单价：</span>
                         <input type="number" id="chushou2" class="inputMid" name="price2"/>/平尺
                         <span class="tip">PS：请输入数字</span>
-                    </div>
+                    </div> -->
                     <!-- <div class="inputBox">
                         <span class="leftTitle">价格区间：</span>
                         <select name="price_period">
@@ -129,7 +129,7 @@
                         {/volist}
                         </select>
                     </div> -->
-                    <div class="inputBox">
+                    <!-- <div class="inputBox">
                         <span class="leftTitle">户型：</span>
                         <input type="number" id="fang" class="inputSmall" name="count1"/><span class="leftMargin">房</span>
                         <input type="number" id="ting" class="inputSmall" name="count2"/><span class="leftMargin">厅</span>
@@ -139,8 +139,8 @@
                     <div class="inputBox">
                         <span class="leftTitle">交房时间：</span>
                         <input type="number" id="fangling" class="inputBig" name="give_date" placeholder="请输入年份"/>
-                    </div>
-                    <div class="inputBox">
+                    </div> -->
+                    <!-- <div class="inputBox">
                         <span class="leftTitle">户型划分：</span>
                         <select name="layout_diff">
                         <option>请选择</option>
@@ -148,17 +148,26 @@
                             <option value ="{$layout.name}">{$layout.name}</option>
                         {/volist}
                         </select>
-                    </div>
+                    </div> -->
                     <div class="inputBox">
-                        <span class="leftTitle">建筑类型：</span>
-                        <select name="theme">
+                        <span class="leftTitle">建筑属性：</span>
+                        <select name="poverty">
                         <option>请选择</option>
-                        {volist name='theme' id='theme'}
-                          <option value ="{$theme.name}">{$theme.name}</option>
-                        {/volist}
+                          <option value ="生意买卖">生意买卖</option>
+                          <option value ="商铺/写字楼">商铺/写字楼</option>
+                          <option value ="土地">土地</option>
+                          <option value ="农地">农地</option>
                         </select>
                     </div>
                     <div class="inputBox">
+                        <span class="leftTitle">租售类型：</span>
+                        <select name="transaction">
+                        <option>请选择</option>
+                          <option value ="出租">出租</option>
+                          <option value ="出售">出售</option>
+                        </select>
+                    </div>
+                    <!-- <div class="inputBox">
                         <span class="leftTitle">楼层：</span>
                         第<input type="number" class="inputSmall" oninput="if(value.length>2)value=value.slice(0,2)"   name="num"/><span class="leftMargin">层</span>
 
@@ -173,12 +182,12 @@
                     <div class="inputBox">
                         <span class="leftTitle">车位：</span>
                         <input type="text" id="chewei" class="inputBig" name="car"/>
-                    </div>
+                    </div> -->
                     <!-- <div class="inputBox">
                         <span class="leftTitle">装修：</span>
                         <input type="text" id="zhuangxiu" class="inputBig" name="decorate"/>
                     </div> -->
-                    <div class="cheackBox clear">
+                    <!-- <div class="cheackBox clear">
                         <div class="leftTitle left">配套：</div>
                         <div class="cheackBoxs clear">
                             <div class="left">
@@ -227,7 +236,7 @@
                               <input type="checkbox" id="zhengqifang" class="cheacks" value="蒸汽房" name="assort[]"/><label for="zhengqifang">蒸汽房</label>
                             </div>
                       </div>
-                    </div>
+                    </div> -->
                     <div id="imgUpLoader">
                       <p>上传图片：图片大小不能大于2M，最多15张</p>
                       <label for="fileUpload" class="upload-img">选择图片</label><span class="loadImg"></span>
@@ -251,6 +260,9 @@
                     <div class="inputBox">
                         <span class="leftTitle">联系人：</span>
                         <input type="text" id="lianxi" class="inputBig contact" name="contact"/>
+                        <input  type="radio" name="card" value="0" checked>unlicensed
+                        <input  type="radio" name="card" value="1" >licensed
+                        <input  type="radio" name="card" value="2" >owned
                     </div>
                     <div class="inputBox">
                         <span class="leftTitle">联系电话：</span>

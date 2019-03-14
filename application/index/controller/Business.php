@@ -191,16 +191,15 @@ class Business extends Controller
             $house->house_acreage=$data['house_acreage'];
             $house->land_acreage=$data['land_acreage'];
             $house->price1=$data['price1'];
-            $house->price2=$data['price2'];
-            $house->give_date=$data['give_date'];
 
 
-            $house->car=$data['car'];
+            $house->transaction=$data['transaction'];
+            $house->poverty=$data['poverty'];
+            $house->card=$data['card'];
             $house->email=$data['email'];
             $house->weixin=$data['weixin'];
-            $house->layout=$data['count1'].'房,'.$data['count2'].'厅,'.$data['count3'].'厨,'.$data['count4'].'卫';
-            $house->high="第".$data['num']."层,共".$data['all']."层";
-            $house->orientation=$data['orientation'];
+
+
             //$house->decorate=$data['decorate'];
             if(isset($data['assort'])){
               $house->assort=implode(",",$data['assort']);
@@ -209,15 +208,15 @@ class Business extends Controller
             $house->contact=$data['contact'];
             $house->phone=$data['phone'];
             $house->type=$data['type'];
-            $house->hot_area=$data['hot_area'];
+            // $house->hot_area=$data['hot_area'];
             //$house->price_period=$data['price_period'];
-            $house->layout_diff=$data['layout_diff'];
-            $house->theme=$data['theme'];
+            // $house->layout_diff=$data['layout_diff'];
+            // $house->theme=$data['theme'];
             $house->sn=uniqid().rand(1000000, 9999999);
             if($house->save()){
               $config=ConfigModel::where('id',1)->find();
               $email=new EmailService();
-              $type="楼花王-发布房源";
+              $type="楼花王-发布商业地产";
               $receiver=$data['email'];
               $title=$data['title'];
               $link=Config::get('host')."/index/business/info_edit?sn=".$house->sn;

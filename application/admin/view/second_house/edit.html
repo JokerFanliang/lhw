@@ -93,10 +93,22 @@
                 <td>
                     <input type="number"  name="give_date" value="{$list->give_date}"/>
                 </td>
-                {else}
+                {/if}
+                {if condition="$list->type==0"}
                 <td width="100" align="right">房龄</td>
                 <td>
                     <input type="number"  name="age" value="{$list->age}"/>
+                </td>
+                {/if}
+                {if condition="$list->type==2"}
+                <td width="100" align="right">建筑属性</td>
+                <td>
+                  <select name="poverty">
+                    <option value ="生意买卖" <?php if($list->poverty=='生意买卖') echo "selected"?>>生意买卖</option>
+                    <option value ="商铺/写字楼" <?php if($list->poverty=='商铺/写字楼') echo "selected"?>>商铺/写字楼</option>
+                    <option value ="土地" <?php if($list->poverty=='土地') echo "selected"?>>土地</option>
+                    <option value ="农地" <?php if($list->poverty=='农地') echo "selected"?>>农地</option>
+                  </select>
                 </td>
                 {/if}
             </tr>
@@ -115,11 +127,22 @@
                 <td>
                     <input type="number"  name="price1" value="{$list->price1}"/>
                 </td>
+                {if condition="$list->type==2"}
+                <td width="100" align="right">租售类型</td>
+                <td>
+                  <select name="transaction">
+                    <option value ="出租" <?php if($list->poverty=='出租') echo "selected"?>>出租</option>
+                    <option value ="出售" <?php if($list->poverty=='出售') echo "selected"?>>出售</option>
+                  </select>
+                </td>
+                {else}
                 <td width="100" align="right">单价/平尺</td>
                 <td>
                     <input type="number"  name="price2" value="{$list->price2}"/>
                 </td>
+                {/if}
             </tr>
+            {if condition="$list->type!=2"}
             <tr>
                 <td width="100" align="right">户型</td>
                 <?php $layout=explode(",",$list->layout);?>
@@ -134,6 +157,7 @@
                     <input type="text" name="orientation" value="{$list->orientation}"/>
                 </td>
             </tr>
+
             <tr>
                 <td width="100" align="right">车位</td>
                 <td>
@@ -144,6 +168,7 @@
                     <input type="text"  name="num" value="{$list->high}"/>
                 </td>
             </tr>
+
             <tr>
                 <td width="100" align="right">配套</td>
                 <td>
@@ -164,11 +189,16 @@
                         <input type="checkbox" id="zhengqifang" class="cheacks" value="蒸汽房" name="assort[]" <?php if(strpos($list->assort,'蒸汽房') !==false)echo 'checked';?>/><label>蒸汽房</label>
 
                 </td>
-				        <td width="100" align="right">联系电话</td>
-                <td>
-                    <input type="text" name="phone" value="{$list->phone}"/>
-                </td>
+                <td width="100" align="right">热点新盘</td>
+                        <td>
+                        <select name="is_hot">
+                            <option value="0" <?php if($list->is_hot==0) echo "selected"?>>否</option>
+                            <option value="1" <?php if($list->is_hot==1) echo "selected"?>>是</option>
+                        </select>
+                        </td>
+
             </tr>
+            {/if}
             <tr>
                 <td width="100" align="right">邮箱</td>
                 <td>
@@ -183,13 +213,13 @@
                 <td width="100" align="right">联系人</td>
                 <td>
                     <input type="text"  name="contact" value="{$list->contact}"/>
+                    <input  type="radio" name="card" value="0"  <?php if($list->card==0) echo "checked"?>>unlicensed
+                    <input  type="radio" name="card" value="1"  <?php if($list->card==1) echo "checked"?>>licensed
+                    <input  type="radio" name="card" value="2"  <?php if($list->card==2) echo "checked"?>>owned
                 </td>
-				<td width="100" align="right">热点新盘</td>
+                <td width="100" align="right">联系电话</td>
                 <td>
-                <select name="is_hot">
-                    <option value="0" <?php if($list->is_hot==0) echo "selected"?>>否</option>
-                    <option value="1" <?php if($list->is_hot==1) echo "selected"?>>是</option>
-                </select>
+                    <input type="text" name="phone" value="{$list->phone}"/>
                 </td>
 
             </tr>

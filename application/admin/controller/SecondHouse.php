@@ -27,9 +27,7 @@ class SecondHouse extends common
             $house->address=$data['address'];
             //$house->acreage=$data['acreage'];
             //$house->price=$data['price'];
-            $house->layout=$data['count1'].','.$data['count2'].','.$data['count3'].','.$data['count4'].'';
-            $house->high=$data['num'];
-            $house->orientation=$data['orientation'];
+
             //$house->lease_type=$data['lease_type'];
             //$house->decorate=$data['decorate'];
             if(isset($data['assort'])){
@@ -43,14 +41,26 @@ class SecondHouse extends common
             $house->house_acreage=$data['house_acreage'];
             $house->land_acreage=$data['land_acreage'];
             $house->price1=$data['price1'];
-            $house->price2=$data['price2'];
+
             if($house->type==1){
               $house->give_date=$data['give_date'];
-            }else{
+            }
+            if($house->type==0){
               $house->age=$data['age'];
             }
-
-            $house->car=$data['car'];
+            if($house->type==2){
+              $house->poverty=$data['poverty'];
+              $house->card=$data['card'];
+              $house->transaction=$data['transaction'];
+            }
+            if($house->type!=2){
+              $house->car=$data['car'];
+              $house->price2=$data['price2'];
+              $house->layout=$data['count1'].','.$data['count2'].','.$data['count3'].','.$data['count4'].'';
+              $house->high=$data['num'];
+              $house->orientation=$data['orientation'];
+              $house->is_hot=$data['is_hot'];
+            }
             $house->email=$data['email'];
             $house->weixin=$data['weixin'];
             //$house->price_period=$data['price_period'];
@@ -58,7 +68,7 @@ class SecondHouse extends common
             //$house->theme=$data['theme'];
 
             $house->checkout=$data['checkout'];
-			      $house->is_hot=$data['is_hot'];
+
             $house->checkout_at=date("Y-m-d H:i:s",time());
             $files=request()->file('img');
             $id=0;
