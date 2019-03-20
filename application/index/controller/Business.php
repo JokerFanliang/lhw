@@ -222,7 +222,7 @@ class Business extends Controller
               $link=Config::get('host')."/index/business/info_edit?sn=".$house->sn;
               //$content="<a href='".Config::get('host')."/index/buyroom/maimaifabu_edit?sn=".$house->sn."'>点击对您提交的房源进行修改</a>";
               $content=$config->content."<br/><a href='".Config::get('host')."/index/business/info_edit?sn=".$house->sn."'>点击对您提交的房源进行修改</a>";
-              $email->sendEmail($type,$receiver,$title,$content);
+              //$email->sendEmail($type,$receiver,$title,$content);
             }
 
 
