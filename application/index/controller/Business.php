@@ -208,7 +208,7 @@ class Business extends Controller
             $house->contact=$data['contact'];
             $house->phone=$data['phone'];
             $house->type=$data['type'];
-            // $house->hot_area=$data['hot_area'];
+            $house->hot_area=$data['hot_area'];
             //$house->price_period=$data['price_period'];
             // $house->layout_diff=$data['layout_diff'];
             // $house->theme=$data['theme'];
