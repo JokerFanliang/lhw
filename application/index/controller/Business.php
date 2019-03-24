@@ -36,9 +36,9 @@ class Business extends Controller
         $data['price']=isset($data['price']) ? $data['price'] : '0';
         $data['house_s']=isset($data['house_s']) ? $data['house_s'] : '0';
         $data['land_s']=isset($data['land_s']) ? $data['land_s'] : '0';
-        $data['layout']=isset($data['layout']) ? $data['layout'] : '0';
+        $data['transaction']=isset($data['transaction']) ? $data['transaction'] : '0';
         $data['give_date']=isset($data['give_date']) ? $data['give_date'] : '0';
-        $data['theme']=isset($data['theme']) ? $data['theme'] : '0';
+        $data['poverty']=isset($data['poverty']) ? $data['poverty'] : '0';
         $data['price_min']=isset($data['price_min']) ? $data['price_min'] : '';
         $data['price_max']=isset($data['price_max']) ? $data['price_max'] : '';
         if($data['price_min']!="" || $data['price_max']!=""){
@@ -129,14 +129,14 @@ class Business extends Controller
                 if($data['land_max']!=""){
                     $query->where('land_acreage','<=',$data['land_max']);
                 }
-                if(isset($data['layout']) && $data['layout']!='0'){
-                    $query->where('layout_diff',$data['layout']);
+                if(isset($data['poverty']) && $data['poverty']!='0'){
+                    $query->where('poverty',$data['poverty']);
                 }
                 // if(!empty($layouts)){
                 //     $query->wherein('layout_diff',$layouts);
                 // }
-                if(isset($data['theme']) && $data['theme']!='0'){
-                    $query->where('theme',$data['theme']);
+                if(isset($data['transaction']) && $data['transaction']!='0'){
+                    $query->where('transaction',$data['transaction']);
                 }
 
                 $query->where('type',SecondHandHouseModel::$types['business']['val']);

@@ -34,8 +34,8 @@
 		<form action="{:url('Business/index')}" method="get" id="form">
 			<input type="hidden" class="area_form" name="area" value="{$data['area']}">
 			<input type="hidden" class="price_form" name="price" value="{$data['price']}">
-			<input type="hidden" class="layout_form" name="layout" value="{$data['layout']}">
-			<input type="hidden" class="theme_form" name="theme" value="{$data['theme']}">
+			<input type="hidden" class="poverty_form" name="poverty" value="{$data['poverty']}">
+			<input type="hidden" class="transaction_from" name="transaction" value="{$data['transaction']}">
 			<input type="hidden" class="house_form" name="house_s" value="{$data['house_s']}">
 			<input type="hidden" class="land_form" name="land_s" value="{$data['land_s']}">
 			<input type="hidden" class="price_min_form" name="price_min" value="{$data['price_min']}">
@@ -75,12 +75,12 @@
                 <input type="radio" name="price_form" value="0"/>
                 不限
             	</label>
-            	{volist name='price' id='price'}
+            	<!-- {volist name='price' id='price'}
 							<label <?php $pri=$price->min."--".$price->max; if($data['price']===$pri) {echo "class='active'";}?>>
                 	<input type="radio" name="price_form" value="{$price.min}--{$price.max}"/>
                 	{$price.min}--{$price.max==0 ? "以上" : $price.max}
             	</label>
-            	{/volist}
+            	{/volist} -->
 							<div class="sureBox">
 								<input type="number" name="price_min" value="{$data['price_min']}" class="min-price price_min" placeholder="最低"> --
 								<input type="number" name="price_max" value="{$data['price_max']}" class="max-price price_max" placeholder="最高">万(加元)
@@ -88,93 +88,91 @@
 							</div>
 						</div>
 					</div>
+					<div class="radioSunBox priceBox clear">
+						<div class="fenlei left">房屋面积：</div>
+						<div class="fenleiDetailes ">
+							<label <?php if($data['house_s']=='0') {echo "class='active'";}?>>
+								 <input type="radio" name="house_form" value="0"/>不限
+							</label>
+							<!-- {volist name='house_s' id='house_s'}
+							<label <?php $s=$house_s->min."--".$house_s->max; if($data['house_s']===$s) {echo "class='active'";}?>>
+									<input type="radio" name="house_form" value="{$house_s.min}--{$house_s.max}"/>
+									{$house_s.min}--{$house_s.max==0 ? "以上" : $house_s.max}
+							</label>
+							{/volist} -->
+							<div class="sureBox">
+								<input type="number" name="house_min" value="{$data['house_min']}" class="min-price house_min" placeholder="最低"> --
+								<input type="number" name="house_max" value="{$data['house_max']}" class="max-price house_max" placeholder="最高">平尺
+								<span class="sureBtn houseSearch">确定</span>
+							</div>
+						</div>
+					</div>
+					<div class="radioSunBox priceBox clear">
+						<div class="fenlei left">土地面积：</div>
+						<div class="fenleiDetailes ">
+							<label  <?php if($data['land_s']=='0') {echo "class='active'";}?>>
+								 <input type="radio" name="land_form" value="0"/>不限
+							</label>
+							<!-- {volist name='land_s' id='land_s'}
+							<label <?php $s=$land_s->min."--".$land_s->max; if($data['land_s']===$s) {echo "class='active'";}?>>
+									<input type="radio" name="land_form" value="{$land_s.min}--{$land_s.max}"/>
+									{$land_s.min}--{$land_s.max==0 ? "以上" : $land_s.max}
+							</label>
+							{/volist} -->
+							<div class="sureBox">
+								<input type="number" name="land_min" value="{$data['land_min']}" class="min-price land_min" placeholder="最低"> --
+								<input type="number" name="land_max" value="{$data['land_max']}" class="max-price land_max" placeholder="最高">平尺
+								<span class="sureBtn landSearch">确定</span>
+							</div>
+						</div>
+					</div>
 					<!--户型划分-->
 					<div class="radioSunBox clear">
-						<div class="fenlei left">户型划分：</div>
+						<div class="fenlei left">商业类型：</div>
 						<div class="fenleiDetailes">
-						<label  <?php if($data['layout']=='0') {echo "class='active'";}?>>
-                        	<input type="radio" name="layout_form" value="0"/>
+						<label  <?php if($data['poverty']=='0') {echo "class='active'";}?>>
+                        	<input type="radio" name="poverty_form" value="0"/>
                         不限
                     	</label>
-                    	{volist name='layout' id='layout'}
-                    	<label <?php if($data['layout']==$layout->name) {echo "class='active'";}?>>
-                        	<input type="radio" name="layout_form" value="{$layout.name}"/>
-                        	{$layout.name}
+                    	<label <?php if($data['poverty']=="生意买卖") {echo "class='active'";}?>>
+                        	<input type="radio" name="poverty_form" value="生意买卖"/>
+													生意买卖
                     	</label>
-						{/volist}
+											<label <?php if($data['poverty']=="商铺/写字楼") {echo "class='active'";}?>>
+                        	<input type="radio" name="poverty_form" value="商铺/写字楼"/>
+													商铺/写字楼买卖
+                    	</label>
+											<label <?php if($data['poverty']=="土地") {echo "class='active'";}?>>
+                        	<input type="radio" name="poverty_form" value="土地"/>
+													土地买卖
+                    	</label>
+											<label <?php if($data['poverty']=="农地") {echo "class='active'";}?>>
+                        	<input type="radio" name="poverty_form" value="农地"/>
+													农地买卖
+                    	</label>
+
 						</div>
 					</div>
 					<!--特色主题-->
 					<div class="radioSunBox clear">
-						<div class="fenlei left">建筑类型：</div>
+						<div class="fenlei left">交易类型：</div>
 						<div class="fenleiDetailes">
 
-						<label  <?php if($data['theme']=='0') {echo "class='active'";}?>>
-                        	<input type="radio" name="theme_form" value="0"/>
+						<label  <?php if($data['transaction']=='0') {echo "class='active'";}?>>
+                        	<input type="radio" name="transaction_from" value="0"/>
                         不限
                     	</label>
-						{volist name='theme' id='theme'}
-						<label <?php if($data['theme']==$theme->name) {echo "class='active'";}?>>
-                        	<input type="radio" name="theme_form" value="{$theme.name}"/>
-                        	{$theme.name}
-                    	</label>
-                    	{/volist}
+
+						<label <?php if($data['transaction']=="出租") {echo "class='active'";}?>>
+                  <input type="radio" name="transaction_from" value="出租"/>
+									出租
+            </label>
+						<label <?php if($data['transaction']=="出售") {echo "class='active'";}?>>
+									<input type="radio" name="transaction_from" value="出售"/>
+									出售
+						</label>
+
 						</div>
-					</div>
-					<div class="moreMsgBox">
-						<div class="radioSunBox priceBox clear">
-							<div class="fenlei left">房屋面积：</div>
-							<div class="fenleiDetailes ">
-								<label <?php if($data['house_s']=='0') {echo "class='active'";}?>>
-		               <input type="radio" name="house_form" value="0"/>不限
-		            </label>
-								{volist name='house_s' id='house_s'}
-								<label <?php $s=$house_s->min."--".$house_s->max; if($data['house_s']===$s) {echo "class='active'";}?>>
-	                	<input type="radio" name="house_form" value="{$house_s.min}--{$house_s.max}"/>
-	                	{$house_s.min}--{$house_s.max==0 ? "以上" : $house_s.max}
-	            	</label>
-	            	{/volist}
-								<div class="sureBox">
-									<input type="number" name="house_min" value="{$data['house_min']}" class="min-price house_min" placeholder="最低"> --
-									<input type="number" name="house_max" value="{$data['house_max']}" class="max-price house_max" placeholder="最高">平尺
-									<span class="sureBtn houseSearch">确定</span>
-								</div>
-							</div>
-						</div>
-						<div class="radioSunBox priceBox clear">
-							<div class="fenlei left">土地面积：</div>
-							<div class="fenleiDetailes ">
-								<label  <?php if($data['land_s']=='0') {echo "class='active'";}?>>
-		               <input type="radio" name="land_form" value="0"/>不限
-		            </label>
-								{volist name='land_s' id='land_s'}
-								<label <?php $s=$land_s->min."--".$land_s->max; if($data['land_s']===$s) {echo "class='active'";}?>>
-	                	<input type="radio" name="land_form" value="{$land_s.min}--{$land_s.max}"/>
-	                	{$land_s.min}--{$land_s.max==0 ? "以上" : $land_s.max}
-	            	</label>
-	            	{/volist}
-								<div class="sureBox">
-									<input type="number" name="land_min" value="{$data['land_min']}" class="min-price land_min" placeholder="最低"> --
-									<input type="number" name="land_max" value="{$data['land_max']}" class="max-price land_max" placeholder="最高">平尺
-									<span class="sureBtn landSearch">确定</span>
-								</div>
-							</div>
-						</div>
-						<div class="radioSunBox priceBox clear">
-							<div class="fenlei left">交房时间：</div>
-							<div class="fenleiDetailes ">
-								<!-- <label>
-		               <input type="radio" name="price_form" value="0"/>不限
-		            </label> -->
-								<div class="sureBox">
-									<input type="text" name="give_date" value="{$data['give_date']==0 ? "" : $data['give_date']}" class="min-price give_date" placeholder="请输入年份">
-									<span class="sureBtn dateSearch">确定</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="moreBox">
-							<p class="moreBtn">查看更多</p>
 					</div>
 				</div>
 				<form action="{:url('Business/index')}" method="get" id="search">
@@ -281,8 +279,8 @@
 		<script>
 			var area="{$data['area']}";
 			var price="{$data['price']}";
-			var layout="{$data['layout']}";
-			var theme="{$data['theme']}";
+			var transaction="{$data['transaction']}";
+			var poverty="{$data['poverty']}";
 			$(function() {
 				$('#radioBox').on('click', 'input', function() {
 					$(this).addClass('active').siblings('.active').removeClass('active');
